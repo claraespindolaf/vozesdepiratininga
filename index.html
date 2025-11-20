@@ -1,0 +1,675 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vozes de Piratininga</title>
+    <style>
+      :root {
+        --deep-ocean: #0a2a3d;
+        --mid-ocean: #106d83;
+        --foam: #37c5d9;
+        --sunset: #ffd6a5;
+        --sand: #fff5e6;
+        --shell: #f4f0ea;
+        --graphite: #1f2a30;
+        --cloud: #eef6f8;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Arial", "Helvetica", sans-serif;
+        background: var(--sand);
+        color: var(--graphite);
+        line-height: 1.65;
+      }
+
+      header {
+        background: rgba(10, 42, 61, 0.95);
+        color: #fff;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(16px);
+      }
+
+      .navbar {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 1rem 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+      }
+
+      .brand {
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 0.95rem;
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 1rem;
+        margin: 0;
+        padding: 0;
+      }
+
+      nav li {
+        position: relative;
+      }
+
+      .nav-button {
+        border: none;
+        background: transparent;
+        color: #fff;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        padding: 0.6rem 1.2rem;
+        cursor: pointer;
+      }
+
+      .nav-button.active::after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 2px;
+        background: var(--foam);
+        margin-top: 0.2rem;
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 220px;
+        background: rgba(10, 42, 61, 0.96);
+        border: 1px solid rgba(55, 197, 217, 0.2);
+        border-radius: 16px;
+        padding: 0.4rem 0;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+        display: none;
+      }
+
+      .dropdown:hover .dropdown-menu,
+      .dropdown.open .dropdown-menu {
+        display: block;
+      }
+
+      .dropdown-menu button {
+        width: 100%;
+        background: transparent;
+        border: none;
+        color: #fff;
+        text-align: left;
+        padding: 0.7rem 1.2rem;
+        font-family: inherit;
+        font-size: 0.85rem;
+        letter-spacing: 0.06em;
+        cursor: pointer;
+      }
+
+      .dropdown-menu button:hover,
+      .dropdown-menu button:focus-visible {
+        background: rgba(55, 197, 217, 0.15);
+      }
+
+      main {
+        padding: 4rem 2rem 5rem 2rem;
+      }
+
+      .page-panel {
+        display: none;
+        width: min(1200px, 96vw);
+        margin: 0 auto;
+        animation: fade 0.35s ease;
+      }
+
+      .page-panel.active {
+        display: block;
+      }
+
+      @keyframes fade {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero {
+        min-height: calc(100vh - 160px);
+        display: flex;
+        align-items: center;
+        padding: clamp(2rem, 6vw, 4rem);
+        text-align: center;
+      }
+
+      .hero h1 {
+        font-size: clamp(3rem, 6vw, 4.4rem);
+        color: var(--mid-ocean);
+        margin-bottom: 1rem;
+      }
+
+      .hero h2,
+      .hero p {
+        max-width: 900px;
+        margin: 0 auto 1.6rem auto;
+        color: rgba(15, 42, 61, 0.8);
+      }
+
+      .author-tag {
+        display: inline-flex;
+        padding: 0.7rem 1.6rem;
+        border-radius: 999px;
+        border: 1px solid rgba(55, 197, 217, 0.4);
+        color: var(--mid-ocean);
+        font-weight: 600;
+        gap: 0.5rem;
+        align-items: center;
+      }
+
+      .author-tag::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--foam);
+      }
+
+      .profile-page {
+        background: var(--cloud);
+        border-radius: 36px;
+        padding: clamp(2.5rem, 5vw, 4rem);
+        box-shadow: 0 30px 70px rgba(15, 42, 61, 0.15);
+      }
+
+      .profile-page header {
+        position: relative;
+        background: none;
+        box-shadow: none;
+        padding: 0;
+      }
+
+      .profile-headline {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        align-items: center;
+      }
+
+      .profile-headline img,
+      .profile-headline figure {
+        flex: 1 1 320px;
+        max-width: 420px;
+        border-radius: 28px;
+        overflow: hidden;
+        box-shadow: 0 25px 60px rgba(10, 42, 61, 0.3);
+      }
+
+      .profile-headline img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .profile-info {
+        flex: 1 1 320px;
+      }
+
+      .profile-info h2 {
+        margin: 0 0 0.8rem 0;
+        font-size: clamp(2rem, 3.5vw, 2.6rem);
+        color: var(--mid-ocean);
+        letter-spacing: 0.03em;
+        line-height: 1.25;
+      }
+
+      .profile-info .profile-name {
+        display: inline-block;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-size: 1rem;
+        color: rgba(15, 42, 61, 0.7);
+        margin-bottom: 0.4rem;
+      }
+
+      .profile-content {
+        margin-top: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.6rem;
+      }
+
+      .profile-content p {
+        margin: 0;
+        font-size: 1.2rem;
+        line-height: 1.95;
+        letter-spacing: 0.01em;
+        color: inherit;
+      }
+
+      .section-title {
+        font-size: clamp(2.2rem, 4vw, 3rem);
+        color: var(--mid-ocean);
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+
+      .section-subtitle {
+        text-align: center;
+        max-width: 760px;
+        margin: 0 auto 3rem auto;
+        color: rgba(15, 42, 61, 0.75);
+      }
+
+      .about-wrapper {
+        background: var(--shell);
+        border-radius: 30px;
+        padding: clamp(2rem, 4vw, 3rem);
+        box-shadow: 0 20px 60px rgba(15, 42, 61, 0.2);
+      }
+
+      footer {
+        background: var(--deep-ocean);
+        color: #fff;
+        text-align: center;
+        padding: 1.5rem 1rem;
+        font-size: 0.9rem;
+        letter-spacing: 0.05em;
+      }
+
+      @media (max-width: 720px) {
+        nav ul {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .dropdown-menu {
+          position: static;
+          width: 100%;
+        }
+
+        .dropdown-menu button {
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="navbar">
+        <div class="brand">Vozes de Piratininga: perfis de moradores apaixonados</div>
+        <nav>
+          <ul>
+            <li>
+              <button class="nav-button active" data-panel="apresentacao">Apresentação</button>
+            </li>
+            <li class="dropdown">
+              <button class="nav-button" data-panel="lista-perfis" aria-haspopup="true">
+                Perfis
+              </button>
+              <div class="dropdown-menu" role="menu">
+                <button data-panel="perfil-1">Perfil 1</button>
+                <button data-panel="perfil-2">Perfil 2</button>
+                <button data-panel="perfil-3">Perfil 3</button>
+                <button data-panel="perfil-4">Perfil 4</button>
+                <button data-panel="perfil-5">Perfil 5</button>
+                <button data-panel="perfil-6">Perfil 6</button>
+                <button data-panel="perfil-7">Perfil 7</button>
+                <button data-panel="perfil-maricelia">Maricélia</button>
+              </div>
+            </li>
+            <li>
+              <button class="nav-button" data-panel="expediente">Expediente</button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section id="panel-apresentacao" class="page-panel active">
+        <article class="hero">
+          <div>
+            <h1>Vozes de Piratininga: perfis de moradores apaixonados</h1>
+            <h2>
+              Cartografia afetiva e sociocultural de quem constrói o cotidiano da faixa litorânea de Piratininga.
+            </h2>
+            <p>
+              Use este texto para contextualizar objetivos, metodologia, recortes e relevância do TCC. Descreva brevemente as etapas de pesquisa e antecipe o que o leitor encontrará nos perfis catalogados. Ajuste o conteúdo conforme a narrativa do trabalho.
+            </p>
+            <div class="author-tag">Trabalho de Conclusão de Curso de Clara</div>
+          </div>
+        </article>
+      </section>
+
+      <section id="panel-perfil-1" class="page-panel">
+        <article class="profile-page">
+          <div class="profile-headline">
+            <figure>
+              <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80" alt="Vista aérea de Piratininga representando o Perfil 1" />
+            </figure>
+            <div class="profile-info">
+              <h2>Categoria / Subtítulo</h2>
+              <span class="profile-name">Perfil 1</span>
+            </div>
+          </div>
+          <div class="profile-content">
+            <p>
+              Texto de exemplo descrevendo hábitos, motivações e histórico deste grupo. Substitua por dados reais do levantamento, indicando a relação com o território e evidências coletadas durante entrevistas ou observações.
+            </p>
+            <p>
+              Use este espaço para registrar fatores culturais, econômicos ou sociais que caracterizam o perfil e destaque citações ou episódios que reforcem a narrativa.
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <section id="panel-perfil-2" class="page-panel">
+        <article class="profile-page">
+          <div class="profile-headline">
+            <figure>
+              <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80" alt="Ondas do mar representando o Perfil 2" />
+            </figure>
+            <div class="profile-info">
+              <h2>Categoria / Subtítulo</h2>
+              <span class="profile-name">Perfil 2</span>
+            </div>
+          </div>
+          <div class="profile-content">
+            <p>
+              Utilize este espaço para detalhar percepções, desafios, expectativas e contribuições do perfil 2, incluindo trechos de entrevistas ou dados observados em campo.
+            </p>
+            <p>
+              Indique como este grupo participa da vida local, quais relações mantém com outros atores e quais demandas surgem do contato com o ambiente costeiro.
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <section id="panel-perfil-3" class="page-panel">
+        <article class="profile-page">
+          <div class="profile-headline">
+            <figure>
+              <img src="https://images.unsplash.com/photo-1526481280695-3c4693f28f17?auto=format&fit=crop&w=900&q=80" alt="Barcos de pesca representando o Perfil 3" />
+            </figure>
+            <div class="profile-info">
+              <h2>Categoria / Subtítulo</h2>
+              <span class="profile-name">Perfil 3</span>
+            </div>
+          </div>
+          <div class="profile-content">
+            <p>
+              Registre tradições, redes comunitárias e relações econômicas que sustentam este perfil. Traga informações que demonstrem a singularidade das vozes ouvidas.
+            </p>
+            <p>
+              Destaque dados, narrativas e imagens que ilustrem o papel do grupo na construção da identidade de Piratininga.
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <section id="panel-perfil-4" class="page-panel">
+        <article class="profile-page">
+          <div class="profile-headline">
+            <figure>
+              <img src="https://images.unsplash.com/photo-1455659817273-f96807779a8e?auto=format&fit=crop&w=900&q=80" alt="Pessoas caminhando na areia representando o Perfil 4" />
+            </figure>
+            <div class="profile-info">
+              <h2>Categoria / Subtítulo</h2>
+              <span class="profile-name">Perfil 4</span>
+            </div>
+          </div>
+          <div class="profile-content">
+            <p>
+              Explique rotinas de lazer, práticas comunitárias, organizações locais e o impacto desses elementos na identidade de Piratininga.
+            </p>
+            <p>
+              Inclua observações sobre como o grupo se articula em eventos, celebrações e decisões relacionadas ao bairro.
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <section id="panel-perfil-5" class="page-panel">
+        <article class="profile-page">
+          <div class="profile-headline">
+            <figure>
+              <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=80" alt="Surfista representando o Perfil 5" />
+            </figure>
+            <div class="profile-info">
+              <h2>Categoria / Subtítulo</h2>
+              <span class="profile-name">Perfil 5</span>
+            </div>
+          </div>
+          <div class="profile-content">
+            <p>
+              Detalhe motivações, desafios, impactos e expectativas desse grupo, conectando as narrativas à análise desenvolvida no TCC.
+            </p>
+            <p>
+              Mostre como a presença deste perfil influencia as políticas locais, o uso da praia e a sustentabilidade do território.
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <section id="panel-perfil-6" class="page-panel">
+        <article class="profile-page">
+          <div class="profile-headline">
+            <figure>
+              <img src="https://images.unsplash.com/photo-1470246973918-29a93221c455?auto=format&fit=crop&w=900&q=80" alt="Feira ao ar livre representando o Perfil 6" />
+            </figure>
+            <div class="profile-info">
+              <h2>Categoria / Subtítulo</h2>
+              <span class="profile-name">Perfil 6</span>
+            </div>
+          </div>
+          <div class="profile-content">
+            <p>
+              Descreva comportamentos, estatísticas e percepções que demonstram como este grupo se relaciona com o território e quais demandas apresenta.
+            </p>
+            <p>
+              Inclua referências a políticas públicas, projetos colaborativos e personagens-chave que sustentam o perfil.
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <section id="panel-perfil-7" class="page-panel">
+        <article class="profile-page">
+          <div class="profile-headline">
+            <figure>
+              <img src="https://images.unsplash.com/photo-1483683804023-6ccdb62f86ef?auto=format&fit=crop&w=900&q=80" alt="Por do sol em Piratininga representando o Perfil 7" />
+            </figure>
+            <div class="profile-info">
+              <h2>Categoria / Subtítulo</h2>
+              <span class="profile-name">Perfil 7</span>
+            </div>
+          </div>
+          <div class="profile-content">
+            <p>
+              Feche a série detalhando características exclusivas, pontos de atenção e como este grupo contribui para a visão integral do território.
+            </p>
+            <p>
+              Mostre conexões com as demais vozes mapeadas e a importância de considerar o conjunto para compreender Piratininga.
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <section id="panel-perfil-maricelia" class="page-panel">
+        <article class="profile-page">
+          <div class="profile-headline">
+            <figure>
+              <img src="maricelia.jpg" alt="Maricélia no quiosque em Piratininga" />
+            </figure>
+            <div class="profile-info">
+              <h2>Uma Baiana <s>perdida</s> em Piratininga</h2>
+              <span class="profile-name">Maricélia</span>
+            </div>
+          </div>
+          <div class="profile-content">
+            <p>
+              Eu a encontrei numa tarde ventosa caminhando pelo calçadão de Piratininga, já perto da Prainha. Na mesa de um quiosque, entre uma senhora e um homem de cerca de quarenta anos, Maricélia primeiro desconfiou ao ser convidada para conversar. Precisava trabalhar, disse. Mas bastou alguns minutos para que a baiana de fala firme afrouxasse os ombros e começasse a contar a própria história.
+            </p>
+            <p>
+              A relação dela com Piratininga é declarada em uma palavra: amor. Nascida no sul da Bahia, desembarcou aqui aos dezesseis anos, em 1992, depois de uma viagem de Carnaval com amigos que já viviam na região. Chegou sem muitos planos, foi ficando, recebeu uma proposta de trabalho logo na chegada e nunca mais conseguiu se afastar da praia que a encantou muito mais que o calor intenso do Rio.
+            </p>
+            <p>
+              Ao lado dela estava Val, amiga que acompanhou a entrevista e participou da conversa entre risos e comentários cúmplices. Maricélia apontou o próprio quiosque com orgulho: assim que chegou, imaginou que um dia aquele espaço seria seu. O sonho tomou forma com a urgência de quem sabia aproveitar oportunidades. Bastou uma crise de falta de água em um fim de semana de sol para perceber que podia abastecer a praia inteira.
+            </p>
+            <p>
+              Ela pediu férias da empresa em que trabalhava, comprou um isopor, uma churrasqueira simples e partiu para o Largo da Batalha em busca de suprimentos. Preparou espetos, peixe assado e começou a vender. Entre corridas da fiscalização, isopores emprestados e tachos de óleo que precisavam ser escondidos às pressas, foi juntando dinheiro até montar o negócio próprio.
+            </p>
+            <p>
+              Hoje, formada em Gastronomia, mora no Tibau, canto direito da praia, ao lado da lagoa. Descreve o bairro como maravilhoso, um lugar em que todos se conhecem e se cumprimentam. Para ela, viver onde o quiosque fica é sinônimo de qualidade de vida e rede de apoio diária. Quando pergunto se vir para Piratininga foi a melhor escolha, ela responde sem hesitar que foi uma das melhores coisas que já fez.
+            </p>
+            <p>
+              A trajetória, porém, não foi simples. Criada por avós fazendeiros, teve uma adolescência rígida. Aos quatorze anos, saiu escondida para uma festa e, como punição, foi obrigada a se casar no ano seguinte. Casou em 1977, teve a primeira filha pouco depois e percebeu que havia queimado etapas demais. Hoje encara essa história como parte da força que precisou construir para seguir em frente.
+            </p>
+            <p>
+              Os avós, a quem chama de pais, já se foram. Da mãe biológica guarda carinho, mas diz que a relação é mais parecida com a de irmãs. Todos os irmãos prosperaram em diferentes áreas e, entre brincadeiras, Maricélia conta que foi quem “puxou o bonde” ao sair da Bahia e abrir caminhos para os demais.
+            </p>
+            <p>
+              Durante a entrevista, ela era interrompida o tempo todo: netos pedindo atenção, funcionárias perguntando sobre pedidos, clientes passando para cumprimentar. O controle do quiosque ainda é feito em caderno e ela mostra as páginas rabiscadas pelas crianças com um misto de orgulho e humor. Os clientes viram amigos e é comum receber ligações quando o quiosque não abre.
+            </p>
+            <p>
+              Também enxerga sentido em ajudar o próximo. Durante a pandemia, arrecadou 380 cestas básicas mesmo com o quiosque fechado. Montava mesas em frente a shoppings, pedia alimentos e distribuía para quem precisava. Viúva do primeiro marido e separada do segundo, fala com franqueza sobre episódios de violência física e verbal que enfrentou. Ainda assim, diz que tudo a deixou mais forte e repetia para si mesma que desistir não era opção.
+            </p>
+            <p>
+              Em agosto recente, um incêndio consumiu seu quarto e os objetos de maior valor. A casa ficou improvisada, com parte sem água ou luz. Ela mostra as marcas das queimaduras e confessa que, desde então, qualquer cheiro de fumaça a faz se levantar e checar tomadas e fios pela casa inteira. O tempo livre diminuiu, mas ela tenta manter um ritmo mais tranquilo, assistindo a séries turcas com a filha e lendo tudo o que encontra — apesar dos livros perdidos no fogo.
+            </p>
+            <p>
+              Para o futuro, deseja saúde e continuidade. Quer manter o quiosque vivo, passando-o adiante dentro da família. Afinal, como diz com simplicidade, “as coisas mais simples são as mais gostosas”.
+            </p>
+            <p>
+              Eu estava andando no calçadão da praia de Piratininga. Era uma tarde de sol, mas com bastante vento. Observando as pessoas com uma atenção além da habitual, vi Maricelia quando estava quase chegando à prainha. Na mesa ao lado de um quiosque, ela estava acompanhada de mais duas pessoas: uma senhora e um homem que parecia ter cerca de 40 anos. Cheguei e perguntei se ela aceitava conversar. No início, pareceu não querer muito, perguntou quanto tempo durava, porque precisava trabalhar. Mas logo a mulher, que vestia um colete da cachaça “51” com manchas de comidas, se soltou e revelou detalhes de sua história para mim. 
+            </p>
+            <p>
+              A primeira pergunta que fiz foi sobre sua relação com Piratininga e a resposta foi dita de forma bem direta e com muita convicção: “Amor. Muito amor! Amo esse lugar aqui.” Nascida e criada no Sul da Bahia, Maricelia Santos Barbosa conheceu o local que tanto ama aos 16 anos. No final de 1992. Tudo começou com uma viagem despretensiosa de Carnaval com os amigos da época que já moravam em Piratininga. Saíram da Bahia de carro em direção a Camboinhas, local vizinho a Piratininga. “Cheguei (no Rio) já recebi proposta de trabalho. Aí foi fluindo, eu fui ficando, me encantei, porque quando eu conheci o Rio em si eu não gostei, muito calor. Mas me encantei por Piratininga.”
+            </p>
+            <p>
+              Ao seu lado durante todo tempo, estava Val, uma amiga. E foi para ela que em vários momentos a mulher direcionou falas, criando um clima bem descontraído e dando a ela  liberdade para participar da conversa. “A primeira vez que eu vim aqui, nesse quiosque, eu virei e falei: “Esse que eu acho que um dia vai ser meu. A minha irmã olhou para minha cara e riu.” Perguntei como ela conseguiu realizar esse sonho e a resposta veio através de uma história de anos atrás: 
+            </p>
+            <p>
+              “Cara, trabalhando muito mesmo. Eu trabalhava em uma empresa, mas em um final de semana de sol não lembro o ano, acabou toda a água na praia. Nenhum quiosque, camelô ou barraqueiro tinha água. Os poucos que conseguiram estavam vendendo na época por cinco reais, um absurdo. Aí falei: “Caraca, a fonte é aqui.” Entrei de férias na empresa, fui no Largo da Batalha, comprei um isopor, uma caixa de cada coisa e uma churrasqueira. Fiz um monte de espetos de carne, comprei peixe, assei na brasa e minha barraca bombou. Mas eu só tinha um isopor e uma mesa emprestada. Ai fui indo, mas já corri muito de SEOP, fiscalização da prefeitura. Antigamente dava pra vender peixe frito na praia, mas quando a prefeitura vinha, a gente saía correndo com o isopor de bebida e tacho de óleo quente. Fui indo, juntando dinheiro, e foi assim que comecei”, contou.
+Hoje em dia, Maricelia possui formação em Gastronomia e mora no Tibau, região localizada no canto direito da praia, próxima à lagoa. “Canto maravilhoso aqui de Piratininga, bairro fechado. Maravilhoso. Onde todo mundo conhece todo mundo”, definiu. “Muita gente fala: ‘Ah, eu odeio o Tibau, só tem gente fofoqueira, não sei o que’. Eu falei: ‘Gente, eu não faço nada ilícito, nada ilegal, nada’'". Eu amo o Tibau é é toma conta da minha vida aqui? Que ótimo, porque eu mesma não tenho tempo para tomar conta. [...] A qualidade de vida é muito boa, muito boa, muito boa mesmo,  as pessoas ainda se conhecem, se cumprimentam: bom dia, boa tarde. O dia que eu não abro o quiosque, as pessoas me liga para saber o que que houve.”
+“Então, você acredita que ter vindo para Piratininga foi a melhor coisa que te aconteceu?”, perguntei. 
+“A melhor coisa da minha vida, uma das melhores,  porque eu amo esse lugar!”, responde e em seguida  comenta também que nunca sairia de Piratininga, nem para ir para a Bahia, onde até hoje tem uma casa.  
+            </p>
+            <p>
+              Mas a vida nem sempre foi tão simples assim para ela. Com família muito rígida, aos 14 anos saiu escondida para uma festa, querendo curtir um pouco. Mas a menina que esperava um castigo convencional, teve como punição aceitar um casamento forçado, “mesmo sem ter feito nada”.  Com 15, se casou no dia 10 de outubro de 1977 e, menos de um ano depois, nasceu sua primeira filha. “EPorque eu era só uma menina, né? Ultrapassei um monte de etapa da minha vida.”, relembrou,   Diz, refletindo como se estivesse desabafando em uma conversa entre amigos.
+            </p>
+            <p>
+              Criada pelos avós fazendeiros, são eles que Maricelia  considera como pais. “A minha mãe (biológica) é como se fosse uma irmã. Eu é como uma não tenho como mãe. Meus pais já morreram para mim, na minha cabeça. Mas eu sempre tive contato com a minha mãe e com o meu pai. São meus genitores, mas afinidade mesmo…” Ela conta também que mesmo com a infância simples no interior, todos seus irmãos estão bem de vida. “Tem um que tem uma empresa de Construção Civil em São Paulo. Um outro é engenheiro, topógrafo [...] eu que puxei o bonde, tá? Depois que fui embora, todo mundo foi.” Apesar disso, relembra comparações que teve que passar: “Minha mãe ficava jogando minha cara:  “Ah, que a ‘'tua irmã tem dois diplomas, fez isso, fez não sei que lá, fez mestrado disso, mestrado daquilo.’' Eu ficava quieta, mas outro dia eu falei: engraçado, outro dia ela me pediu 200 reais’.  Essa comparação me motivou ainda mais a crescer”
+            </p>
+            <p>
+              Durante o tempo em que estive no quiosque com ela, percebi que a todo momento Maricelia era solicitada, seja para cuidar de algum dos netos que estavam ao redor, brincando e aprontando, ou por alguma funcionária que vinha tirar dúvidas sobre o trabalho: “Onde tá aquela mulher ali sentada, ali, ó, que botou a mão na mesa agora?”, perguntou a jovem que trabalha no quiosque. O controle dos pedidos é feito em um caderno, tudo à mão e à caneta ainda. As crianças também já rabiscaram o caderno, ela me mostra: “Olha o que as crianças fizeram, rabiscaram tudo!”. Além disso, toda hora passava alguém e a cumprimentava. 
+“ Você tem uma relação com os clientes, né?”, eu quis saber.  
+“Ah, a maioria, né? Vira amigo”, disse, orgulhosa. 
+Em certo momento, ela fala sobre legado e foi aí que aproveitei para perguntar qual ela deseja deixar. Ela não teve que pensar muito para responder: “O meu legado? Cara, o meu orgulho de mim mesmo, porque eu, eu dei uma boa criação para meus filhos. Hoje todo mundo tá bem, graças a Deus. Todo mundo tem suas próprias vidas. Vvocê não pode ter o egoísmo. Eu poderia ter vivido mais, ter aproveitado muito demais a minha vida, ter viajado, ter feito várias coisas. Mas eu tinha a minha preferência, o meu foco estava nos era meus filhos, numa coisa melhor para os meus filhos.”"
+            </p>
+            <p>
+              Além do cuidado com os filhos, ela enfatizou a  a importância de fazer bem ao próximo. Na pandemia, mesmo estando com seu quiosque fechado, conseguiu 380 cestas básicas para ajudar quem estava precisando. “Eu ia para a porta do Bay Market (shopping), ia para lá para o Renato, botava uma mesa e ficava pedindo alimento, arrecadando alimento”. . “
+            </p>
+            <p>
+              Maricelia é do tipo que não deixa a peteca cair. As partes negativas da vida, ela contou sem nunca se vitimizar. Ela acredita que tudo que aconteceu nos seus 52 anos de vida foi importante para deixá-la  mais forte. “Às vezes, mesmo a gente olhando assim e pensando: ‘meu Deus, que problemão, o que eu vou fazer agora? Viúva com dois filhos, não sei o quê’. Mas, na verdade, isso foi algo para me deixar mais forte,  eu não tinha como desistir. Como que eu vou desistir da vida? Tudo que tenho é fruto do meu trabalho, ninguém nunca me deu nada, nem marido. Ao contrário, né? Mas, graças a Deus, não tenho do que reclamar.”
+Viúva do primeiro marido e separada do segundo, com quem foi casada por 27 anos, ela comenta que, com o último marido, as coisas foram complicadas demais: “Passei por muita coisa ruim com o pai do meu filho mais novo. Muita coisa de agressão física e verbal. Muita coisa mesmo. Mas sobrevivi, né?” Apesar disso tudo, hoje ela se considera uma mulher feliz. “Ninguém é 100%, né? Eu acho que felicidade é um estado de espírito.”, complementou.
+            </p>
+            <p>
+              Recentemente um acidente a abalou muito. Ela  diminui o ritmo da fala para contar: “Teve um incêndio, um acidente na minha casa. Queimou meu quarto todo. Tudo de mais valor estava no meu quarto.  Foi no dia 12 de agosto. Está uma coisa de maluco, porque metade da casa está sem água, metade está sem luz. Tá um monte de gambiarra, um monte de gato.” O fogo começou com uma extensão no quarto. Muito abalada ao falar do assunto, ela me mostra  marcas do fogo no corpo. “Eu já passei por muita coisa na vida, Val, mas eu não sei... a idade que tá chegando, esse negócio mexeu muito comigo, tu sabia?  “Eu até que achei que você foi forte”, apoiou a amiga.  
+Visivelmente, o trauma deixou marcas e sequelas muito além das queimaduras da pele de Maricelia. “Eu fico sentindo cheiro de fumaça. Se aí qualquer coisa eu levanto. O cheiro é tão ativo que eu começo a cheirar a tomada, começo a olhar ao redor”. 
+            </p>
+            <p>
+              Agora trabalhando menos, em suas palavras: com “a batida mais tranquila” no tempo livre, gosta de assistir a filmes e séries, em especial, séries turcas, que conquistaram o gosto dela e de sua filha. Mas o que mais gosta é de ler. “Cara, eu sou curiosa, eu leio tudo.” E mais uma vez o incêndio volta à conversa e a mulher fica triste ao lembrar: “Ah, eu tinha muitos livros... queimou muito livro meu.” Recorda no meio da conversa ao perceber que o fogo também consumiu uma boa parte do que mais amava. 
+Para o futuro, seu desejo é ter saúde, e garante que não quer deixar o quiosque acabar. Quer que ele passe para os filhos, para os netos e, afinal, como ela mesma me disse: “As coisas mais simples são as mais gostosas, Clara.”
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <section id="panel-expediente" class="page-panel">
+        <h2 class="section-title">Expediente</h2>
+        <p class="section-subtitle">
+          Utilize o expediente para apresentar Clara, instituição, orientadores e contatos ligados ao trabalho.
+        </p>
+        <div class="about-wrapper">
+          <p>
+            Escreva um parágrafo sobre quem é Clara, o curso e o período que está concluindo, além da motivação para mapear os perfis de Piratininga. Traga também agradecimentos ou destaques institucionais relevantes.
+          </p>
+          <p>
+            Adicione informações de contato, links para o repositório completo, redes sociais ou formas de acompanhar desdobramentos do projeto após a entrega do TCC.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer>&copy; 2025 - TCC de Clara Espíndola. Todos os direitos reservados.</footer>
+
+    <script>
+      const navButtons = document.querySelectorAll('.nav-button');
+      const dropdown = document.querySelector('.dropdown');
+      const panels = document.querySelectorAll('.page-panel');
+
+      function activatePanel(panel) {
+        panels.forEach((p) => p.classList.remove('active'));
+        const target = document.getElementById(`panel-${panel}`);
+        if (target) {
+          target.classList.add('active');
+        }
+
+        navButtons.forEach((btn) => btn.classList.remove('active'));
+        navButtons.forEach((btn) => {
+          if (btn.dataset.panel === panel || (panel.startsWith('perfil') && btn.dataset.panel === 'lista-perfis')) {
+            btn.classList.add('active');
+          }
+        });
+
+        if (dropdown) {
+          dropdown.classList.remove('open');
+        }
+      }
+
+      navButtons.forEach((button) => {
+        button.addEventListener('click', (event) => {
+          const panel = button.dataset.panel;
+          if (panel === 'lista-perfis') {
+            dropdown.classList.toggle('open');
+            event.stopPropagation();
+            return;
+          }
+          activatePanel(panel);
+        });
+      });
+
+      document.querySelectorAll('.dropdown-menu button').forEach((button) => {
+        button.addEventListener('click', () => {
+          activatePanel(button.dataset.panel);
+        });
+      });
+
+      document.addEventListener('click', (event) => {
+        if (dropdown && !dropdown.contains(event.target)) {
+          dropdown.classList.remove('open');
+        }
+      });
+
+      // Default panel
+      activatePanel('apresentacao');
+    </script>
+  </body>
+</html>
