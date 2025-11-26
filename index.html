@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vozes de Piratininga | TCC Clara Espíndola</title>
     
-    <!-- Fonts: DM Sans (Títulos) e Inter (Texto) -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;400;700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -55,6 +55,7 @@
 
         .hero-pattern {
             background-color: #0f4c75;
+            /* Imagem de fundo genérica para a capa - pode manter essa do Unsplash ou usar uma sua se tiver */
             background-image: url("https://images.unsplash.com/photo-1471922694854-ff1b63b20054?auto=format&fit=crop&q=80&w=2072");
             background-size: cover;
             background-position: center;
@@ -71,34 +72,31 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Estilo do Placeholder de Foto */
-        .photo-placeholder {
-            border: 2px dashed #94a3b8;
-            background-color: #f1f5f9;
-            color: #64748b;
-            padding: 2rem;
-            text-align: center;
-            border-radius: 0.5rem;
+        /* Estilo para as Fotos no Texto */
+        .article-figure {
             margin: 2.5rem 0;
-            font-family: 'DM Sans', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
+            background-color: #f8fafc;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
         
-        .photo-placeholder:hover {
-            border-color: #0f4c75;
-            background-color: #e2e8f0;
-            color: #0f4c75;
+        .article-figure img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
         }
 
-        .photo-caption {
-            font-size: 0.875rem;
+        .article-figure figcaption {
+            padding: 1rem;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: #475569;
             font-style: italic;
-            font-weight: 600;
-            margin-top: 0.5rem;
+            border-top: 1px solid #e2e8f0;
+            background-color: #fff;
         }
     </style>
 </head>
@@ -178,6 +176,7 @@
                     </div>
                     <div class="md:w-1/2 relative fade-in mt-8 md:mt-0" style="animation-delay: 0.3s;">
                         <div class="aspect-[3/4] rounded-sm overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500">
+                            <!-- Se tiver uma foto conceitual, coloque na pasta img e mude aqui. Se não, mantenha a URL externa. -->
                             <img src="https://images.unsplash.com/photo-1595239541249-163462d733c7?auto=format&fit=crop&q=80&w=1000" alt="Piratininga Conceitual" class="w-full h-full object-cover">
                         </div>
                     </div>
@@ -205,7 +204,8 @@
                 <!-- Ricardo's Special Card -->
                 <div class="mt-12 fade-in">
                     <div onclick="openProfile('ricardo')" class="cursor-pointer group relative h-96 rounded-sm overflow-hidden shadow-xl">
-                        <img src="https://images.unsplash.com/photo-1534234828563-025cda287a98?auto=format&fit=crop&q=80&w=2000" alt="Homenagem Ricardo" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter grayscale">
+                        <!-- FOTO: capa-ricardo.jpg -->
+                        <img src="./img/capa-ricardo.jpg" onerror="this.src='https://images.unsplash.com/photo-1534234828563-025cda287a98?auto=format&fit=crop&q=80&w=1600'" alt="Homenagem Ricardo" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter grayscale">
                         <div class="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-colors"></div>
                         <div class="absolute bottom-0 left-0 p-8 md:p-12 w-full">
                             <span class="inline-block px-3 py-1 mb-4 text-xs font-bold tracking-wider text-deep uppercase bg-white rounded-sm">In Memoriam</span>
@@ -307,26 +307,26 @@
 
     <!-- Data & Scripts -->
     <script>
-        // Helper para criar o placeholder da foto
-        function createPhotoPlaceholder(caption) {
+        // Helper para criar a tag de imagem correta
+        function createPhoto(filename, caption) {
             return `
-                <div class="photo-placeholder">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-3"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
-                    <span class="font-bold text-sm uppercase tracking-wider">Espaço para Foto</span>
-                    <span class="photo-caption">${caption}</span>
-                </div>
+                <figure class="article-figure">
+                    <img src="./img/${filename}" alt="${caption}" loading="lazy">
+                    <figcaption>${caption}</figcaption>
+                </figure>
             `;
         }
 
+        // Dados dos Perfis com os caminhos exatos das imagens
         const profilesData = {
             'ze': {
                 title: "O homem da cervejinha na varanda",
                 name: "Zé",
                 subtitle: "",
-                image: "https://images.unsplash.com/photo-1560965034-70e6c62e5870?auto=format&fit=crop&q=80&w=1600",
+                image: "./img/capa-ze.jpg",
                 snippet: "“Quatro cervejas. Sozinho”. É assim que José Luiz da Costa, mais conhecido como Zé, descreve um dos seus melhores e mais comuns momentos de prazer da vida atual.",
                 content: `
-                    ${createPhotoPlaceholder("Zé na varanda. Foto: Arquivo Pessoal")}
+                    ${createPhoto("capa-ze.jpg", "Zé na varanda. Foto: Arquivo Pessoal")}
 
                     <p>“Quatro cervejas. Sozinho”. É assim que José Luiz da Costa, mais conhecido como Zé, descreve um dos seus melhores e mais comuns momentos de prazer da vida atual. Nascido no dia 24 de novembro de 1958, o homem que sempre viveu em Piratininga, aproveita seu momento de descanso em sua varanda, bebendo uma cerveja, contemplando a vista para a lagoa de Piratininga. Sua casa fica em cima da casa dos seus pais, simples e acolhedora, sua varanda possui diversas flores e plantas, roupas no varal e sua cadeira de balanço. E foi ali que ele me recebeu e conversamos, tomando sua cerveja - o que é uma espécie de ritual para ele. Como Luiz ressaltou em diversos momentos, ele já trabalhou muito e bebeu muito, e agora descansa diante da vista do lugar que mais fez parte dos seus 66 anos de vida.</p>
                     <p>Mas mais uma vez o número quatro aparece em sua vida. Ele é o filho mais velho de quatro irmãos, frutos do amor de seus pais Maria Edwirges Da Costa e Luiz da Costa. Ele contou que até houve uma quinta irmã, mas ela já nasceu sem vida, e afirmou com certa frieza que é o “primeiro de quatro irmãos”.  Quando questionado sobre sua infância, o homem, de aparência tímida e bem direto, disse: “a gente ia para o colégio, voltava, ia para a lagoa, tomar banho.  Tudo em Piratininga! ” Apesar de ter passado todos os seus anos de vida na região, hoje, o lugar que conhece e onde vive, é muito diferente dos cenários que emolduraram sua infância. “Isso aqui tudo era areia, tipo dunas”, relembrou.</p>
@@ -342,10 +342,10 @@
                 title: "Um tempero a mais na vida",
                 name: "Elizangela",
                 subtitle: "",
-                image: "https://images.unsplash.com/photo-1556910103-1c02745a30bf?auto=format&fit=crop&q=80&w=1600",
+                image: "./img/capa-elizangela.jpg",
                 snippet: "Era uma sexta-feira de setembro, por volta das quinze para as quatro da tarde, quando vi Elizangela pela primeira vez.",
                 content: `
-                    ${createPhotoPlaceholder("Elizangela apoiada no balcão da lanchonete. Foto: Clara Fonseca")}
+                    ${createPhoto("capa-elizangela.jpg", "Elizangela apoiada no balcão da lanchonete. Foto: Clara Fonseca")}
 
                     <p>Era uma sexta-feira de setembro, por volta das quinze para as quatro da tarde, quando vi Elizangela pela primeira vez. Ela estava na janela da sua casa com seu marido, observando a vista para a lagoa. Embaixo de sua casa, funciona sua lanchonete. Pedi um açaí e precisei apenas de poucos minutos para notar uma mulher vaidosa, alegre e com muito orgulho dos filhos.</p>
                     <p>Retornei outro dia pra continuar nossa conversa. Sempre simpática, ela me recebeu novamente em sua lanchonete e ali descobri como cada pessoa é capaz de carregar tantas histórias que a gente nem imagina, ao esbarrar no cotidiano. Hoje, Elizangela Vieira dos Santos tem 52 anos, mora em Piratininga, conseguiu formar os dois filhos no ensino superior e tem uma vida confortável e de muita parceria com seu marido. Mas nem sempre foi assim.</p>
@@ -364,7 +364,7 @@
                     <p>Apesar de ser feliz com que construiu, ela também não vê a hora de poder descansar e aproveitar a praia e a vida com mais tranquilidade: “Com 14 anos eu comecei a trabalhar e não parei mais. Não vejo a hora de parar!”<br>“Mas eu acho que quando você parar você vai querer continuar com a loja, não?”, perguntei, ingênua, ao enxergar seu trabalho como uma parte importante da sua vida.<br>“Ah, eu não sei, porque assim, a loja é  bom , né? Mas prende muito, entendeu? Eu adoro praia, mas os dias que eu tenho movimento é dia de sol na praia, então não dá, né?”</p>
                     <p>Descansando no futuro ou não, o hoje, com Tempero a Mais, ela leva seu amor e afeto em forma de comida boa e com preço justo para os moradores da região.</p>
                     
-                    ${createPhotoPlaceholder("Fachada da lanchonete de Elizangela. Foto: Clara Fonseca")}
+                    ${createPhoto("elizangela-fachada.jpg", "Fachada da lanchonete de Elizangela. Foto: Clara Fonseca")}
 
                     <h3>“Eu sou feliz assim”</h3>
                     <p>“Eu sou feliz assim”. Foi nesse momento que a entrevista se aproximou do fim. Ela é feliz e a felicidade basta para ela. Hoje, a mulher se revelou caseira e tem no seu lar tudo o que precisa para ser feliz. “Tem uma área gourmet, a vista para a lagoa, tem a televisão, tem a Netflix, eu quero mais o que? Eu estou feliz da minha vida”.</p>
@@ -375,10 +375,10 @@
                 title: "Uma Baiana perdida em Piratininga",
                 name: "Maricelia",
                 subtitle: "",
-                image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=1600",
+                image: "./img/capa-maricelia.jpg",
                 snippet: "Eu estava andando no calçadão da praia de Piratininga. Era uma tarde de sol, mas com bastante vento.",
                 content: `
-                   ${createPhotoPlaceholder("Maricelia sorrindo em frente ao seu quiosque 40 Graus. Foto: Clara Fonseca")}
+                   ${createPhoto("capa-maricelia.jpg", "Maricelia sorrindo em frente ao seu quiosque 40 Graus. Foto: Clara Fonseca")}
 
                    <p>Eu estava andando no calçadão da praia de Piratininga. Era uma tarde de sol, mas com bastante vento. Observando as pessoas com uma atenção além da habitual, vi Maricelia quando estava quase chegando à prainha. Na mesa ao lado de um quiosque, ela estava acompanhada de mais duas pessoas: uma senhora e um homem que parecia ter cerca de 40 anos. Cheguei e perguntei se ela aceitava conversar. No início, pareceu não querer muito, perguntou quanto tempo durava, porque precisava trabalhar. Mas logo a mulher, que vestia um colete da cachaça “51” com manchas de comidas, se soltou e revelou detalhes de sua história para mim.</p>
                    <p>A primeira pergunta que fiz foi sobre sua relação com Piratininga e a resposta foi dita de forma bem direta e com muita convicção: “Amor. Muito amor! Amo esse lugar aqui”. Nascida e criada no Sul da Bahia, Maricelia Santos Barbosa conheceu o local que tanto ama aos 16 anos. No final de 1992. Tudo começou com uma viagem despretensiosa de Carnaval com os amigos da época que já moravam em Piratininga. Saíram da Bahia de carro em direção a Camboinhas, local vizinho a Piratininga. “Cheguei (no Rio) já recebi proposta de trabalho. Aí foi fluindo, eu fui ficando, me encantei, porque quando eu conheci o Rio em si eu não gostei, muito calor. Mas me encantei por Piratininga”.</p>
@@ -397,13 +397,13 @@
                 title: "Histórias de pescador",
                 name: "Selmo",
                 subtitle: "",
-                image: "https://images.unsplash.com/photo-1541417937963-c2763327d6d1?auto=format&fit=crop&q=80&w=1600",
+                image: "./img/capa-selmo.jpg",
                 snippet: "“Eu sou o único Selmo da região”. Essa foi uma das primeiras falas do homem para mim.",
                 content: `
                     <p>“Eu sou o único Selmo da região.” Essa foi uma das primeiras falas do homem para mim. Vestindo um casaco preto, boné tampando seus cabelos brancos quase inexistentes, apesar do seus mais de 60 anos, e calçando uma havaiana branca com meia cinza, vejo ele mexendo em um barco azul na beira da lagoa de Piratininga. Logo mais, eu descobriria que o barco denominado de “Salmos” foi construído por ele mesmo.</p>
                     <p>Selmo José Nascimento, de 66 anos, é um exemplo de talento que vem de berço. Filho e neto de pescadores, o homem, que se denomina “Minhoca da Terra” de Piratininga, sempre morou e pescou na região, e tirou dessa prática o principal meio de sustento durante toda sua vida. Vida essa que coleciona memórias que me fazem acreditar ainda mais na veracidade da expressão “história de pescador”. Contador de histórias ora interessantes ora suspeitas o homem que gosta de falar encontrou, na nossa conversa, a oportunidade perfeita de ser ouvido.</p>
                     
-                    ${createPhotoPlaceholder("Selmo e seu barco “Salmos”. Foto: Clara Fonseca")}
+                    ${createPhoto("capa-selmo.jpg", "Selmo e seu barco “Salmos”. Foto: Clara Fonseca")}
 
                     <p>Criado na natureza da região, assume ter sido bem “largadinho” e fala com boa nostalgia dessa fase: corridas, bolas, brincadeiras na chuva e banhos na lagoa. Hoje, ele acha que as crianças são “Nutella”: “As crianças de hoje não  faz  mais isso”, e aproveita para me contar sobre um tombo de bicicleta em Piratininga que o fez desmaiar na infância.</p>
                     <p>Apesar dos 66 anos de muita história, o homem afirma que nasceu mesmo em 2016, quando se converteu à religião evangélica. Se revelando uma pessoa de muita fé, sem dúvidas, foi a religião o assunto mais presente em toda conversa. Sua conversão foi impulsionada por um momento muito difícil na sua família: a internação de um dos seus filhos em um manicômio, por esquizofrenia.</p>
@@ -426,10 +426,10 @@
                 title: "Quiosque Pinguim",
                 name: "Jorge",
                 subtitle: "",
-                image: "https://images.unsplash.com/photo-1574315042633-8998d36006dc?auto=format&fit=crop&q=80&w=1600",
+                image: "./img/capa-jorge.jpg",
                 snippet: "Jorge Luiz Silva Ferreira tem 59 anos e herdou o gosto pela praia do seu pai, que levava ele pra perto do mar como forma de passeio na infância.",
                 content: `
-                    ${createPhotoPlaceholder("Jorge sentado na frente do seu quiosque. Foto: Clara Fonseca")}
+                    ${createPhoto("capa-jorge.jpg", "Jorge sentado na frente do seu quiosque. Foto: Clara Fonseca")}
 
                     <p>Jorge Luiz Silva Ferreira tem 59 anos e herdou o gosto pela praia do seu pai, que levava ele pra perto do mar como forma de passeio na infância. Ele recorda que ia muito a Itaipu, já que seu pai achava o mar de Piratininga muito bravo, por causa dos afogamentos que aconteceram na época. Mas algo muito curioso que ele lembrou nos faz perceber que seu encantamento por Piratininga vem de antes mesmo dele saber diferenciar as praias, também na infância, quando nem imaginava morar lá um dia: “quando a gente chegava ali no alto da da serrinha, descendo do Cantagalo, olhava e via a praia de perto e falava assim: ‘Olha a praia, todo mundo na felicidade que a praia tava chegando’. Só que a praia demorava muito para chegar e eu, como criança, não entendia, porque a gente via tão de perto”. A praia que ele via era Piratininga, mas foi só na adolescência que ele começou a frequentar mais regularmente a praia onde hoje ficam  seu lar e seu local de trabalho.</p>
                     <p>“Você se vê morando em outro lugar hoje em dia?”<br>“Não. Não tem como, porque eu me identifico muito com isso aqui, né?”, comentou o homem que se mudou para Piratininga por uma questão logística do trabalho, e hoje é apaixonado pela região.</p>
@@ -439,7 +439,7 @@
                     <p>Ele me contou que, antes da fiscalização ser mais severa no local, havia um forte costume de reunir esses amigos e fazer churrascos no quiosque: “ Dia dos Pais a gente se juntava. Ano novo, dia primeiro, o pessoal vinha com o que sobrou de casa, chope e tal, e a gente fazia. Hoje em dia, com a fiscalização, é mais difícil, mas de vez em quando ainda acontece”. Outro encontro curioso que o quiosque proporcionou à família foi o da própria Clarinha, como ele chama a filha. Foi ali que ela conheceu o atual marido, Bruno. “Ele estava passando férias e parou para tomar um coco. Parece que deu algum clique ali”, relembra. Hoje, anos depois, o casal é casado e tem uma filha, Mel, a maior paixão do avô. “Uma coisa que todo mundo sempre dizia, e que eu nunca imaginei, é que fosse tão bom ser avô”.<br>Atualmente, é seu filho Pedro que assume boa parte da administração do quiosque.  “ Hoje em dia eu trabalho duas, três vezes na semana, nessa época de movimento menor eu faço mercado do Ceasa, peixaria, essa coisa toda, eu faço mais a parte de logística, de apoio. Pedro que fica aqui direto, entendeu?”. Mesmo assim, ele gosta de aproveitar, quando tem uma oportunidade de cozinhar no estabelecimento: “Faltou uma cozinheira ou tá muito apertado, eu entro e a gente vai e toca.  Eu gosto do movimento do sufoco todo de verão, essa confusão toda.  Nada melhor do que você fazer aquilo que você gosta. Eu gosto muito de cozinhar, eu gosto que a pessoa diga assim: ‘Tá bom, tá gostoso, eu gostei, ficou legal’. Até quando a gente tá em casa, final de semana, que tá chovendo, a gente faz a comidinha lá, eu gosto de fazer. Eu aprendi a cozinhar com a minha vó”.</p>
                     <p>Por falar em gostos e paixões, Jorge demonstrou ser um flamenguista apaixonado com convicção. Isso fica claro até pra quem, assim como eu, tem o primeiro contato pelo  WhatsApp , onde sua foto do perfil sintetiza muito bem seus dois amores: o Flamengo e a neta Mel.  “ Eu não sou torcedor modinha. Desde criança, meu pai ensinou a gente ser Flamengo. Antes a gente acompanhava pelo rádio, já que não havia transmissão na televisão”, relembrou. Na ocasião em que o encontrei, meu namorado estava me fazendo companhia, e Jorge não perdeu oportunidade de zoar a camisa que ele estava usando do time rival, o Fluminense. A atitude revelou também um lado bem-humorado dele, que em diversos momentos se permitiu rir comigo, contando memórias engraçadas, sempre de forma leve.</p>
                     
-                    ${createPhotoPlaceholder("Jorge com a neta na praia de Piratininga. Foto: Arquivo Pessoal")}
+                    ${createPhoto("jorge-familia.jpg", "Jorge com a neta na praia de Piratininga. Foto: Arquivo Pessoal")}
 
                     <p>De voz calma e perfil centrado, ele também demonstrou ser um homem muito conectado com a família, que a todo momento era mencionada de alguma forma nas suas histórias. Pai de três filhos, a formação de sua família começou no local em que conheceu sua esposa: na igreja da Nossa Senhora de Fátima, quando ele tinha 18 anos. O primeiro interesse surgiu por parte dela. “Tinha uma quermesse lá na igreja e ela mandou um bilhetinho para mim. Aí marcamos encontro na missa e foi crescendo aquela conversinha. Depois começamos a namorar. Depois a gente noivou e a casou”,  disse.<br>Ele contou que a trajetória da sua família se manteve ligada à igreja por longos anos: “A nossa vida toda foi dentro da igreja, né? Quando a gente casou, as crianças nasceram, foram batizadas lá, todo mundo fez Primeira Comunhão na mesma igreja”.<br>Apesar do passado católico, hoje em dia ele frequenta um centro de umbanda, mas o processo de se descobrir em uma nova religião foi gradual. “Por algumas coisas da vida , a gente começou a ir no kardecismo. A gente conheceu um lugar  aqui em Piratininga e passou  a frequentar esse centro de umbanda, que é uma coisa bem legal também. Tem uns 10 anos que a gente tá nessa nessa religião, que é uma religião de caridade, de muita fraternidade. Mas, a gente de vez em quando vai na missa. Tem muito disso, desse sincretismo, né? Uma coisa que não te sufoca, né? Que prega que você tem que fazer caridade, que tem que ser uma pessoa boa. Que lá na frente, o universo vai te cobrar por aquilo que você faz e só você pode se ajudar”, refletiu.</p>
                     <h3>Legalização dos quiosques</h3>
@@ -453,18 +453,18 @@
                 title: "O defensor da natureza",
                 name: "Paulo",
                 subtitle: "",
-                image: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&q=80&w=1600",
+                image: "./img/capa-paulo.jpg",
                 snippet: "Na Rua Doutor Celso Dias, entre a lagoa e a praia, está a residência de Paulo Oberlander.",
                 content: `
                     <p>Na Rua Doutor Celso Dias, entre a lagoa e a praia, está a residência de Paulo Oberlander. A casa de aparência humilde, com tijolos à mostra e sem reboco, logo de cara já revela que ali mora um surfista. A ausência de cores nas paredes, contrasta justamente com as mais de 10 pranchas coloridas que estão ao lado de fora e anunciam: “aqui vive um surfista apaixonado!” A casa é simples, segundo ele também é pequena, e por isso, escolheu conversar comigo do lado de fora, em dois bancos na beira da lagoa, a menos de um minuto de sua casa.</p>
                     
-                    ${createPhotoPlaceholder("Paulo e a fachada de sua casa. Foto: Clara Fonseca")}
+                    ${createPhoto("capa-paulo.jpg", "Paulo e a fachada de sua casa. Foto: Clara Fonseca")}
 
                     <p>Em um dia frio, e sentado à beira da lagoa tranquila, Paulo logo foi relembrando momentos de sua vida na região: “A gente andava por isso aqui tudo né? Desbravando, comendo coquinho que tinha pelos  terreno baldio . Com a dificuldade na época de se alimentar, juntava vários  coquinho  e misturava a farinha. E a pesca vinha do mar. Pescava com o meu pai também na lagoa, desde que eu era criança, meu pai sempre foi pescador”. E foi ao falar do pai que ele se emocionou a primeira vez, com menos de 10 minutos de conversa, expondo pra mim um lado frágil de um homem que muitas vezes tenta parecer forte: “Fui um cara duro a vida toda e agora eu tô vendo que não me levou nada. Eu acho que eu posso ter perdido várias oportunidades na vida por ter sido um cara muito duro, comigo mesmo, com a minha família. Mas meu pai era assim. Eu não tenho que ser igual ao meu pai, porque a vida fez ele assim”, chorou discretamente ao lembrar.<br>Paulo chegou a tentar assumir o legado do pai na pesca, mas acabou abandonando porque, segundo suas palavras, “essa lagoa está completamente só esgoto”. Hoje, devido a essa condição, ele buscou outras formas de conseguir dinheiro, todas de alguma forma associadas ao local em que nasceu e que lhe ensinou boa parte do que sabe. “Eu conserto prancha e trabalho do surfe (dando aulas)”. E complementa a renda com um barco que tem na praia, onde oferece passeios turísticos, mostra os pontos, pesca e leva gente para pescar.<br>Foi também almejando uma vida melhor que foi para os Estados Unidos, onde morou de 2000 a 2006. Lá ele assume ter feito um pouco de tudo, como por exemplo lavar carros,  valet parking  e  delivery ,  “eu só não roubava, só não fazia nada errado”, e comentou o motivo da sua volta para o Brasil: “Deu saudade de Piratininga… A verdade é essa”.</p>
                     <p>Seu amor por Piratininga já foi refletido de diversas formas durante seus 52 anos de vida. Hoje, o homem, com manchas de sol na pele, fruto de uma vida vivida sob muito sol e mar, relembrou já ter feito de tudo para defender sua terra, até mesmo práticas criminosas: “A gente pegava quem tava fazendo besteira, dava uma surra e mandava embora. Vai bagunçar aqui não! Antigamente a gente saía por aí com um grupo de amigos pegando pichador. Pintava a cara, fazia ele engolir o bico do jet. Olha só, eu estou nessa já faz um tempo, nesse amor pelo lugar, nesse amor por aquilo que eu faço. Porra, eu já salvei baleia, cara…” E não é à toa a frase ‘defensor da natureza’ que ele que escolheu para bio do no seu  Instagram . Além do papel questionável de justiceiro que já assumiu no local, Paulo coleciona uma série de histórias como ativista da natureza, essas não somente em Piratininga. Em 2013, quando causou rebuliço ao atravessar a Baía de Guanabara vestindo terno pela primeira vez e acabou parando a barca Rio-Niterói em protesto contra a poluição do local para as Olimpíadas.</p>
                     <p>“Porra, aí deu uma merda, né cara.”<br>“Mas aí teve algum processo?”<br>“Quase fui preso.”<br>“Sério? E se arrepende?”<br>“Não.”</p>
                     
-                    ${createPhotoPlaceholder("Paulo no protesto que parou a barca Rio x Niterói. Foto: Reprodução/O Globo")}
+                    ${createPhoto("paulo-protesto.jpg", "Paulo no protesto que parou a barca Rio x Niterói. Foto: Reprodução/O Globo")}
 
                     <p>Ou quando posou em protesto em frente ao MAC (Museu de Arte Contemporânea), atrás de uma montanha de lixo, e teve sua foto indevidamente usada por um velejador de Búzios, Ricardo Vinícius, que publicou a imagem assumindo ser o homem que, na verdade, era Paulo. A foto viralizou, e foi assim que o homem simples de Piratininga, que nem chegou a concluir os estudos na escola, ganhou espaço em veículos mundiais como The New York Times e Le Monde, mesmo sendo tratado como outra pessoa. Nessa ocasião, ele acabou recebendo uma indenização de R$6 mil do portal UOL, mas falou com um tom de desprezo, como se o dinheiro tivesse sido pouco.</p>
                     <p>Para os três filhos, cada um de uma mãe diferente, ele deseja que sejam reconhecidos em Piratininga pelo mesmo cuidado com a natureza que ele carrega: “Minha filha cata lixo no mar”, contou a voz orgulhosa e brilho nos olhos.<br>E como alguém que habita há anos em Piratininga, e mais do que só morar, explora cada pedaço desse lugar, ele assumiu ser, sem dúvidas, um conhecedor profundo do local. “Tem um museu aqui, cara, que é o Museu de Piratininga, da Pesca. Ninguém sabe nada lá. Aí o visitante vai para lá e conversa comigo, vou e dou aula”.</p>
@@ -479,24 +479,24 @@
                 title: "Ricardo da Costa Fonseca",
                 name: "Ricardo Fonseca",
                 subtitle: "1965 - 2021",
-                image: "https://images.unsplash.com/photo-1534234828563-025cda287a98?auto=format&fit=crop&q=80&w=1600",
+                image: "./img/capa-ricardo.jpg",
                 snippet: "Era dia 22 de setembro de 1965, na Rua dos Corais lote e quadra 39, quando nasceu Ricardo da Costa Fonseca.",
                 content: `
-                    ${createPhotoPlaceholder("Ricardo Fonseca sorrindo. Foto: Caio Fonseca")}
+                    ${createPhoto("capa-ricardo.jpg", "Ricardo Fonseca sorrindo. Foto: Caio Fonseca")}
 
                     <p>Era dia 22 de setembro de 1965, na Rua dos Corais lote e quadra 39, quando nasceu Ricardo da Costa Fonseca. Todas as pessoas com quem  conversei, não se lembram do clima desse dia, nem mesmo o Google soube responder. Se fosse para deduzir, eu chutaria um dia de sol bem bonito, justamente por ser o dia que marca o início da primavera. Coincidência ou não, Ricardo era como um sol típico da estação que marca seu nascimento: iluminava e trazia acalento para todos ao seu redor, e disso posso falar com propriedade.</p>
                     <p>Ricardo tinha cabelos brancos, olhos azuis e as marcas da idade já apareciam em sua pele. Ele foi o sexto filho de Magda Maria da Costa e Rubens Cipriano da Fonseca e eu sempre cresci ouvindo sobre meu pai ter sido o mais levado e agitado entre os diversos filhos do casal. Rodeado de histórias, era impossível conhecer Ricardo e não conhecer Piratininga.  Por isso, quando penso nele, imediatamente sou levada a diversas paisagens da região que embalaram os seus 55 anos de vida.<br>Diferente de todos os perfis escritos para esse projeto, o do meu pai não vai ter falas diretas e atuais dele. Isso porque, no dia 14 de junho de 2021, ele partiu, sendo mais uma vítima da Pandemia do Covid-19. Mas sua relação com Piratininga sempre foi tão forte, que foi em um hospital próximo a lagoa que ele deu seu último suspiro de vida, finalizando lá um ciclo de muita luta, amor, alegria e sonhos.<br>Porque, se tem algo que meu pai foi, sem dúvidas, foi feliz. E, por causa dessa alegria, é que eu sigo aqui tentando sonhar. Esse trabalho é parte de um sonho que ele construiu lá trás quando, junto da minha mãe, sempre deixou muito claro pra mim e pro meu irmão o verdadeiro valor de um diploma universitário, e nunca poupou esforços para que isso acontecesse. Está acontecendo!<br>Com a ausência de recursos e brinquedos, ele sempre lembrava que sua infância humilde foi aproveitando o que Piratininga tinha para oferecer de graça: catar frutas, mergulhos no mar e na lagoa e muitas brincadeiras ao ar livre no local calmo e tranquilo. Com criação simples e com poucos cuidados,  meu pai começou andar apenas com 2 anos, mas frequentador assíduo da Lagoa, com essa mesma idade ele quase morreu afogado. “Fiquei roxo”, contava ele. E esse não foi o único dos afogamentos ocorridos durante os anos em que se aventurou em Piratininga. Mas a prática o fez aprender a nadar como ninguém. Lembro de estar na areia acompanhando suas braçadas na praia de Piratininga.  Certa vez, ele entrou nesse mesmo mar para salvar uma jovem enquanto não chegava o socorrista, revelando seu lado bondoso. “Tava chegando na areia e não soltava ela”, conta minha mãe, rindo e com ciúmes.<br>Seu pai, Rubens, era pedreiro e construiu quase todas as casas no Tibau, local em Piratininga, na época. Durante um período, Ricardo o ajudava na equipe. Ele sempre contava que seu pai, bruto, o chamava de burro, e ele não gostava muito de trabalhar com ele, mas foi graças a esse período que obteve conhecimentos e construiu nossa casa. Essa casa fica localizada em São Gonçalo. Este ano, faz dez anos que não moramos mais lá, ,mas a casa grande, de 3 quartos, um enorme quintal e terraço, sem dúvidas é a representação perfeita do homem que sempre lutou muito para oferecer o melhor do conforto à sua família.<br>Quando ele tinha  por volta  de  12 anos, teve que se mudar para Arsenal, São Gonçalo. Meu avô comprou uma casa lá, acredito que por ser maior e mais barata, e toda família se viu tendo que abandonar Piratininga. Mas Ricardo nunca se deu por satisfeito com essa condição. Se não houvesse um impedimento,  todos os seus finais de semana eram lá e, mesmo anos depois, já estabelecido em SG com a família que criou, sempre fazia questão de mencionar que seu sonho era voltar a viver  lá. E foi na tentativa de minimamente viver esse sonho que passamos lá tantos fins de semana, feriados,  carnavais e viradas do ano. Para escrever este perfil, mergulhei na caixa enorme de fotos antigas e reveladas que tenho em casa. A quantidade  de fotos revela um hábito antigo que não temos mais hoje em dia, que é ir para o bairro. Em quase todas as fotos da minha infância, Piratininga estava no plano de fundo.</p>
                     
-                    ${createPhotoPlaceholder("Foto antiga de Ricardo, os filhos e a esposa na praia de Piratininga. Foto: Arquivo Pessoal")}
+                    ${createPhoto("ricardo-familia-antiga.jpg", "Foto antiga de Ricardo, os filhos e a esposa na praia de Piratininga. Foto: Arquivo Pessoal")}
 
                     <p>Apesar de ter ido para São Gonçalo e lá ter conhecido a minha mãe, foi em uma pedra na praia Piratininga que aconteceu o pedido de casamento, pouco tempo depois de começarem a namorar. O casamento ocorreu em 5 de maio de 1990. Três anos depois, em 93, nasceu Caio. O filho mais velho do casal, que herdou o sorriso solto do meu pai, e era sua companhia para acordar aos domingos e assistir Fórmula 1  –  esporte que ele mais gostava. Era o som das corridas na televisão que me acordava todos os domingos.<br>Por falar em domingos, esse dia da semana até hoje é um dos mais difíceis, quando mais sinto sua ausência. Após as corridas, ele adorava colocar uma música e ir para a cozinha. Aos domingos, o almoço era com ele e quase sempre com receitas de frutos do mar. Fazer esses pratos foi um costume que herdou da época em que morava em Piratininga. Graças aos pescados da região, sempre foi um costume muito forte de Ricardo cozinhar pratos com frutos do mar, em especial a caldeirada; não à toa, é minha comida favorita até hoje, mas nenhum se iguala ao dele. Com muito amor, ele cozinhava e a gente se reunia em volta da mesa. A tradição era tão forte que, mesmo depois de Caio ir morar sozinho, aos domingos ele retornava para almoçar com a gente. Meu pai não era um homem de falar muitas palavras de amor, mas sempre fazia questão de demonstrar seu sentimento por nós com gestos e ações, e cozinhar era um deles.<br>Lembro muito bem da época da escola: meu pai me acordava todo dia de manhã, já com a toalha na mão. Quando eu saía do banho, meu café já estava pronto e minhas frutas, cortadas. No caminho, íamos conversando, e na hora de ir embora ele me buscava novamente, sempre com carro cheio dando carona para meus amigos, que o adoravam. Ele levava eu, meu irmão e minha mãe para qualquer lugar e a qualquer hora. Seu maior objetivo era dar conforto para sua família, e isso posso afirmar que ele conseguiu. Até em momentos de dificuldades financeiras, ele nunca deixou isso chegar até mim.</p>
                     <p>Em 2017, a gente se mudou para Itaipu, também na Região Oceânica de Niterói. Ainda não era Piratininga, mas era perto. Nos fins de semana, quase todos os finais de tarde eram lá. Com o tempo, essa prática se estendeu também para os dias da semana.  Na pandemia, essa prática se tornou ainda mais comum. Quase todo dia era dia de Piratininga.  Sempre dentro do carro. Fico feliz de saber que ele pode conviver mais com o lugar que amava e me arrependo pelas vezes em que reclamava, querendo voltar para casa ou quando falava que não queria morar lá.  Hoje, faria tudo para passar um pouco mais de tempo com ele nesse lugar que aprendi a amar.</p>
                     
-                    ${createPhotoPlaceholder("Ricardo no Tibau. Foto: Clara Fonseca")}
+                    ${createPhoto("ricardo-tibau.jpg", "Ricardo no Tibau. Foto: Clara Fonseca")}
 
                     <p>Além disso, toda vez que íamos a Piratininga, eu reclamava porque ele sempre queria ir no Tibau e olhar a casa em que nasceu, casa essa também construída por meu avô. A primeira vez que Bernardo, meu namorado, foi lá em casa conhecer meus pais, ele também teve que ir conhecer a casa da Rua dos Corais que mapeou a infância do meu pai, como uma espécie de ritual para entrar na família.</p>
                     
-                    ${createPhotoPlaceholder("Casa que Ricardo nasceu. Foto: Clara Fonseca")}
+                    ${createPhoto("ricardo-casa-infancia.jpg", "Casa que Ricardo nasceu. Foto: Clara Fonseca")}
 
                     <p>Dedicado à família, ele perdeu o pai cedo e, por ironia do destino, sempre brincava, com certo medo: “Será que vou morrer cedo igual ao meu pai?”. Rubens morreu aos 60 anos. Meu pai, aos 55.<br>Teimoso, ele logo quis retornar ao trabalho durante a pandemia.  Na época, era coordenador de uma equipe de representantes comerciais aqui no Rio. Ele não gostava de ficar parado, muito menos quieto em casa. Lembro das voltas que ele ficava dando no condomínio nesse período. Além disso, também estava preocupado com dinheiro, e procurava sempre formas de aumentar a renda, já que só ele trabalhava em casa. Além da ocupação principal, buscava produtos para assumir a representação comercial e, às vezes, voltava ao ofício de corretor imobiliário, que ele já havia exercido.  Ele não era homem de se acomodar, durante quase toda minha infância, ele trabalhou na Coca-Cola e lá conseguiu ir subindo de cargos. Depois disso, não me recordo de ter tido outros empregos tão duradouros.<br>E foi assim, retornando ao trabalho, que ele contraiu essa doença. Lá em casa, eu e minha mãe tínhamos todo o cuidado do mundo, mas ele era mais relapso. Lembro das brigas para ele usar a máscara de forma correta ou higienizar tudo ao chegar em casa. Por volta de um mês antes de ele pegar COVID, um dos seus melhores amigos morreu, e mesmo assim ele não levava a doença tão a sério. Lembro de uma fala minha que me corroeu de culpa por muito tempo: estávamos no carro, bem na saída do condomínio, e falei: “Você só vai levar a sério depois que alguém aqui de casa morrer (de Covid)”. Logo depois, ele acabou contraindo.<br>Era uma segunda-feira, 24 de maio de 2021. As coisas estavam começando a se normalizar  e encontrei meu namorado para ir ao cinema. As sessões do shopping Itaipu Multicenter ficavam tão vazias, que assistir filmes ali se tornou nosso único passeio na época. Após o filme, como de costume, meu pai foi me buscar, o que não sabíamos é que seria a última vez fazendo algo tão habitual para nós.</p>
                     <p>Entrei no carro e ele pediu para a gente parar na farmácia  –  em Piratininga. Ele queria comprar vitamina C, pois já estava sentindo o corpo ruim. Dias depois, ele fez o teste. O resultado saiu em um sábado. Meu pai já estava isolado, dormindo no quarto ao lado do meu, que estava vazio depois que Caio saiu de casa. Fui fazer xixi pela  manhã e ele anunciou para mim num tom de voz mais alto e preocupado “Clara, estou com Covid”.  Dias depois, ele precisou ser internado e, no dia em que veio a notícia da intubação, meu mundo desmoronou de vez.<br>Ele estava sem plano de saúde, justamente por causa do valor, mas mesmo assim continuava pagando o meu e o da minha mãe. Ele sempre abdicou das coisas dele para fazer por nós. Por conta disso, foi para um hospital público, Mário Monteiro, em Piratininga, e depois acabou sendo transferido para o hospital de campanha que havia em Niterói, também na região. A última vez que o vi foi nesse dia 3 de junho de 2021, entrando na ambulância e indo para o segundo hospital.<br>Dia 14 de junho de 2021. Seria meu primeiro dia de aula da faculdade de Jornalismo. O celular do meu irmão tocou bem cedo e ali já entendi o que estava acontecendo: meu pai tinha morrido. O médico disse pro meu irmão que ele lutou muito para viver.</p>
