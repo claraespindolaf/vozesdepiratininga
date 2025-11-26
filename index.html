@@ -1,675 +1,664 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vozes de Piratininga</title>
-    <style>
-      :root {
-        --deep-ocean: #0a2a3d;
-        --mid-ocean: #106d83;
-        --foam: #37c5d9;
-        --sunset: #ffd6a5;
-        --sand: #fff5e6;
-        --shell: #f4f0ea;
-        --graphite: #1f2a30;
-        --cloud: #eef6f8;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      body {
-        margin: 0;
-        font-family: "Arial", "Helvetica", sans-serif;
-        background: var(--sand);
-        color: var(--graphite);
-        line-height: 1.65;
-      }
-
-      header {
-        background: rgba(10, 42, 61, 0.95);
-        color: #fff;
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-        backdrop-filter: blur(16px);
-      }
-
-      .navbar {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding: 1rem 2rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1.5rem;
-      }
-
-      .brand {
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        font-size: 0.95rem;
-      }
-
-      nav ul {
-        list-style: none;
-        display: flex;
-        gap: 1rem;
-        margin: 0;
-        padding: 0;
-      }
-
-      nav li {
-        position: relative;
-      }
-
-      .nav-button {
-        border: none;
-        background: transparent;
-        color: #fff;
-        font-weight: 600;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        font-size: 0.85rem;
-        padding: 0.6rem 1.2rem;
-        cursor: pointer;
-      }
-
-      .nav-button.active::after {
-        content: "";
-        display: block;
-        width: 100%;
-        height: 2px;
-        background: var(--foam);
-        margin-top: 0.2rem;
-      }
-
-      .dropdown-menu {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        min-width: 220px;
-        background: rgba(10, 42, 61, 0.96);
-        border: 1px solid rgba(55, 197, 217, 0.2);
-        border-radius: 16px;
-        padding: 0.4rem 0;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
-        display: none;
-      }
-
-      .dropdown:hover .dropdown-menu,
-      .dropdown.open .dropdown-menu {
-        display: block;
-      }
-
-      .dropdown-menu button {
-        width: 100%;
-        background: transparent;
-        border: none;
-        color: #fff;
-        text-align: left;
-        padding: 0.7rem 1.2rem;
-        font-family: inherit;
-        font-size: 0.85rem;
-        letter-spacing: 0.06em;
-        cursor: pointer;
-      }
-
-      .dropdown-menu button:hover,
-      .dropdown-menu button:focus-visible {
-        background: rgba(55, 197, 217, 0.15);
-      }
-
-      main {
-        padding: 4rem 2rem 5rem 2rem;
-      }
-
-      .page-panel {
-        display: none;
-        width: min(1200px, 96vw);
-        margin: 0 auto;
-        animation: fade 0.35s ease;
-      }
-
-      .page-panel.active {
-        display: block;
-      }
-
-      @keyframes fade {
-        from {
-          opacity: 0;
-          transform: translateY(12px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .hero {
-        min-height: calc(100vh - 160px);
-        display: flex;
-        align-items: center;
-        padding: clamp(2rem, 6vw, 4rem);
-        text-align: center;
-      }
-
-      .hero h1 {
-        font-size: clamp(3rem, 6vw, 4.4rem);
-        color: var(--mid-ocean);
-        margin-bottom: 1rem;
-      }
-
-      .hero h2,
-      .hero p {
-        max-width: 900px;
-        margin: 0 auto 1.6rem auto;
-        color: rgba(15, 42, 61, 0.8);
-      }
-
-      .author-tag {
-        display: inline-flex;
-        padding: 0.7rem 1.6rem;
-        border-radius: 999px;
-        border: 1px solid rgba(55, 197, 217, 0.4);
-        color: var(--mid-ocean);
-        font-weight: 600;
-        gap: 0.5rem;
-        align-items: center;
-      }
-
-      .author-tag::before {
-        content: "";
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: var(--foam);
-      }
-
-      .profile-page {
-        background: var(--cloud);
-        border-radius: 36px;
-        padding: clamp(2.5rem, 5vw, 4rem);
-        box-shadow: 0 30px 70px rgba(15, 42, 61, 0.15);
-      }
-
-      .profile-page header {
-        position: relative;
-        background: none;
-        box-shadow: none;
-        padding: 0;
-      }
-
-      .profile-headline {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 2rem;
-        align-items: center;
-      }
-
-      .profile-headline img,
-      .profile-headline figure {
-        flex: 1 1 320px;
-        max-width: 420px;
-        border-radius: 28px;
-        overflow: hidden;
-        box-shadow: 0 25px 60px rgba(10, 42, 61, 0.3);
-      }
-
-      .profile-headline img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .profile-info {
-        flex: 1 1 320px;
-      }
-
-      .profile-info h2 {
-        margin: 0 0 0.8rem 0;
-        font-size: clamp(2rem, 3.5vw, 2.6rem);
-        color: var(--mid-ocean);
-        letter-spacing: 0.03em;
-        line-height: 1.25;
-      }
-
-      .profile-info .profile-name {
-        display: inline-block;
-        text-transform: uppercase;
-        letter-spacing: 0.12em;
-        font-size: 1rem;
-        color: rgba(15, 42, 61, 0.7);
-        margin-bottom: 0.4rem;
-      }
-
-      .profile-content {
-        margin-top: 2.5rem;
-        display: flex;
-        flex-direction: column;
-        gap: 1.6rem;
-      }
-
-      .profile-content p {
-        margin: 0;
-        font-size: 1.2rem;
-        line-height: 1.95;
-        letter-spacing: 0.01em;
-        color: inherit;
-      }
-
-      .section-title {
-        font-size: clamp(2.2rem, 4vw, 3rem);
-        color: var(--mid-ocean);
-        margin-bottom: 1rem;
-        text-align: center;
-      }
-
-      .section-subtitle {
-        text-align: center;
-        max-width: 760px;
-        margin: 0 auto 3rem auto;
-        color: rgba(15, 42, 61, 0.75);
-      }
-
-      .about-wrapper {
-        background: var(--shell);
-        border-radius: 30px;
-        padding: clamp(2rem, 4vw, 3rem);
-        box-shadow: 0 20px 60px rgba(15, 42, 61, 0.2);
-      }
-
-      footer {
-        background: var(--deep-ocean);
-        color: #fff;
-        text-align: center;
-        padding: 1.5rem 1rem;
-        font-size: 0.9rem;
-        letter-spacing: 0.05em;
-      }
-
-      @media (max-width: 720px) {
-        nav ul {
-          flex-wrap: wrap;
-          justify-content: center;
-        }
-
-        .dropdown-menu {
-          position: static;
-          width: 100%;
-        }
-
-        .dropdown-menu button {
-          text-align: center;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <div class="navbar">
-        <div class="brand">Vozes de Piratininga: perfis de moradores apaixonados</div>
-        <nav>
-          <ul>
-            <li>
-              <button class="nav-button active" data-panel="apresentacao">Apresentação</button>
-            </li>
-            <li class="dropdown">
-              <button class="nav-button" data-panel="lista-perfis" aria-haspopup="true">
-                Perfis
-              </button>
-              <div class="dropdown-menu" role="menu">
-                <button data-panel="perfil-1">Perfil 1</button>
-                <button data-panel="perfil-2">Perfil 2</button>
-                <button data-panel="perfil-3">Perfil 3</button>
-                <button data-panel="perfil-4">Perfil 4</button>
-                <button data-panel="perfil-5">Perfil 5</button>
-                <button data-panel="perfil-6">Perfil 6</button>
-                <button data-panel="perfil-7">Perfil 7</button>
-                <button data-panel="perfil-maricelia">Maricélia</button>
-              </div>
-            </li>
-            <li>
-              <button class="nav-button" data-panel="expediente">Expediente</button>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-
-    <main>
-      <section id="panel-apresentacao" class="page-panel active">
-        <article class="hero">
-          <div>
-            <h1>Vozes de Piratininga: perfis de moradores apaixonados</h1>
-            <h2>
-              Cartografia afetiva e sociocultural de quem constrói o cotidiano da faixa litorânea de Piratininga.
-            </h2>
-            <p>
-              Use este texto para contextualizar objetivos, metodologia, recortes e relevância do TCC. Descreva brevemente as etapas de pesquisa e antecipe o que o leitor encontrará nos perfis catalogados. Ajuste o conteúdo conforme a narrativa do trabalho.
-            </p>
-            <div class="author-tag">Trabalho de Conclusão de Curso de Clara</div>
-          </div>
-        </article>
-      </section>
-
-      <section id="panel-perfil-1" class="page-panel">
-        <article class="profile-page">
-          <div class="profile-headline">
-            <figure>
-              <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80" alt="Vista aérea de Piratininga representando o Perfil 1" />
-            </figure>
-            <div class="profile-info">
-              <h2>Categoria / Subtítulo</h2>
-              <span class="profile-name">Perfil 1</span>
-            </div>
-          </div>
-          <div class="profile-content">
-            <p>
-              Texto de exemplo descrevendo hábitos, motivações e histórico deste grupo. Substitua por dados reais do levantamento, indicando a relação com o território e evidências coletadas durante entrevistas ou observações.
-            </p>
-            <p>
-              Use este espaço para registrar fatores culturais, econômicos ou sociais que caracterizam o perfil e destaque citações ou episódios que reforcem a narrativa.
-            </p>
-          </div>
-        </article>
-      </section>
-
-      <section id="panel-perfil-2" class="page-panel">
-        <article class="profile-page">
-          <div class="profile-headline">
-            <figure>
-              <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80" alt="Ondas do mar representando o Perfil 2" />
-            </figure>
-            <div class="profile-info">
-              <h2>Categoria / Subtítulo</h2>
-              <span class="profile-name">Perfil 2</span>
-            </div>
-          </div>
-          <div class="profile-content">
-            <p>
-              Utilize este espaço para detalhar percepções, desafios, expectativas e contribuições do perfil 2, incluindo trechos de entrevistas ou dados observados em campo.
-            </p>
-            <p>
-              Indique como este grupo participa da vida local, quais relações mantém com outros atores e quais demandas surgem do contato com o ambiente costeiro.
-            </p>
-          </div>
-        </article>
-      </section>
-
-      <section id="panel-perfil-3" class="page-panel">
-        <article class="profile-page">
-          <div class="profile-headline">
-            <figure>
-              <img src="https://images.unsplash.com/photo-1526481280695-3c4693f28f17?auto=format&fit=crop&w=900&q=80" alt="Barcos de pesca representando o Perfil 3" />
-            </figure>
-            <div class="profile-info">
-              <h2>Categoria / Subtítulo</h2>
-              <span class="profile-name">Perfil 3</span>
-            </div>
-          </div>
-          <div class="profile-content">
-            <p>
-              Registre tradições, redes comunitárias e relações econômicas que sustentam este perfil. Traga informações que demonstrem a singularidade das vozes ouvidas.
-            </p>
-            <p>
-              Destaque dados, narrativas e imagens que ilustrem o papel do grupo na construção da identidade de Piratininga.
-            </p>
-          </div>
-        </article>
-      </section>
-
-      <section id="panel-perfil-4" class="page-panel">
-        <article class="profile-page">
-          <div class="profile-headline">
-            <figure>
-              <img src="https://images.unsplash.com/photo-1455659817273-f96807779a8e?auto=format&fit=crop&w=900&q=80" alt="Pessoas caminhando na areia representando o Perfil 4" />
-            </figure>
-            <div class="profile-info">
-              <h2>Categoria / Subtítulo</h2>
-              <span class="profile-name">Perfil 4</span>
-            </div>
-          </div>
-          <div class="profile-content">
-            <p>
-              Explique rotinas de lazer, práticas comunitárias, organizações locais e o impacto desses elementos na identidade de Piratininga.
-            </p>
-            <p>
-              Inclua observações sobre como o grupo se articula em eventos, celebrações e decisões relacionadas ao bairro.
-            </p>
-          </div>
-        </article>
-      </section>
-
-      <section id="panel-perfil-5" class="page-panel">
-        <article class="profile-page">
-          <div class="profile-headline">
-            <figure>
-              <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=80" alt="Surfista representando o Perfil 5" />
-            </figure>
-            <div class="profile-info">
-              <h2>Categoria / Subtítulo</h2>
-              <span class="profile-name">Perfil 5</span>
-            </div>
-          </div>
-          <div class="profile-content">
-            <p>
-              Detalhe motivações, desafios, impactos e expectativas desse grupo, conectando as narrativas à análise desenvolvida no TCC.
-            </p>
-            <p>
-              Mostre como a presença deste perfil influencia as políticas locais, o uso da praia e a sustentabilidade do território.
-            </p>
-          </div>
-        </article>
-      </section>
-
-      <section id="panel-perfil-6" class="page-panel">
-        <article class="profile-page">
-          <div class="profile-headline">
-            <figure>
-              <img src="https://images.unsplash.com/photo-1470246973918-29a93221c455?auto=format&fit=crop&w=900&q=80" alt="Feira ao ar livre representando o Perfil 6" />
-            </figure>
-            <div class="profile-info">
-              <h2>Categoria / Subtítulo</h2>
-              <span class="profile-name">Perfil 6</span>
-            </div>
-          </div>
-          <div class="profile-content">
-            <p>
-              Descreva comportamentos, estatísticas e percepções que demonstram como este grupo se relaciona com o território e quais demandas apresenta.
-            </p>
-            <p>
-              Inclua referências a políticas públicas, projetos colaborativos e personagens-chave que sustentam o perfil.
-            </p>
-          </div>
-        </article>
-      </section>
-
-      <section id="panel-perfil-7" class="page-panel">
-        <article class="profile-page">
-          <div class="profile-headline">
-            <figure>
-              <img src="https://images.unsplash.com/photo-1483683804023-6ccdb62f86ef?auto=format&fit=crop&w=900&q=80" alt="Por do sol em Piratininga representando o Perfil 7" />
-            </figure>
-            <div class="profile-info">
-              <h2>Categoria / Subtítulo</h2>
-              <span class="profile-name">Perfil 7</span>
-            </div>
-          </div>
-          <div class="profile-content">
-            <p>
-              Feche a série detalhando características exclusivas, pontos de atenção e como este grupo contribui para a visão integral do território.
-            </p>
-            <p>
-              Mostre conexões com as demais vozes mapeadas e a importância de considerar o conjunto para compreender Piratininga.
-            </p>
-          </div>
-        </article>
-      </section>
-
-      <section id="panel-perfil-maricelia" class="page-panel">
-        <article class="profile-page">
-          <div class="profile-headline">
-            <figure>
-              <img src="maricelia.jpg" alt="Maricélia no quiosque em Piratininga" />
-            </figure>
-            <div class="profile-info">
-              <h2>Uma Baiana <s>perdida</s> em Piratininga</h2>
-              <span class="profile-name">Maricélia</span>
-            </div>
-          </div>
-          <div class="profile-content">
-            <p>
-              Eu a encontrei numa tarde ventosa caminhando pelo calçadão de Piratininga, já perto da Prainha. Na mesa de um quiosque, entre uma senhora e um homem de cerca de quarenta anos, Maricélia primeiro desconfiou ao ser convidada para conversar. Precisava trabalhar, disse. Mas bastou alguns minutos para que a baiana de fala firme afrouxasse os ombros e começasse a contar a própria história.
-            </p>
-            <p>
-              A relação dela com Piratininga é declarada em uma palavra: amor. Nascida no sul da Bahia, desembarcou aqui aos dezesseis anos, em 1992, depois de uma viagem de Carnaval com amigos que já viviam na região. Chegou sem muitos planos, foi ficando, recebeu uma proposta de trabalho logo na chegada e nunca mais conseguiu se afastar da praia que a encantou muito mais que o calor intenso do Rio.
-            </p>
-            <p>
-              Ao lado dela estava Val, amiga que acompanhou a entrevista e participou da conversa entre risos e comentários cúmplices. Maricélia apontou o próprio quiosque com orgulho: assim que chegou, imaginou que um dia aquele espaço seria seu. O sonho tomou forma com a urgência de quem sabia aproveitar oportunidades. Bastou uma crise de falta de água em um fim de semana de sol para perceber que podia abastecer a praia inteira.
-            </p>
-            <p>
-              Ela pediu férias da empresa em que trabalhava, comprou um isopor, uma churrasqueira simples e partiu para o Largo da Batalha em busca de suprimentos. Preparou espetos, peixe assado e começou a vender. Entre corridas da fiscalização, isopores emprestados e tachos de óleo que precisavam ser escondidos às pressas, foi juntando dinheiro até montar o negócio próprio.
-            </p>
-            <p>
-              Hoje, formada em Gastronomia, mora no Tibau, canto direito da praia, ao lado da lagoa. Descreve o bairro como maravilhoso, um lugar em que todos se conhecem e se cumprimentam. Para ela, viver onde o quiosque fica é sinônimo de qualidade de vida e rede de apoio diária. Quando pergunto se vir para Piratininga foi a melhor escolha, ela responde sem hesitar que foi uma das melhores coisas que já fez.
-            </p>
-            <p>
-              A trajetória, porém, não foi simples. Criada por avós fazendeiros, teve uma adolescência rígida. Aos quatorze anos, saiu escondida para uma festa e, como punição, foi obrigada a se casar no ano seguinte. Casou em 1977, teve a primeira filha pouco depois e percebeu que havia queimado etapas demais. Hoje encara essa história como parte da força que precisou construir para seguir em frente.
-            </p>
-            <p>
-              Os avós, a quem chama de pais, já se foram. Da mãe biológica guarda carinho, mas diz que a relação é mais parecida com a de irmãs. Todos os irmãos prosperaram em diferentes áreas e, entre brincadeiras, Maricélia conta que foi quem “puxou o bonde” ao sair da Bahia e abrir caminhos para os demais.
-            </p>
-            <p>
-              Durante a entrevista, ela era interrompida o tempo todo: netos pedindo atenção, funcionárias perguntando sobre pedidos, clientes passando para cumprimentar. O controle do quiosque ainda é feito em caderno e ela mostra as páginas rabiscadas pelas crianças com um misto de orgulho e humor. Os clientes viram amigos e é comum receber ligações quando o quiosque não abre.
-            </p>
-            <p>
-              Também enxerga sentido em ajudar o próximo. Durante a pandemia, arrecadou 380 cestas básicas mesmo com o quiosque fechado. Montava mesas em frente a shoppings, pedia alimentos e distribuía para quem precisava. Viúva do primeiro marido e separada do segundo, fala com franqueza sobre episódios de violência física e verbal que enfrentou. Ainda assim, diz que tudo a deixou mais forte e repetia para si mesma que desistir não era opção.
-            </p>
-            <p>
-              Em agosto recente, um incêndio consumiu seu quarto e os objetos de maior valor. A casa ficou improvisada, com parte sem água ou luz. Ela mostra as marcas das queimaduras e confessa que, desde então, qualquer cheiro de fumaça a faz se levantar e checar tomadas e fios pela casa inteira. O tempo livre diminuiu, mas ela tenta manter um ritmo mais tranquilo, assistindo a séries turcas com a filha e lendo tudo o que encontra — apesar dos livros perdidos no fogo.
-            </p>
-            <p>
-              Para o futuro, deseja saúde e continuidade. Quer manter o quiosque vivo, passando-o adiante dentro da família. Afinal, como diz com simplicidade, “as coisas mais simples são as mais gostosas”.
-            </p>
-            <p>
-              Eu estava andando no calçadão da praia de Piratininga. Era uma tarde de sol, mas com bastante vento. Observando as pessoas com uma atenção além da habitual, vi Maricelia quando estava quase chegando à prainha. Na mesa ao lado de um quiosque, ela estava acompanhada de mais duas pessoas: uma senhora e um homem que parecia ter cerca de 40 anos. Cheguei e perguntei se ela aceitava conversar. No início, pareceu não querer muito, perguntou quanto tempo durava, porque precisava trabalhar. Mas logo a mulher, que vestia um colete da cachaça “51” com manchas de comidas, se soltou e revelou detalhes de sua história para mim. 
-            </p>
-            <p>
-              A primeira pergunta que fiz foi sobre sua relação com Piratininga e a resposta foi dita de forma bem direta e com muita convicção: “Amor. Muito amor! Amo esse lugar aqui.” Nascida e criada no Sul da Bahia, Maricelia Santos Barbosa conheceu o local que tanto ama aos 16 anos. No final de 1992. Tudo começou com uma viagem despretensiosa de Carnaval com os amigos da época que já moravam em Piratininga. Saíram da Bahia de carro em direção a Camboinhas, local vizinho a Piratininga. “Cheguei (no Rio) já recebi proposta de trabalho. Aí foi fluindo, eu fui ficando, me encantei, porque quando eu conheci o Rio em si eu não gostei, muito calor. Mas me encantei por Piratininga.”
-            </p>
-            <p>
-              Ao seu lado durante todo tempo, estava Val, uma amiga. E foi para ela que em vários momentos a mulher direcionou falas, criando um clima bem descontraído e dando a ela  liberdade para participar da conversa. “A primeira vez que eu vim aqui, nesse quiosque, eu virei e falei: “Esse que eu acho que um dia vai ser meu. A minha irmã olhou para minha cara e riu.” Perguntei como ela conseguiu realizar esse sonho e a resposta veio através de uma história de anos atrás: 
-            </p>
-            <p>
-              “Cara, trabalhando muito mesmo. Eu trabalhava em uma empresa, mas em um final de semana de sol não lembro o ano, acabou toda a água na praia. Nenhum quiosque, camelô ou barraqueiro tinha água. Os poucos que conseguiram estavam vendendo na época por cinco reais, um absurdo. Aí falei: “Caraca, a fonte é aqui.” Entrei de férias na empresa, fui no Largo da Batalha, comprei um isopor, uma caixa de cada coisa e uma churrasqueira. Fiz um monte de espetos de carne, comprei peixe, assei na brasa e minha barraca bombou. Mas eu só tinha um isopor e uma mesa emprestada. Ai fui indo, mas já corri muito de SEOP, fiscalização da prefeitura. Antigamente dava pra vender peixe frito na praia, mas quando a prefeitura vinha, a gente saía correndo com o isopor de bebida e tacho de óleo quente. Fui indo, juntando dinheiro, e foi assim que comecei”, contou.
-Hoje em dia, Maricelia possui formação em Gastronomia e mora no Tibau, região localizada no canto direito da praia, próxima à lagoa. “Canto maravilhoso aqui de Piratininga, bairro fechado. Maravilhoso. Onde todo mundo conhece todo mundo”, definiu. “Muita gente fala: ‘Ah, eu odeio o Tibau, só tem gente fofoqueira, não sei o que’. Eu falei: ‘Gente, eu não faço nada ilícito, nada ilegal, nada’'". Eu amo o Tibau é é toma conta da minha vida aqui? Que ótimo, porque eu mesma não tenho tempo para tomar conta. [...] A qualidade de vida é muito boa, muito boa, muito boa mesmo,  as pessoas ainda se conhecem, se cumprimentam: bom dia, boa tarde. O dia que eu não abro o quiosque, as pessoas me liga para saber o que que houve.”
-“Então, você acredita que ter vindo para Piratininga foi a melhor coisa que te aconteceu?”, perguntei. 
-“A melhor coisa da minha vida, uma das melhores,  porque eu amo esse lugar!”, responde e em seguida  comenta também que nunca sairia de Piratininga, nem para ir para a Bahia, onde até hoje tem uma casa.  
-            </p>
-            <p>
-              Mas a vida nem sempre foi tão simples assim para ela. Com família muito rígida, aos 14 anos saiu escondida para uma festa, querendo curtir um pouco. Mas a menina que esperava um castigo convencional, teve como punição aceitar um casamento forçado, “mesmo sem ter feito nada”.  Com 15, se casou no dia 10 de outubro de 1977 e, menos de um ano depois, nasceu sua primeira filha. “EPorque eu era só uma menina, né? Ultrapassei um monte de etapa da minha vida.”, relembrou,   Diz, refletindo como se estivesse desabafando em uma conversa entre amigos.
-            </p>
-            <p>
-              Criada pelos avós fazendeiros, são eles que Maricelia  considera como pais. “A minha mãe (biológica) é como se fosse uma irmã. Eu é como uma não tenho como mãe. Meus pais já morreram para mim, na minha cabeça. Mas eu sempre tive contato com a minha mãe e com o meu pai. São meus genitores, mas afinidade mesmo…” Ela conta também que mesmo com a infância simples no interior, todos seus irmãos estão bem de vida. “Tem um que tem uma empresa de Construção Civil em São Paulo. Um outro é engenheiro, topógrafo [...] eu que puxei o bonde, tá? Depois que fui embora, todo mundo foi.” Apesar disso, relembra comparações que teve que passar: “Minha mãe ficava jogando minha cara:  “Ah, que a ‘'tua irmã tem dois diplomas, fez isso, fez não sei que lá, fez mestrado disso, mestrado daquilo.’' Eu ficava quieta, mas outro dia eu falei: engraçado, outro dia ela me pediu 200 reais’.  Essa comparação me motivou ainda mais a crescer”
-            </p>
-            <p>
-              Durante o tempo em que estive no quiosque com ela, percebi que a todo momento Maricelia era solicitada, seja para cuidar de algum dos netos que estavam ao redor, brincando e aprontando, ou por alguma funcionária que vinha tirar dúvidas sobre o trabalho: “Onde tá aquela mulher ali sentada, ali, ó, que botou a mão na mesa agora?”, perguntou a jovem que trabalha no quiosque. O controle dos pedidos é feito em um caderno, tudo à mão e à caneta ainda. As crianças também já rabiscaram o caderno, ela me mostra: “Olha o que as crianças fizeram, rabiscaram tudo!”. Além disso, toda hora passava alguém e a cumprimentava. 
-“ Você tem uma relação com os clientes, né?”, eu quis saber.  
-“Ah, a maioria, né? Vira amigo”, disse, orgulhosa. 
-Em certo momento, ela fala sobre legado e foi aí que aproveitei para perguntar qual ela deseja deixar. Ela não teve que pensar muito para responder: “O meu legado? Cara, o meu orgulho de mim mesmo, porque eu, eu dei uma boa criação para meus filhos. Hoje todo mundo tá bem, graças a Deus. Todo mundo tem suas próprias vidas. Vvocê não pode ter o egoísmo. Eu poderia ter vivido mais, ter aproveitado muito demais a minha vida, ter viajado, ter feito várias coisas. Mas eu tinha a minha preferência, o meu foco estava nos era meus filhos, numa coisa melhor para os meus filhos.”"
-            </p>
-            <p>
-              Além do cuidado com os filhos, ela enfatizou a  a importância de fazer bem ao próximo. Na pandemia, mesmo estando com seu quiosque fechado, conseguiu 380 cestas básicas para ajudar quem estava precisando. “Eu ia para a porta do Bay Market (shopping), ia para lá para o Renato, botava uma mesa e ficava pedindo alimento, arrecadando alimento”. . “
-            </p>
-            <p>
-              Maricelia é do tipo que não deixa a peteca cair. As partes negativas da vida, ela contou sem nunca se vitimizar. Ela acredita que tudo que aconteceu nos seus 52 anos de vida foi importante para deixá-la  mais forte. “Às vezes, mesmo a gente olhando assim e pensando: ‘meu Deus, que problemão, o que eu vou fazer agora? Viúva com dois filhos, não sei o quê’. Mas, na verdade, isso foi algo para me deixar mais forte,  eu não tinha como desistir. Como que eu vou desistir da vida? Tudo que tenho é fruto do meu trabalho, ninguém nunca me deu nada, nem marido. Ao contrário, né? Mas, graças a Deus, não tenho do que reclamar.”
-Viúva do primeiro marido e separada do segundo, com quem foi casada por 27 anos, ela comenta que, com o último marido, as coisas foram complicadas demais: “Passei por muita coisa ruim com o pai do meu filho mais novo. Muita coisa de agressão física e verbal. Muita coisa mesmo. Mas sobrevivi, né?” Apesar disso tudo, hoje ela se considera uma mulher feliz. “Ninguém é 100%, né? Eu acho que felicidade é um estado de espírito.”, complementou.
-            </p>
-            <p>
-              Recentemente um acidente a abalou muito. Ela  diminui o ritmo da fala para contar: “Teve um incêndio, um acidente na minha casa. Queimou meu quarto todo. Tudo de mais valor estava no meu quarto.  Foi no dia 12 de agosto. Está uma coisa de maluco, porque metade da casa está sem água, metade está sem luz. Tá um monte de gambiarra, um monte de gato.” O fogo começou com uma extensão no quarto. Muito abalada ao falar do assunto, ela me mostra  marcas do fogo no corpo. “Eu já passei por muita coisa na vida, Val, mas eu não sei... a idade que tá chegando, esse negócio mexeu muito comigo, tu sabia?  “Eu até que achei que você foi forte”, apoiou a amiga.  
-Visivelmente, o trauma deixou marcas e sequelas muito além das queimaduras da pele de Maricelia. “Eu fico sentindo cheiro de fumaça. Se aí qualquer coisa eu levanto. O cheiro é tão ativo que eu começo a cheirar a tomada, começo a olhar ao redor”. 
-            </p>
-            <p>
-              Agora trabalhando menos, em suas palavras: com “a batida mais tranquila” no tempo livre, gosta de assistir a filmes e séries, em especial, séries turcas, que conquistaram o gosto dela e de sua filha. Mas o que mais gosta é de ler. “Cara, eu sou curiosa, eu leio tudo.” E mais uma vez o incêndio volta à conversa e a mulher fica triste ao lembrar: “Ah, eu tinha muitos livros... queimou muito livro meu.” Recorda no meio da conversa ao perceber que o fogo também consumiu uma boa parte do que mais amava. 
-Para o futuro, seu desejo é ter saúde, e garante que não quer deixar o quiosque acabar. Quer que ele passe para os filhos, para os netos e, afinal, como ela mesma me disse: “As coisas mais simples são as mais gostosas, Clara.”
-            </p>
-          </div>
-        </article>
-      </section>
-
-      <section id="panel-expediente" class="page-panel">
-        <h2 class="section-title">Expediente</h2>
-        <p class="section-subtitle">
-          Utilize o expediente para apresentar Clara, instituição, orientadores e contatos ligados ao trabalho.
-        </p>
-        <div class="about-wrapper">
-          <p>
-            Escreva um parágrafo sobre quem é Clara, o curso e o período que está concluindo, além da motivação para mapear os perfis de Piratininga. Traga também agradecimentos ou destaques institucionais relevantes.
-          </p>
-          <p>
-            Adicione informações de contato, links para o repositório completo, redes sociais ou formas de acompanhar desdobramentos do projeto após a entrega do TCC.
-          </p>
-        </div>
-      </section>
-    </main>
-
-    <footer>&copy; 2025 - TCC de Clara Espíndola. Todos os direitos reservados.</footer>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vozes de Piratininga | TCC Clara Espíndola</title>
+    
+    <!-- Fonts: Adicionada 'DM Sans' para um toque moderno geométrico -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
     <script>
-      const navButtons = document.querySelectorAll('.nav-button');
-      const dropdown = document.querySelector('.dropdown');
-      const panels = document.querySelectorAll('.page-panel');
-
-      function activatePanel(panel) {
-        panels.forEach((p) => p.classList.remove('active'));
-        const target = document.getElementById(`panel-${panel}`);
-        if (target) {
-          target.classList.add('active');
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ocean: '#0f4c75',
+                        sand: '#bbe1fa',
+                        sunset: '#ed6663',
+                        deep: '#1b262c'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['DM Sans', 'sans-serif'], // Nova fonte para títulos
+                    }
+                }
+            }
         }
-
-        navButtons.forEach((btn) => btn.classList.remove('active'));
-        navButtons.forEach((btn) => {
-          if (btn.dataset.panel === panel || (panel.startsWith('perfil') && btn.dataset.panel === 'lista-perfis')) {
-            btn.classList.add('active');
-          }
-        });
-
-        if (dropdown) {
-          dropdown.classList.remove('open');
-        }
-      }
-
-      navButtons.forEach((button) => {
-        button.addEventListener('click', (event) => {
-          const panel = button.dataset.panel;
-          if (panel === 'lista-perfis') {
-            dropdown.classList.toggle('open');
-            event.stopPropagation();
-            return;
-          }
-          activatePanel(panel);
-        });
-      });
-
-      document.querySelectorAll('.dropdown-menu button').forEach((button) => {
-        button.addEventListener('click', () => {
-          activatePanel(button.dataset.panel);
-        });
-      });
-
-      document.addEventListener('click', (event) => {
-        if (dropdown && !dropdown.contains(event.target)) {
-          dropdown.classList.remove('open');
-        }
-      });
-
-      // Default panel
-      activatePanel('apresentacao');
     </script>
-  </body>
+
+    <style>
+        /* Custom Styles */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #0f4c75; border-radius: 4px; }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .glass-dark {
+            background: rgba(27, 38, 44, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .hero-pattern {
+            background-color: #0f4c75;
+            background-image: url("https://images.unsplash.com/photo-1471922694854-ff1b63b20054?auto=format&fit=crop&q=80&w=2072");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-in forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Área de foto no texto */
+        .article-photo {
+            margin: 2rem 0;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            background-color: #f3f4f6;
+        }
+        .article-photo img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .article-photo figcaption {
+            padding: 0.75rem;
+            text-align: center;
+            font-size: 0.875rem;
+            color: #6b7280;
+            background: #f9fafb;
+            border-top: 1px solid #e5e7eb;
+            font-style: italic;
+        }
+
+        /* Placeholders para edição */
+        .photo-placeholder {
+            border: 2px dashed #cbd5e1;
+            background-color: #f8fafc;
+            color: #94a3b8;
+            padding: 3rem;
+            text-align: center;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 500;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-deep antialiased selection:bg-ocean selection:text-white font-sans">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-dark text-white transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 cursor-pointer" onclick="goHome()">
+                    <span class="font-display text-lg font-bold tracking-widest uppercase">Vozes de Piratininga</span>
+                </div>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <button onclick="scrollToSection('apresentacao')" class="hover:text-sand transition-colors text-xs font-bold uppercase tracking-widest">O Projeto</button>
+                    <button onclick="scrollToSection('perfis')" class="hover:text-sand transition-colors text-xs font-bold uppercase tracking-widest">Os Perfis</button>
+                    <button onclick="scrollToSection('expediente')" class="hover:text-sand transition-colors text-xs font-bold uppercase tracking-widest">Expediente</button>
+                </div>
+                <div class="md:hidden">
+                    <button onclick="toggleMobileMenu()" class="p-2"><i data-lucide="menu"></i></button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-deep border-t border-gray-700 absolute w-full">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col items-center">
+                <button onclick="scrollToSection('apresentacao')" class="block px-3 py-2 text-base font-medium hover:text-sand">O Projeto</button>
+                <button onclick="scrollToSection('perfis')" class="block px-3 py-2 text-base font-medium hover:text-sand">Os Perfis</button>
+                <button onclick="scrollToSection('expediente')" class="block px-3 py-2 text-base font-medium hover:text-sand">Expediente</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div id="main-view">
+        
+        <!-- Hero Section (Redesigned) -->
+        <header class="relative h-screen flex items-center justify-center hero-pattern">
+            <div class="absolute inset-0 bg-deep/50 mix-blend-multiply"></div>
+            <div class="relative z-10 text-center px-4 max-w-5xl mx-auto fade-in" style="animation-delay: 0.2s;">
+                <p class="text-sand uppercase tracking-[0.4em] text-xs md:text-sm mb-6 font-bold">Trabalho de Conclusão de Curso</p>
+                <!-- Título Modernizado: Fonte Sans-Serif, Grande, Caixa Alta -->
+                <h1 class="font-display text-5xl md:text-7xl lg:text-9xl text-white font-bold mb-8 leading-none tracking-tighter">
+                    VOZES DE<br/>PIRATININGA
+                </h1>
+                <div class="w-24 h-1 bg-sand mx-auto mb-8"></div>
+                <p class="text-gray-100 text-lg md:text-xl font-light mb-12 max-w-2xl mx-auto leading-relaxed">
+                    Cartografia afetiva e sociocultural de quem constrói o cotidiano da faixa litorânea.
+                </p>
+                <button onclick="scrollToSection('apresentacao')" class="px-10 py-4 bg-white text-deep font-bold text-sm uppercase tracking-widest hover:bg-sand hover:text-deep transition-all duration-300 rounded-sm">
+                    Ler Perfis
+                </button>
+            </div>
+            
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-white/50">
+                <i data-lucide="arrow-down" size="24"></i>
+            </div>
+        </header>
+
+        <!-- Apresentação Section -->
+        <section id="apresentacao" class="py-24 bg-white">
+            <div class="max-w-4xl mx-auto px-6 md:px-12">
+                <div class="flex flex-col md:flex-row gap-12 items-start">
+                    <div class="md:w-1/2 fade-in">
+                        <span class="text-ocean font-bold tracking-widest uppercase text-xs mb-3 block">Sobre</span>
+                        <h2 class="font-display text-4xl text-deep font-bold mb-6 leading-tight">Gente Comum e Apaixonada</h2>
+                        <p class="text-gray-600 leading-relaxed text-base mb-4 text-justify">
+                            Todas as pessoas são atravessadas por histórias, sejam elas boas ou ruins, e são essas histórias que guiam o meu projeto. Esse site tem como foco apresentar meu Trabalho de Conclusão de Curso. <strong>Vozes de Piratininga</strong> é um produto jornalístico digital que reúne sete textos do gênero perfil, de moradores apaixonados por Piratininga, sendo um deles do meu pai, que faleceu no meu primeiro dia de aula na Faculdade de Jornalismo.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed text-base text-justify">
+                            Piratininga é um bairro localizado na Região Oceânica de Niterói, Rio de Janeiro. A escolha dessa região para delimitar este trabalho surgiu a partir de um questionamento existente desde que comecei a pensar no meu TCC: como homenagear meu pai, a partir da relação afetiva dele com Piratininga? Meu pai nasceu, cresceu e morreu neste bairro. E, a partir desse querer, surgiu uma ideia ainda melhor e mais abrangente: reunir outras pessoas que, assim como ele, são apaixonadas por esse lugar.
+                        </p>
+                        <div class="mt-6 p-4 bg-gray-50 border-l-4 border-ocean">
+                            <p class="text-sm text-gray-500 italic">
+                                "Ao reunir essas pessoas... esse projeto se torna um grande instrumento para fortalecer a construção de uma memória local."
+                            </p>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 relative fade-in mt-8 md:mt-0" style="animation-delay: 0.3s;">
+                        <div class="aspect-[3/4] rounded-sm overflow-hidden shadow-xl grayscale hover:grayscale-0 transition-all duration-700">
+                            <img src="https://images.unsplash.com/photo-1595239541249-163462d733c7?auto=format&fit=crop&q=80&w=1000" alt="Piratininga Conceitual" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Perfis Grid Section -->
+        <section id="perfis" class="py-24 bg-gray-50 relative">
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-16 fade-in border-b border-gray-200 pb-6">
+                    <div>
+                        <h2 class="font-display text-5xl text-deep font-bold mb-2">Os Perfis</h2>
+                        <p class="text-gray-500">Histórias de quem vive a lagoa e o mar.</p>
+                    </div>
+                    <div class="hidden md:block text-ocean font-bold text-sm uppercase tracking-widest">
+                        7 Histórias
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="profiles-grid">
+                    <!-- Cards will be injected by JS -->
+                </div>
+                
+                <!-- Ricardo's Special Card -->
+                <div class="mt-12 fade-in">
+                    <div onclick="openProfile('ricardo')" class="cursor-pointer group relative h-96 rounded-sm overflow-hidden shadow-xl">
+                        <img src="https://images.unsplash.com/photo-1534234828563-025cda287a98?auto=format&fit=crop&q=80&w=2000" alt="Homenagem Ricardo" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter grayscale">
+                        <div class="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-colors"></div>
+                        <div class="absolute bottom-0 left-0 p-8 md:p-12 w-full">
+                            <span class="inline-block px-3 py-1 mb-4 text-xs font-bold tracking-wider text-deep uppercase bg-white rounded-sm">In Memoriam</span>
+                            <h3 class="font-display text-3xl md:text-5xl text-white mb-2 font-bold">Ricardo da Costa Fonseca</h3>
+                            <p class="text-gray-300 text-lg font-light">1965 - 2021</p>
+                            <div class="mt-6 flex items-center text-white font-bold group-hover:translate-x-2 transition-all">
+                                <span class="uppercase tracking-widest text-sm mr-2">Ler Homenagem</span>
+                                <i data-lucide="arrow-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Expediente Section -->
+        <section id="expediente" class="py-20 bg-deep text-white">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <i data-lucide="feather" class="mx-auto mb-6 text-sand" size="32"></i>
+                <h2 class="font-display text-3xl font-bold mb-12 tracking-wide uppercase">Expediente</h2>
+                
+                <div class="grid md:grid-cols-2 gap-12 text-left bg-white/5 p-10 rounded-sm border border-white/10">
+                    <div>
+                        <h3 class="text-sm font-bold text-sand uppercase tracking-widest mb-4">Ficha Técnica</h3>
+                        <p class="text-xl font-display font-light leading-relaxed">Trabalho de Conclusão de Curso em Jornalismo na Universidade Federal Fluminense - UFF</p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-sand uppercase tracking-widest mb-4">Equipe</h3>
+                        <ul class="space-y-4">
+                            <li>
+                                <span class="block text-gray-400 text-xs uppercase">Produção</span>
+                                <span class="text-lg">Clara Espíndola Fonseca</span>
+                            </li>
+                            <li>
+                                <span class="block text-gray-400 text-xs uppercase">Orientação</span>
+                                <span class="text-lg">Professora Larissa Morais</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="mt-16 pt-8 border-t border-gray-800 text-xs text-gray-500 uppercase tracking-widest">
+                    &copy; 2025 Vozes de Piratininga.
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Reading Modal / Article View -->
+    <div id="reading-view" class="fixed inset-0 z-[60] bg-white transform translate-y-full transition-transform duration-500 overflow-y-auto hidden">
+        <button onclick="closeProfile()" class="fixed top-6 right-6 z-50 bg-white/90 backdrop-blur rounded-full p-3 hover:bg-gray-100 transition-colors shadow-lg group border border-gray-200">
+            <i data-lucide="x" class="text-deep group-hover:text-red-500 transition-colors"></i>
+        </button>
+
+        <div class="fixed top-0 left-0 h-1 bg-ocean z-50 transition-all duration-300" id="scroll-progress" style="width: 0%"></div>
+
+        <article class="relative min-h-screen pb-20">
+            <!-- Article Header -->
+            <div class="h-[50vh] md:h-[65vh] relative">
+                <img id="article-image" src="" alt="" class="w-full h-full object-cover grayscale opacity-90">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                
+                <div class="absolute bottom-0 left-0 w-full p-6 md:p-16 max-w-5xl mx-auto right-0">
+                    <span id="article-category" class="text-sand text-sm font-bold uppercase tracking-[0.2em] mb-4 inline-block">Perfil</span>
+                    <h1 id="article-title" class="font-display text-4xl md:text-7xl text-white font-bold mb-4 leading-none"></h1>
+                    <p id="article-subtitle" class="text-xl md:text-2xl text-gray-300 font-light"></p>
+                </div>
+            </div>
+
+            <!-- Article Content -->
+            <div class="max-w-3xl mx-auto px-6 md:px-12 mt-16">
+                <!-- Author Info -->
+                <div class="flex items-center gap-4 mb-16 border-b border-gray-100 pb-8">
+                    <div class="w-12 h-12 bg-gray-200 rounded-full overflow-hidden">
+                        <img src="https://ui-avatars.com/api/?name=Clara+Espindola&background=0f4c75&color=fff" alt="Clara">
+                    </div>
+                    <div>
+                        <p class="text-sm font-bold text-deep uppercase tracking-wide">Por Clara Espíndola</p>
+                        <p class="text-xs text-gray-500 uppercase tracking-widest">Vozes de Piratininga</p>
+                    </div>
+                </div>
+
+                <!-- Text Body -->
+                <div id="article-body" class="prose prose-lg prose-headings:font-display prose-headings:font-bold prose-headings:text-deep prose-p:text-gray-700 prose-p:leading-loose prose-a:text-ocean hover:prose-a:text-blue-700 font-sans">
+                    <!-- Content injected via JS -->
+                </div>
+
+                <div class="mt-24 pt-10 border-t border-gray-200 flex justify-between items-center">
+                    <button onclick="closeProfile()" class="text-deep font-bold text-sm uppercase tracking-widest flex items-center gap-3 hover:text-ocean transition-colors">
+                        <i data-lucide="arrow-left" size="18"></i> Voltar
+                    </button>
+                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-gray-400 hover:text-deep flex items-center gap-2 text-sm uppercase tracking-widest">
+                        Topo <i data-lucide="arrow-up" size="18"></i>
+                    </button>
+                </div>
+            </div>
+        </article>
+    </div>
+
+    <!-- Data & Scripts -->
+    <script>
+        // Função auxiliar para criar placeholder de fotos
+        function createPhotoPlaceholder(caption = "Insira a legenda da foto aqui") {
+            return `
+                <div class="photo-placeholder">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="mb-2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                    <span>ESPAÇO PARA FOTO</span>
+                    <span class="text-xs text-gray-400 font-normal italic">(${caption})</span>
+                </div>
+            `;
+        }
+
+        const profilesData = {
+            'ze': {
+                title: "O homem da cervejinha na varanda",
+                name: "Zé",
+                subtitle: "",
+                image: "https://images.unsplash.com/photo-1560965034-70e6c62e5870?auto=format&fit=crop&q=80&w=1600",
+                snippet: "“Quatro cervejas. Sozinho.” É assim que José Luiz da Costa, mais conhecido como Zé, descreve um dos seus melhores e mais comuns momentos de prazer da vida atual.",
+                content: `
+                    <p>“Quatro cervejas. Sozinho.” É assim que José Luiz da Costa, mais conhecido como Zé, descreve um dos seus melhores e mais comuns momentos de prazer da vida atual. Nascido no dia 24 de novembro de 1958, o homem que sempre viveu em Piratininga, aproveita seu momento de descanso em sua varanda, bebendo uma cerveja, contemplando a vista para a lagoa de Piratininga. Sua casa fica em cima da casa dos seus pais, simples e acolhedora, sua varanda possui diversas flores e plantas, roupas no varal e sua cadeira de balanço. E foi ali que ele me recebeu e conversamos, tomando sua cerveja - o que é uma espécie de ritual para ele. Como Luiz ressaltou em diversos momentos, ele já trabalhou muito e bebeu muito, e agora descansa diante da  vista do lugar que mais fez parte dos seus 66 anos de vida.</p>
+                    
+                    ${createPhotoPlaceholder("Zé em sua varanda ou detalhe da casa")}
+
+                    <p>Mas mais uma vez o número quatro aparece em sua vida. Ele é o filho mais velho de quatro irmãos, frutos do amor de seus pais Maria Edwirges Da Costa e Luiz da Costa. Ele conta que até houve uma quinta irmã, mas ela já nasceu sem vida, e afirma com certa frieza que é o “primeiro de quatro irmãos.”  Quando questionado sobre sua infância, o homem, de aparência tímida e bem direto, disse: “a gente ia para o colégio, voltava, ia para a lagoa, tomar banho.  Tudo em Piratininga! ” Apesar de ter passado todos os seus anos de vida na região, hoje, o lugar que conhece e onde vive, é muito diferente dos cenários que emolduraram sua infância. “Isso aqui tudo era areia. Planta era de areia, tipo dunas”, relembrou.</p>
+                    <p>Passado o tempo de farra com os amigos na lagoa, aos 18 anos, se alistou e serviu no Exército por um ano e seis meses. Deixou bem claro que não gostava e não queria seguir a carreira: “Não (quis) Tanto que, pô,  para mim  sair daquela porcaria, foi mano… Os caras queriam que eu ficasse de qualquer maneira” e foi nesse momento que ele descobriu sua verdadeira vocação no ofício que segue até hoje, mesmo depois de ter se aposentado: eletricista. Apesar do curso eletrotécnico, foi na prática que ele realmente aperfeiçoou os conhecimentos na área “É, eu aprendi. aprendi trabalhando”, e aprender sempre foi prazeroso. Não à toa, quando menino, Zé assumiu uma atividade que muitas crianças não conseguiriam entender: Ele estudava duas vezes em um mesmo dia.</p>
+                    <p>“Eu estudava de dia e estudava à noite nessa época”.<br>“Ué, de manhã e à noite?”<br>“É. Estudava de manhã no na Jurujuba e à noite trabalhava  e estudava no Imbuí”.<br>“Por que dois colégios?”<br>“É porque acho que eu sei lá, fazia alguma coisa, eu gostava de estudar”.</p>
+                    
+                    ${createPhotoPlaceholder("Zé trabalhando ou foto antiga de Piratininga")}
+
+                    <p>Palco de muitas aventuras e lembranças de sua vida, foi em Piratininga que conheceu  as mães de seus dois filhos, Gustavo e Alexandre. Zé está até hoje com Silvina, mais conhecida pelo apelido de “Nega”  –  seu primeiro beijo e primeira namorada. Após um relacionamento de dois anos, eles se separaram.  Foi quando conheceu a mãe do seu primeiro filho, Xande, de 44 anos  –  uma Capixaba que foi parar em Piratinha após a morte do seu pai. Foi com o fim desse romance, que logo Nega retornou a sua vida, tiveram Gustavo e estão juntos até hoje. Posso afirmar que logo fica claro para todos que eles são o exemplo perfeito do ditado “os opostos se atraem”, já que o homem demonstra ser muito calmo e de pouco falar, enquanto a esposa é agitada e muito comunicativa.</p>
+                    <p>Avô de uma menina de sete anos, ele conta que tem contato com a neta, mas não muito, já que ela mora em São Paulo. Ele afirmou não ser “coruja”, mas não elaborou muito, porque, nesse momento, nossa conversa foi interrompida por uma ligação: na varanda de sua casa, a todo momento seu celular tocava. Era uma moradora da praia de Piratininga que solicitava um de seus serviços elétricos emergenciais para o quadro de luz de sua casa, mas ele não queria ir. Recusou quase todas as ligações. Respondia no Whatsapp, mas mentia sobre o motivo de não poder ir. Ele apenas não queria ir. Aos 66 anos, ele pode se dar o luxo de escolher descansar um pouco mais. Apesar de aposentado, ainda trabalha dois dias na semana prestando serviços para complementar a renda familiar e lembra dos tempos antigos. “Já trabalhei muito. Em 10 anos de Ampla (empresa), acho que nunca fiquei um feriado em casa e sábado.  E não tinha esse negócio não, de dizer que ‘ah, não dá para  mim vir  não’.</p>
+                    <p>Quando perguntei se já bebeu muito na vida, o homem tranquilo surpreende ao pôr mais ênfase na voz: “ p uta que pariu. Nega ja passou muito sufoco comigo, porra… [...] Eu saía às 5 horas da manhã para trabalhar, só chegava às onze e meia da noite”. Engraçado que, minutos depois, sua esposa chega na conversa e, ao retornar o assunto, ela traz seu lado da história:  “Olha, Zé … ele saía 5 horas da manhã de casa, chegava duas horas da manhã em casa.” Uma diferença de duas horas e trinta minutos. Seja lá qual for o lado mais verdadeiro dessa conversa, o importante é que os dois concordaram que Zé parou com esse hábito após o nascimento de Gustavo, seu segundo filho.  “ Tem vez  que eu bebo só sábado. Quatro cervejas. Sozinho. Vamos dizer, eu compro quatro sábado. Às vezes eu bebo quatro, às vezes eu bebo três. Eu não bebo domingo. Aí chega também eu não  poder beber domingo de noite, de tarde. Só bebo de manhã. E ai de quem oferecer algo que não seja sua tradicional cervejinha: “não gosto de vinho. Só bebo cerveja. eu nunca gostei de nada de mistura assim. Eu já bebi muita vodka’, revelou.</p>
+                    
+                    ${createPhotoPlaceholder("Zé e sua esposa ou um momento de lazer")}
+
+                    <p>O filho de pescador que revelou não gostar de pescar, é um homem simples, de poucas palavras, mas feliz com convicção. Feliz com a vida que leva ao lado da sua esposa. Feliz com a calmaria que só a idade e a maturidade podem proporcionar. E agora, aos 66 anos, é feliz de poder passar o tempo no lugar que tanto ama. Seja bebendo sozinho em um sábado ou compartilhando um almoço farto como o casal gosta de fazer na varanda humilde e cheia de amor.</p>
+                `
+            },
+            'elizangela': {
+                title: "Um tempero a mais na vida",
+                name: "Elizangela",
+                subtitle: "",
+                image: "https://images.unsplash.com/photo-1556910103-1c02745a30bf?auto=format&fit=crop&q=80&w=1600",
+                snippet: "Era uma sexta-feira de setembro, por volta das quinze para as quatro da tarde, quando vi Elizangela pela primeira vez.",
+                content: `
+                    <p>Era uma sexta-feira de setembro, por volta das quinze para as quatro da tarde, quando vi Elizangela pela primeira vez. Ela estava na janela da sua casa com seu marido, observando a vista para a lagoa. Embaixo de sua casa, funciona sua lanchonete. Pedi um açaí e precisei apenas de poucos minutos para notar uma mulher vaidosa, alegre e com muito orgulho dos filhos.</p>
+                    <p>Retornei outro dia pra continuar nossa conversa. Sempre simpática, ela me recebeu novamente em sua lanchonete e ali descobri como cada pessoa é capaz de carregar tantas histórias que a gente nem imagina, ao esbarrar no cotidiano. Hoje, Elizangela Vieira dos Santos tem 52 anos, mora em Piratininga, conseguiu formar os dois filhos no ensino superior e tem uma vida confortável e de muita parceria com seu marido. Mas nem sempre foi assim.</p>
+                    
+                    ${createPhotoPlaceholder("Elizangela na lanchonete")}
+
+                    <p>Nossa conversa revelou uma sequência de histórias que quem enxerga uma mulher feliz nem imagina:  “ Tive uma infância muito sofrida. Porque eu perdi minha mãe com 7 anos de idade, meu pai eu não conheci. Eu fui criada pela minha avó, quando completei 13 anos minha avó se suicidou. Aí eu com 13 anos já fui viver na casa de uma tia, de outra tia e assim você vai vivendo, né?  E assim você não tem infância.  Porque quando você é uma menina e perde seus pais cedo, a família que for ficar com você, quer você pra empregada, entendeu? Não que é para você ser ‘ah, minha segunda filha, não’, isso não existe, né?  Só em fantasia.”</p>
+                    <p>E foi essa sequência de fatos que levou a menina nascida em Marechal Hermes a amadurecer muito cedo e assumir grandes responsabilidades antes mesmo de atingir a maioridade. A jovem começou a morar sozinha aos 17 anos, mas afirma que esse processo de amadurecimento começou bem antes: “Tive que amadurecer quando a minha avó morreu, com 13 anos. Mas eu acredito que eu amadureci desde quando minha mãe morreu”,  refletiu.</p>
+                    <p>E foi também aos 17 anos que ela conheceu seu marido. Apesar de serem pessoas com gostos completamente diferentes, foi com ele que ela conseguiu construir a primeira casa, formar uma família e foi por causa dele que ela se fixou em Piratininga. Ainda morando no Rio, conseguiram um esquema para passar o Carnaval na terra que hoje é seu lar: eles alugavam casas que estavam em período de reforma, assim pagavam mais barato. Com o passar do tempo, o desejo de curtir o Carnaval na região de praia se expandiu para uma vontade de morar no local.“Meu marido sempre falava: ‘Um dia eu vou comprar uma casa aqui’. Eu sempre falava para ele: ‘Sonha!’. E o que um dia parecia um sonho distante, se tornou real  há 21 anos . “Aí a gente procurando, acabamos encontrando essa casa, que na época era bem pequenininha, era quarto e sala, cozinha, banheiro.”   A casa, que antes era simples, hoje comporta tudo que ela precisa, três andares, sua lanchonete e um quarto dos sonhos, como ressaltou várias vezes, onde não precisa de mais nada. Elizângela é encantada pela própria casa e por Piratininga: “graças a Deus hoje em dia eu não consigo nem pensar em atravessar a ponte para o outro lado”.</p>
+                    
+                    ${createPhotoPlaceholder("Detalhe da casa ou vista da janela")}
+
+                    <p>Em vários momentos, a mulher cita Deus e fica muito perceptível sua gratidão a Ele, mas assumiu tom bem convicto ao dizer que não possui religião definida e não frequenta nenhuma igreja:</p>
+                    <p>“Acredito em Deus. Frequentar um templo, não! Porque para mim Deus tá aonde meus pensamentos  quer  que ele esteja. Eu não acho que preciso ir para dentro de um templo, seja ele qual for, entendeu? Para que Deus esteja comigo. Meu filhos todo dia quando  sai  para trabalhar eu entrego a vida deles na mão de Deus, porque para mim Deus vai acompanhar eles”.</p>
+                    <p>E falando em cuidado e zelo com os dois filhos, logo na primeira conversa ela deixou transparecer o orgulho de ter conseguido ver eles formados na universidade: a menina é bacharel em Direito e o menino, engenheiro mecânico. Elizangela só estudou até o segundo grau, mas enxerga no estudo a única chance de “ser alguém na vida” “Eu completei o ensino médio, hoje eu tenho dois filhos formados. Então, eu posso dizer para você que eu tive muita sorte na minha vida”. E assume ser uma mãe rígida na educação, não abrindo brechas para festas e saídas, sempre priorizando o estudo. “Para mim ele (filho) tinha que ser alguém da vida. E ele só seria se ele estudasse.”</p>
+                    <p>Além disso, ela aproveitou a oportunidade para, com uma entonação de mais autoridade, demonstrar certa discordância com o que enxerga na criação atual de filhos por parte de outros pais:   "Hoje em dia pai e mãe age muito errado. O filho não estuda, por mais que pai e mãe bote para estudar e ele não quer estudar. Aí ele arruma namorada, bota dentro de casa, faz um filho nela e a mãe e o pai que têm que sair para trabalhar, para sustentar os filho deles. Tá tudo errado!”.</p>
+                    <p>A mãe que, várias vezes, afirmou ter sido rígida na criação dos filhos, sente que deu o seu  melhor, mas aproveitou para complementar: “Eu sempre fui uma mãezona, chatona, entendeu? Eu não criei meus filhos para eles serem meus amigos” comentou revelando mais uma vez seu perfil durona.</p>
+                    <h3>Tempero a Mais: a lanchonete</h3>
+                    <p>A lanchonete com paredes revestidas por um piso com cores amadeiradas e com tom amarelo predominando na decoração, que foi plano de fundo para toda nossa conversa, é uma parte importante da vida dela. Não por ser seu trabalho, mas por ser mais um símbolo de uma mulher determinada que conseguiu conquistar seu espaço e realizar sonhos com o seu trabalho. Na bio do instagram do estabelecimento a frase “Transformando AMOR EM COMIDA” descreve perfeitamente o Tempero a Mais, projeto que surgiu como reflexo de uma vontade antiga de Elizangela.</p>
+                    <p>“Eu queria ter um armarinho. Desde novinha, eu falava que eu queria ter um armarinho e sempre fui uma pessoa que sempre trabalhei em casa. Aí quando eu vim morar aqui (Piratininga), comecei a botar salgadinho para vender. Trabalhava com a minha porta fechada, o pessoal batia no portão, eu vendia. Depois comecei a vender o sacolé. Aí um belo dia o meu filho falou assim: ‘Mãe, se a senhora quiser montar uma lojinha, eu ajudo’.  ‘Por que que a senhora não vende marmita?’ Eu topei, mas a intenção dele era eu abrir só uma porta e entregar a marmita para os outros.  E o meu pensamento era: ‘Ah, vou ter uma loja’. O meu pensamento era grande e o dele era pequenininho. Aí eu falei com o meu marido: ‘Amor, vê com o Leandro (filho), você e ele me ajudando, consigo fazer uma loja maneira’. Comecei a crescer a conta e empurrar para o meu filho e para o meu marido, entendeu? E foi crescendo… aí hoje em dia eu fiz o que eu fiz aqui.”</p>
+                    
+                    ${createPhotoPlaceholder("Pratos do Tempero a Mais")}
+
+                    <p>“É você que cozinha?”, perguntei.<br>“Eu faço tudo da loja. Tudo que for de comida. Salgada é eu que faço, eu não vendo nada que eu não faço. Por quê? Se você reclamar, você tem que reclamar comigo, né? Se eu compro de terceiros, e aí? Aí você reclama comigo, eu vou reclamar com outra pessoa”, argumentou.</p>
+                    <p>Apesar de ser feliz com que construiu, ela também não vê a hora de poder descansar e aproveitar a praia e a vida com mais tranquilidade: “Com 14 anos eu comecei a trabalhar e não parei mais. Não vejo a hora de parar!”<br>“Mas eu acho que quando você parar você vai querer continuar com a loja, não?”, perguntei, ingênua, ao enxergar seu trabalho como uma parte importante da sua vida.<br>Ah, eu não sei, porque assim, a loja é  bom , né? Mas prende muito, entendeu? Eu adoro praia, mas os dias que eu tenho movimento é dia de sol na praia, então não dá, né?”</p>
+                    <p>Descansando no futuro ou não, o hoje, com Tempero a Mais, ela leva seu amor e afeto em forma de comida boa e com preço justo para os moradores da região.</p>
+                    <h3>“Eu sou feliz assim”</h3>
+                    <p>“Eu sou feliz assim”. Foi nesse momento que a entrevista se aproximou do fim. Ela é feliz e a felicidade basta para ela. Hoje, a mulher se revela caseira e tem no seu lar tudo o que precisa para ser feliz. “Tem uma área gourmet, a vista para a lagoa, tem a televisão, tem a Netflix, eu quero mais o que? Eu estou feliz da minha vida”.</p>
+                    <p>E essa felicidade é visível até sua forma de se vestir. Sempre arrumada, com brincos e cordões, a mulher que encontrei de salto plataforma na primeira vez que a vi, se define como vaidosa e declara a importância de se arrumar para trabalhar, mesmo o seu ambiente de trabalho sendo em uma extensão de sua casa. “Eu acho que se você não gostar de você, quem vai gostar? Não é porque eu abri a porta de casa, cheguei no meu trabalho que eu tenho que estar de qualquer jeito. Eu tenho que estar arrumada. Eu me arrumo como se eu fosse sair todo dia para trabalhar. Certinho”. Cuidadosa consigo mesma, não abre mão de um hidrante antes de dormir e revela esse ser o segredo para pele perfeita que carrega aos 52 anos.</p>
+                `
+            },
+            'maricelia': {
+                title: "Uma Baiana perdida em Piratininga",
+                name: "Maricelia",
+                subtitle: "",
+                image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=1600",
+                snippet: "Eu estava andando no calçadão da praia de Piratininga. Era uma tarde de sol, mas com bastante vento.",
+                content: `
+                   <p>Eu estava andando no calçadão da praia de Piratininga. Era uma tarde de sol, mas com bastante vento. Observando as pessoas com uma atenção além da habitual, vi Maricelia quando estava quase chegando à prainha. Na mesa ao lado de um quiosque, ela estava acompanhada de mais duas pessoas: uma senhora e um homem que parecia ter cerca de 40 anos. Cheguei e perguntei se ela aceitava conversar. No início, pareceu não querer muito, perguntou quanto tempo durava, porque precisava trabalhar. Mas logo a mulher, que vestia um colete da cachaça “51” com manchas de comidas, se soltou e revelou detalhes de sua história para mim.</p>
+                   
+                   ${createPhotoPlaceholder("Maricélia no quiosque")}
+
+                   <p>A primeira pergunta que fiz foi sobre sua relação com Piratininga e a resposta foi dita de forma bem direta e com muita convicção: “Amor. Muito amor! Amo esse lugar aqui.” Nascida e criada no Sul da Bahia, Maricelia Santos Barbosa conheceu o local que tanto ama aos 16 anos. No final de 1992. Tudo começou com uma viagem despretensiosa de Carnaval com os amigos da época que já moravam em Piratininga. Saíram da Bahia de carro em direção a Camboinhas, local vizinho a Piratininga. “Cheguei (no Rio) já recebi proposta de trabalho. Aí foi fluindo, eu fui ficando, me encantei, porque quando eu conheci o Rio em si eu não gostei, muito calor. Mas me encantei por Piratininga.”</p>
+                   <p>Ao seu lado durante todo tempo, estava Val, uma amiga. E foi para ela que em vários momentos a mulher direcionou falas, criando um clima bem descontraído e dando a ela  liberdade para participar da conversa. “A primeira vez que eu vim aqui, nesse quiosque, eu virei e falei: “Esse que eu acho que um dia vai ser meu. A minha irmã olhou para minha cara e riu.” Perguntei como ela conseguiu realizar esse sonho e a resposta veio através de uma história de anos atrás:</p>
+                   <p>“Cara, trabalhando muito mesmo. Eu trabalhava em uma empresa, mas em um final de semana de sol não lembro o ano, acabou toda a água na praia. Nenhum quiosque, camelô ou barraqueiro tinha água. Os poucos que conseguiram estavam vendendo na época por cinco reais, um absurdo. Aí falei: “Caraca, a fonte é aqui.” Entrei de férias na empresa, fui no Largo da Batalha, comprei um isopor, uma caixa de cada coisa e uma churrasqueira. Fiz um monte de espetos de carne, comprei peixe, assei na brasa e minha barraca bombou. Mas eu só tinha um isopor e uma mesa emprestada. Ai fui indo, mas já corri muito de SEOP, fiscalização da prefeitura. Antigamente dava pra vender peixe frito na praia, mas quando a prefeitura vinha, a gente saía correndo com o isopor de bebida e tacho de óleo quente. Fui indo, juntando dinheiro, e foi assim que comecei”, contou.<br>Hoje em dia, Maricelia possui formação em Gastronomia e mora no Tibau, região localizada no canto direito da praia, próxima à lagoa. “Canto maravilhoso aqui de Piratininga, bairro fechado. Maravilhoso. Onde todo mundo conhece todo mundo”, definiu. “Muita gente fala: ‘Ah, eu odeio o Tibau, só tem gente fofoqueira, não sei o que’. Eu falei: ‘Gente, eu não faço nada ilícito, nada ilegal, nada’'". Eu amo o Tibau é é toma conta da minha vida aqui? Que ótimo, porque eu mesma não tenho tempo para tomar conta. [...] A qualidade de vida é muito boa, muito boa, muito boa mesmo,  as pessoas ainda se conhecem, se cumprimentam: bom dia, boa tarde. O dia que eu não abro o quiosque, as pessoas me liga para saber o que que houve.”<br>“Então, você acredita que ter vindo para Piratininga foi a melhor coisa que te aconteceu?”, perguntei.<br>“A melhor coisa da minha vida, uma das melhores,  porque eu amo esse lugar!”, responde e em seguida  comenta também que nunca sairia de Piratininga, nem para ir para a Bahia, onde até hoje tem uma casa.</p>
+                   
+                   ${createPhotoPlaceholder("Vista do Tibau ou arredores")}
+
+                   <p>Mas a vida nem sempre foi tão simples assim para ela. Com família muito rígida, aos 14 anos saiu escondida para uma festa, querendo curtir um pouco. Mas a menina que esperava um castigo convencional, teve como punição aceitar um casamento forçado, “mesmo sem ter feito nada”.  Com 15, se casou no dia 10 de outubro de 1977 e, menos de um ano depois, nasceu sua primeira filha. “EPorque eu era só uma menina, né? Ultrapassei um monte de etapa da minha vida.”, relembrou,   Diz, refletindo como se estivesse desabafando em uma conversa entre amigos.</p>
+                   <p>Criada pelos avós fazendeiros, são eles que Maricelia  considera como pais. “A minha mãe (biológica) é como se fosse uma irmã. Eu é como uma não tenho como mãe. Meus pais já morreram para mim, na minha cabeça. Mas eu sempre tive contato com a minha mãe e com o meu pai. São meus genitores, mas afinidade mesmo…” Ela conta também que mesmo com a infância simples no interior, todos seus irmãos estão bem de vida. “Tem um que tem uma empresa de Construção Civil em São Paulo. Um outro é engenheiro, topógrafo [...] eu que puxei o bonde, tá? Depois que fui embora, todo mundo foi.” Apesar disso, relembra comparações que teve que passar: “Minha mãe ficava jogando minha cara:  “Ah, que a ‘'tua irmã tem dois diplomas, fez isso, fez não sei que lá, fez mestrado disso, mestrado daquilo.’' Eu ficava quieta, mas outro dia eu falei: engraçado, outro dia ela me pediu 200 reais’.  Essa comparação me motivou ainda mais a crescer”</p>
+                   <p>Durante o tempo em que estive no quiosque com ela, percebi que a todo momento Maricelia era solicitada, seja para cuidar de algum dos netos que estavam ao redor, brincando e aprontando, ou por alguma funcionária que vinha tirar dúvidas sobre o trabalho: “Onde tá aquela mulher ali sentada, ali, ó, que botou a mão na mesa agora?”, perguntou a jovem que trabalha no quiosque. O controle dos pedidos é feito em um caderno, tudo à mão e à caneta ainda. As crianças também já rabiscaram o caderno, ela me mostra: “Olha o que as crianças fizeram, rabiscaram tudo!”. Além disso, toda hora passava alguém e a cumprimentava.<br>“ Você tem uma relação com os clientes, né?”, eu quis saber.<br>“Ah, a maioria, né? Vira amigo”, disse, orgulhosa.<br>Em certo momento, ela fala sobre legado e foi aí que aproveitei para perguntar qual ela deseja deixar. Ela não teve que pensar muito para responder: “O meu legado? Cara, o meu orgulho de mim mesmo, porque eu, eu dei uma boa criação para meus filhos. Hoje todo mundo tá bem, graças a Deus. Todo mundo tem suas próprias vidas. Vvocê não pode ter o egoísmo. Eu poderia ter vivido mais, ter aproveitado muito demais a minha vida, ter viajado, ter feito várias coisas. Mas eu tinha a minha preferência, o meu foco estava nos era meus filhos, numa coisa melhor para os meus filhos.”"</p>
+                   <p>Além do cuidado com os filhos, ela enfatizou a  a importância de fazer bem ao próximo. Na pandemia, mesmo estando com seu quiosque fechado, conseguiu 380 cestas básicas para ajudar quem estava precisando. “Eu ia para a porta do Bay Market (shopping), ia para lá para o Renato, botava uma mesa e ficava pedindo alimento, arrecadando alimento”. . “</p>
+                   <p>Maricelia é do tipo que não deixa a peteca cair. As partes negativas da vida, ela contou sem nunca se vitimizar. Ela acredita que tudo que aconteceu nos seus 52 anos de vida foi importante para deixá-la  mais forte. “Às vezes, mesmo a gente olhando assim e pensando: ‘meu Deus, que problemão, o que eu vou fazer agora? Viúva com dois filhos, não sei o quê’. Mas, na verdade, isso foi algo para me deixar mais forte,  eu não tinha como desistir. Como que eu vou desistir da vida? Tudo que tenho é fruto do meu trabalho, ninguém nunca me deu nada, nem marido. Ao contrário, né? Mas, graças a Deus, não tenho do que reclamar.”<br>Viúva do primeiro marido e separada do segundo, com quem foi casada por 27 anos, ela comenta que, com o último marido, as coisas foram complicadas demais: “Passei por muita coisa ruim com o pai do meu filho mais novo. Muita coisa de agressão física e verbal. Muita coisa mesmo. Mas sobrevivi, né?” Apesar disso tudo, hoje ela se considera uma mulher feliz. “Ninguém é 100%, né? Eu acho que felicidade é um estado de espírito.”, complementou.</p>
+                   <p>Recentemente um acidente a abalou muito. Ela  diminui o ritmo da fala para contar: “Teve um incêndio, um acidente na minha casa. Queimou meu quarto todo. Tudo de mais valor estava no meu quarto.  Foi no dia 12 de agosto. Está uma coisa de maluco, porque metade da casa está sem água, metade está sem luz. Tá um monte de gambiarra, um monte de gato.” O fogo começou com uma extensão no quarto. Muito abalada ao falar do assunto, ela me mostra  marcas do fogo no corpo. “Eu já passei por muita coisa na vida, Val, mas eu não sei... a idade que tá chegando, esse negócio mexeu muito comigo, tu sabia?  “Eu até que achei que você foi forte”, apoiou a amiga.<br>Visivelmente, o trauma deixou marcas e sequelas muito além das queimaduras da pele de Maricelia. “Eu fico sentindo cheiro de fumaça. Se aí qualquer coisa eu levanto. O cheiro é tão ativo que eu começo a cheirar a tomada, começo a olhar ao redor”.</p>
+                   
+                   ${createPhotoPlaceholder("Recuperação pós-incêndio ou quiosque atual")}
+
+                   <p>Agora trabalhando menos, em suas palavras: com “a batida mais tranquila” no tempo livre, gosta de assistir a filmes e séries, em especial, séries turcas, que conquistaram o gosto dela e de sua filha. Mas o que mais gosta é de ler. “Cara, eu sou curiosa, eu leio tudo.” E mais uma vez o incêndio volta à conversa e a mulher fica triste ao lembrar: “Ah, eu tinha muitos livros... queimou muito livro meu.” Recorda no meio da conversa ao perceber que o fogo também consumiu uma boa parte do que mais amava.<br>Para o futuro, seu desejo é ter saúde, e garante que não quer deixar o quiosque acabar. Quer que ele passe para os filhos, para os netos e, afinal, como ela mesma me disse: “As coisas mais simples são as mais gostosas, Clara.”</p>
+                `
+            },
+            'selmo': {
+                title: "Histórias de pescador",
+                name: "Selmo",
+                subtitle: "",
+                image: "https://images.unsplash.com/photo-1541417937963-c2763327d6d1?auto=format&fit=crop&q=80&w=1600",
+                snippet: "“Eu sou o único Selmo da região”. Essa foi uma das primeiras falas do homem para mim.",
+                content: `
+                    <p>“Eu sou o único Selmo da região”. Essa foi uma das primeiras falas do homem para mim. Vestindo um casaco preto, boné tampando seus cabelos brancos quase inexistentes, apesar do seus mais de 60 anos, e calçando uma havaiana branca com meia cinza, vejo ele mexendo em um barco azul na beira da lagoa de Piratininga. Logo mais, eu descobriria que o barco denominado de “Salmos” foi construído por ele mesmo.</p>
+                    <p>Selmo José Nascimento, de 66 anos, é um exemplo de talento que vem de berço. Filho e neto de pescadores, o homem, que se denomina “Minhoca da Terra” de Piratininga, sempre morou e pescou na região, e tirou dessa prática o principal meio de sustento durante toda sua vida. Vida essa que coleciona memórias que me fazem acreditar ainda mais na veracidade da expressão “história de pescador”. Contador de histórias ora interessantes ora suspeitas o homem que gosta de falar encontrou, na nossa conversa, a oportunidade perfeita de ser ouvido.</p>
+                    
+                    ${createPhotoPlaceholder("Selmo com seu barco azul")}
+
+                    <p>Criado na natureza da região, assume ter sido bem “largadinho” e fala com boa nostalgia dessa fase: corridas, bolas, brincadeiras na chuva e banhos na lagoa. Hoje, ele acha que as crianças são “Nutella”: “As crianças de hoje não  faz  mais isso”, e aproveita para me contar sobre um tombo de bicicleta em Piratininga que o fez desmaiar na infância.</p>
+                    <p>Apesar dos 66 anos de muita história, o homem afirma que nasceu mesmo em 2016, quando se converteu à religião evangélica. Se revelando uma pessoa de muita fé, sem dúvidas, foi a religião o assunto mais presente em toda conversa. Sua conversão foi impulsionada por um momento muito difícil na sua família: a internação de um dos seus filhos em um manicômio, por esquizofrenia.</p>
+                    <p>Logo de cara, ele fez questão de ressaltar várias vezes seu novo nascimento, e por isso, tudo que me contou depois, veio em forma de testemunho sobre o que Deus fez em sua vida e como ele foi transformado completamente. Muito desenrolado na conversa, usou um saco que estava a mesa na nossa frente para ilustrar e enfatizar melhor:</p>
+                    <p>“Que cor é essa aqui”<br>“Azul” , respondo<br>“Eu pego uma outra sacola de outra cor e ponho aqui. A minha mudança é tipo isso aí: mudou totalmente” , comparou.</p>
+                    <p>E essa mudança ocorreu de forma tão expressiva justamente pelo estilo de vida que ele levava antes: “Drogas pesadas eu nunca usei: maconha, crack, cocaína... Agora o que você imaginar do resto eu já fiz”  Apesar do seu novo nascimento ter começado devido uma visita de um pastor durante a internação do filho, o homem, pai de Cleiton, Maurício e Mateus, assume, com certa tristeza, não ter levado a paternidade a sério: “Como pai? Pensa num camarada irresponsável. Sabe uma pessoa irresponsável? Era eu! Não me orgulho em falar isso, tá? Eu fico até triste”, diz.</p>
+                    <p>Como marido, a história de Selmo fica ainda mais complicada e duvidosa.  Além de contar que consumia muita pornografia no celular, ele também fala abertamente sobre as traições que praticou durante o casamento: “Quantas mil, filha? Não tenho ideia! Como eu falei para você, eu não tenho condições de contar!” Mas após seu novo nascimento, chegou a se confessar para sua esposa, que o perdoou, mas assume: “Não falei abertamente, né? Porque ninguém aguenta. Não entrei em detalhes.” Mas a resposta surpreende ainda mais quando pergunto se ele se arrependeu de ter tido essas ações no seu casamento. “Não, porque você não tem como voltar. Você tem que pedir perdão a Deus. A maior posição é você se redimir, buscar entender que Deus não quer isso para você, para ninguém, é pedir perdão a ele, cara. Porque como é que você pode voltar atrás?”, argumentou.</p>
+                    <p>O homem, que a todo momento tentava introduzir Deus na conversa, chegou a comentar que queria me presentear com uma bíblia e chorou ao falar do sacrifício de Jesus na cruz. “Eu me emociono até em falar; é uma covardia muito grande, filha. Você nunca fez nada, nunca cometeu erro nenhum e ser crucificado por aquilo ali”. Ele falou com a voz mais embargada.</p>
+                    <p>Apesar de considerar seu nascimento espiritual só em 2016, o corpo físico já sente os sinais da idade e de uma vida desregrada vindo à tona. Com problema na coluna, sua artrose cervical gera uma sequência de dores e pontadas insuportáveis. “Eu já fiz a ressonância da dorsal, já fiz radiografia, tomei seis ou oito injeções. Umas três, quatro receitas de comprimido. Fiz fisioterapia, consegui fazer duas sessões. Eu tava com uma pratinha, fui lá, paguei cento e dez prata cada sessão”.<br>“Mas você cuida da sua saúde em geral?”“Com certeza, filha. Com certeza. Tem uma hérnia umbilical já feita uma cirurgia, uma cirurgia no joelho”.<br>O homem que a vida toda acreditou ser bom em sobrevivência, agora não teme mais a morte. Afirmando que “o ser humano é o único ser que tem a vida eterna”, ele falou com toda convicção que, se morrer, vai para um lugar melhor do que está  agora.</p>
+                    <h3>Pesca</h3>
+                    <p>“Não pesco para brincar, eu vou para ganhar um dinheiro”. A pesca é o que mais conecta Selmo com Piratininga, e essa relação começou cedo. Fruto de uma linhagem de pescadores, Selmo desde muito novo já foi introduzido nesse mundo: “Eu comecei a pescar com meu pai muito cedo, tinha uns seis, sete anos de idade e já saía de barco com ele, aí fui adquirindo a profissão, né? Não tem como fazer uma coisa várias vezes e não aprender. Isso ia ser muito orelhudo”, brincou e riu o homem que levava nossa conversa de forma leve e descontraída.</p>
+                    
+                    ${createPhotoPlaceholder("Selmo trabalhando ou paisagem da lagoa")}
+
+                    <p>Foi a pesca na região que o ajudou a construir e manter a família durante quase toda sua vida, entretanto hoje a pesca não é mais como antes. Ele enfatizou isso em vários momentos. Com a poluição, o que já foi sinônimo de muita fartura se encontra cada vez mais escasso. “Em Piratininga existia muita quantidade. Eu sobrevivia da pesca, várias famílias viviam disso”, conta. “Depois que começou o pessoal vir para Piratininga, morar e tudo mais, começou a dificultar, porque todo saneamento básico que tem de esgoto, vai pendendo na lagoa. Hoje, como diz um amigo: ‘não se cria nem um gato’. A pesca aqui ficou muito precária” contou o homem que sempre fazia questão de usar um ditado ou trocadilho para explicar suas falas, alguns que, muitas vezes, eu nem conhecia.</p>
+                    <p>Selmo se definiu em uma frase peculiar: “sou bom em sobrevivência”. O homem que sempre pescou, precisava achar formas de levar dinheiro para casa em momentos de baixa na pescaria. “Hoje eu tenho cinco ou seis profissões na minha carteira: balconista, maquinista de dragagem, porteiro, motociclista, repositor. Deve ter mais alguma aí, mas não lembro no momento. Eu nunca deixei a minha família passar necessidade. Porque se eu dependesse só da pesca, a pesca ficou ruim, como é que eu vou fazer? Como é que eu vou comprar o pão e o leite dos meus filhos. Não tem como!”</p>
+                    <p>Foi buscando driblar essa situação e trazer melhorias para Lagoa, que surgiu a APALAP. Quando o conheci, por baixo do casaco preto, vestia uma blusa da organização: a Associação de Pescadores e Amigos da Lagoa de Piratininga: “Em todo movimento que a gente busca e faz, é por busca de benefício, em  pró  da lagoa. E hoje tem vários, né? Tem várias  instituições que nos apoiam, que nos ajudam”.</p>
+                    <p>Atualmente sua pesca é feita na Lagoa, mas Selmo relembra com nostalgia da época em que também pescava no mar. Ele diz que, mesmo aposentado, é essa profissão que o ajuda a complementar a renda.</p>
+                    <p>“Se não fosse a necessidade de complementar a renda, você continuaria pescando?”, perguntei.<br>“Sim. Sim, com certeza!”, disse, convicto.<br>Homem simples e de muita fé, o pescador que por muito tempo buscou felicidade em prazeres vazios - segundo ele mesmo falou - agora aprendeu a valorizar as coisas simples da vida. E, como bom contador de histórias, gosta  de exemplificar suas falas: “Pra mim, hoje, valorizar é isso. Eu chego na minha casa, tenho uma garrafa de café, um pote de Claybom e um saco de pão em cima da mesa. Pode ir lá, você vai ver que tem lá agora”. Afinal, como ele mesmo me disse: “A felicidade sem paz não existe”.</p>
+                `
+            },
+            'jorge': {
+                title: "Quiosque Pinguim",
+                name: "Jorge",
+                subtitle: "",
+                image: "https://images.unsplash.com/photo-1574315042633-8998d36006dc?auto=format&fit=crop&q=80&w=1600",
+                snippet: "Jorge Luiz Silva Ferreira tem 59 anos e herdou o gosto pela praia do seu pai, que levava ele pra perto do mar como forma de passeio, na infância.",
+                content: `
+                    <p>Jorge Luiz Silva Ferreira tem 59 anos e herdou o gosto pela praia do seu pai, que levava ele pra perto do mar como forma de passeio, na infância. Ele recorda que ia muito a Itaipu, já  que seu pai achava o mar de Piratininga muito bravo, por causa dos afogamentos que aconteceram na época. Mas algo muito curioso que ele lembra nos faz perceber que seu encantamento por Piratininga vem de antes mesmo dele saber diferenciar as praias, também na infância, quando nem imaginava morar lá um dia: “quando a gente chegava ali no alto da da serrinha, descendo do Cantagalo, olhava e via a praia de perto e falava assim: ‘Olha a praia, todo mundo na felicidade que a praia tava chegando’. Só que a praia demorava muito para chegar e eu, como criança, não entendia, porque a gente via tão de perto que era Piratininga em relação ali, a gente ia para Itaipú e demorava a chegar a praia”. Foi só na adolescência que ele foi começar a frequentar mais regularmente a praia onde hoje ficam  seu lar e seu local de trabalho.</p>
+                    <p>“Você se vê morando em outro lugar hoje em dia?”<br>“Não. Não tem como, porque eu me identifico muito com isso aqui, né?”, comenta o homem que se mudou para Piratininga por uma questão logística do trabalho, e hoje é apaixonado pela região.</p>
+                    <p>Mas sua relação com o local começou a se estreitar a partir de 1998, quando o marceneiro de profissão se viu buscando uma nova ocupação  depois de complicações no trabalho: “Tive um problema de sociedade, a gente fechou lá, vendemos as máquinas e tal, aí eu vim trabalhar com a minha sogra no quiosque.” O quiosque em questão se chama Quiosque Pinguim. Para quem está chegando na praia, é o primeiro a ser visto. Localizado bem em frente à praça do bairro, que anos atrás ocupava um famoso tobogã, é a esse  local que até hoje Jorge dedica boa parte do seu trabalho e tira seu sustento.</p>
+                    
+                    ${createPhotoPlaceholder("Jorge no Quiosque Pinguim")}
+
+                    <p>Com o tempo de quiosque, ele  soma o tempo como visitante de Piratininga e, assim,  acompanha de perto as mudanças que a orla da praia sofreu durante todos esses anos. “Quando a gente veio para cá, não tinha prédio nenhum. Aí tinha o Toboágua e que tinha muito movimento. Tinha muita gente de Caxias, Nova Iguaçu, São Gonçalo, principalmente, até hoje a maioria dos frequentadores da praia são de São Gonçalo. Com essa revitalização  é que começamos a ter mais gente daqui, por exemplo, caminhando todo dia. Porque antigamente, antes da Linha Amarela, havia três fenômenos: Piratininga no final de semana era Baixada Fluminense e São Gonçalo, por conta do Toboágua e porque  era mais fácil uma pessoa vir da Baixada  e chegar em Niterói pela ponte do que ir para a Zona Sul, que não tinha lugar para parar os pontos de de ônibus de excursão. Com o advento da Linha Amarela, o pessoal começou a ir mais para Barra, para o Recreio, porque ficou facilitado. Aí o movimento desse pessoal no final de semana ficou mais restrito a excursão, né? Esse pessoal de excursão paga na prainha. Depois teve o Piscinão de Ramos que  esvaziou mais um pouco [a vinda de visitantes da Baixada]”, avalia Jorge, que parece conhecer na prática todos os movimentos e transformações de Piratininga.</p>
+                    <p>O local, que segundo ele “era uma roça, uma cidade pequena”, hoje não é mais o mesmo. Com o aumento da construção de prédios, ele me fala que as mudanças são humanas  –   as pessoas não conhecem mais umas às outras como antigamente  –  e também estruturais: trânsito caótico, insegurança. Quanto a isso, ele menciona o aumento do número de  assaltos e roubos.<br>Transformaram-se o bairro, o quiosque e sua família. “[os filhos] foram criados aqui, o quintal da casa deles era essa praia. Eles viam, faziam as férias”.<br>“Eu tenho cliente que eu virei padrinho de casamento, padrinho de filha. Tem cliente que é amigo mesmo! Por exemplo, de frequentar aniversário de Clarinha, casamento de Maria Clara. Cliente de  convidar para gente ir em casa. [...] muitas amizades de muitos anos, de gente que mudou daqui e continua sendo amigo”, disse, visivelmente orgulhoso.</p>
+                    <p>Ele me contou que, antes da fiscalização ser mais severa no local, havia um forte costume de reunir esses amigos e fazer churrascos no quiosque:  “ Dia dos Pais a gente se juntava. Ano novo, dia primeiro, o pessoal vinha com o que sobrou de casa, chope e tal, e a gente fazia. Hoje em dia, com a fiscalização, é mais difícil, mas de vez em quando ainda acontece”. Outro encontro curioso que o quiosque proporcionou à família foi o da própria Clarinha, como ele chama a filha. Foi ali que ela conheceu o atual marido, Bruno. “Ele estava passando férias e parou para tomar um coco. Parece que deu algum clique ali”, relembra. Hoje, anos depois, o casal é casado e tem uma filha, Mel, a maior paixão do avô. “Uma coisa que todo mundo sempre dizia, e que eu nunca imaginei, é que fosse tão bom ser avô”.<br>Atualmente, é seu filho Pedro que assume boa parte da administração do quiosque  “ Hoje em dia eu trabalho duas, três vezes na semana, nessa época de movimento menor eu faço mercado do Ceasa, peixaria, essa coisa toda, eu faço mais a parte de logística, de apoio. Pedro que fica aqui direto, entendeu?”. Mesmo assim, ele  gosta de aproveitar, quando tem uma oportunidade de cozinhar no estabelecimento: “Faltou uma cozinheira ou tá muito apertado, eu entro e a gente vai e toca.  Eu gosto do movimento do sufoco todo de verão, essa confusão toda.  Nada melhor do que você fazer aquilo que você gosta. Eu gosto muito de cozinhar, eu gosto que a pessoa diga assim: ‘Tá bom, tá gostoso, eu gostei, ficou legal’. Até quando a gente tá em casa, final de semana, que tá chovendo, a gente faz a comidinha lá, eu gosto de fazer. Eu aprendi a cozinhar com a minha vó.”</p>
+                    <p>Por falar em gostos e paixões, Jorge demonstrou ser um Flamenguista apaixonado com convicção. Isso fica claro até pra quem, assim como eu, tem o primeiro contato pelo WhatsApp, onde sua foto do perfil sintetiza muito bem seus dois amores: o Flamengo e a neta Mel.  “ Eu não sou, torcedor modinha. Desde criança, meu pai ensinou a gente ser Flamengo. Antes a gente acompanhava pelo rádio, já que não havia transmissão na televisão”, relembrou. Na ocasião em que o encontrei, meu namorado estava me fazendo companhia, e Jorge não perdeu oportunidade de zoar a camisa que ele estava usando do time rival, o Fluminense. A atitude revelou também um lado bem-humorado dele, que em diversos momentos se permitiu rir comigo, contando memórias engraçadas, sempre de forma leve.</p>
+                    
+                    ${createPhotoPlaceholder("Jorge com a família ou em momento de lazer")}
+
+                    <p>De voz calma e perfil centrado, ele também demonstrou ser um homem muito conectado com a família, que a todo momento era mencionada de alguma forma nas suas histórias. Pai de três filhos, a formação de sua família começou no local em que conheceu sua esposa: na igreja da Nossa Senhora de Fátima, quando ele tinha 18 anos.  O primeiro interesse surgiu por parte dela. “Tinha uma quermesse lá na igreja e ela mandou um bilhetinho para mim. Aí marcamos encontro na missa e foi crescendo aquela conversinha. Depois começamos a namorar. Depois a gente noivou e a casou”,  diz.<br>Ele conta que a trajetória da sua família se manteve ligada à igreja por longos anos: “A nossa vida toda foi dentro da igreja, né? Quando a gente casou, as crianças nasceram, foram batizadas lá, todo mundo fez Primeira Comunhão na mesma igreja”.<br>Apesar do passado católico, hoje em dia ele frequenta um centro de umbanda, mas o processo de se descobrir em uma nova religião foi gradual. “Por algumas coisas da vida , a gente começou a ir no kardecismo. A gente conheceu um lugar  aqui em Piratininga e passou  a frequentar esse centro de Umbanda, que é uma coisa bem legal também. Tem uns 10 anos que a gente tá nessa nessa religião, que é uma religião de caridade, de muita fraternidade. Mas, a gente de vez em quando vai na missa. Tem muito disso, desse sincretismo, né? Uma coisa que não te sufoca, né? Que prega que você tem que fazer caridade, que tem que ser uma pessoa boa. Que lá na frente, o universo vai te cobrar por aquilo que você faz e só você pode se ajudar”.</p>
+                    <p>Nosso encontro aconteceu pela manhã e a conversa foi bem leve, como se Jorge  estivesse conversando com uma amiga no seu quiosque, em um dia de movimento tranquilo. O papo foi fluindo de maneira bem natural, o que o levou, em certo momento, a colocar o celular no modo avião para não receber mais ligações, para não atrapalhar. Ele fez isso  mesmo eu comentando que ele poderia parar para atender, sem problemas. Quando perguntei o que ele deseja pro futuro, Jorge me surpreendeu ainda mais, se revelando uma pessoa muito consciente, e com clareza sobre o que quer:</p>
+                    <p>“Hoje eu quero ver o sorrisinho da minha neta, quero que a despensa da casa esteja cheia, né? Quero saúde para família toda. Porque eu acho que o futuro você vai fazendo no dia a dia.  Então a gente tem que viver bem o dia, dizer que ama a pessoa que tá do lado da gente, não fazer nenhuma besteira que vá prejudicar alguém. Se prejudicar alguém, você vai ter que resolver isso lá na frente. Então, eu não vejo muito a minha questão de futuro.  Eu sei que eu vou ser eterno,  eu tenho essa consciência. Quando eu morrer, eu vou passar para um outro estágio no mundo espiritual, que eu vou ter que continuar evoluindo”,  me explica e, mesmo sem saber, me ensinou um pouco sobre a vida e sobre viver, me fazendo refletir.</p>
+                    <h3>Legalização dos quiosques</h3>
+                    <p>“Sou bem chatinho com essas coisas. Eu não suporto ver alguma coisa que esteja errada  e que tenha injustiça.” Foi assim que Jorge se definiu quando perguntei o motivo de ele ter se tornado presidente da Associação dos Quiosqueiros de Niterói.<br>Jorge, que durante 5 anos já ocupou o cargo de presidente da Associação de Moradores de Piratininga, hoje destina boa parte da sua luta à legalização dos quiosques de toda a cidade.  A organização, que começou somente em Piratininga, hoje se uniu com todas as praias para somar forças nesse objetivo tão importante. Segundo sua memória, atualmente são 86 membros da cidade inteira.<br>“Essa é  uma questão séria porque, por exemplo, você vai dormir, não sabe se quando você acordar no dia seguinte, vai ter alguém da prefeitura na porta querendo te tirar ou querendo derrubar seu quiosque, do jeito que já aconteceu em algumas  outras praias da cidade. Desde 1998 eu tô nessa luta de legalização dos quiosques, né?”, contou Jorge.</p>
+                    <p>Por fim, mesmo depois da nossa conversa, quando eu já estava em casa, Jorge, em uma situação cotidiana, me mostrou um pouco mais de quem ele é. Enquanto eu estava esperando ele chegar no quiosque, voltando da sua fisioterapia, acabei pedindo uma água com gás para beber com o Bernardo, meu namorado. Como já mencionei, a conversa foi bem amigável e se estendeu por mais de uma hora. Quando acabou, nos levantamos, nos despedimos e fui almoçar. Quando cheguei em casa, percebi que esquecemos de pagar a água. Desesperada e com vergonha, o chamei no WhatsApp e pedi seu pix para poder pagar. Mais uma vez, ele me surpreendeu: “Fica por minha conta, pelo nosso papo, por conhecer uma pessoa boa igual você, fica com Deus.” Jorge me mostrou que ainda é possível encontrar pessoas boas na vida, dispostas a ajudar o outro de verdade e espalhar generosidade.</p>
+                `
+            },
+            'paulo': {
+                title: "O defensor da natureza",
+                name: "Paulo",
+                subtitle: "",
+                image: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&q=80&w=1600",
+                snippet: "Na Rua Doutor Celso Dias, entre a lagoa e a praia, está a residência de Paulo.",
+                content: `
+                    <p>Na Rua Doutor Celso Dias, entre a lagoa e a praia, está a residência de Paulo. A casa de aparência humilde, com tijolos à mostra e sem reboco, logo de cara já revela que ali mora um sufista. A ausência de cores nas paredes, contrasta justamente com as mais de 10 pranchas coloridas que estão ao lado de fora e anunciam: “aqui vive um surfista apaixonado!” A casa é simples, segundo ele também é pequena, e por isso, escolheu conversar comigo do lado de fora, em dois bancos na beira da lagoa, a menos de um minuto de sua casa.</p>
+                    <p>Em um dia frio, e sentado à beira da lagoa tranquila, Paulo logo foi relembrando momentos de sua vida na região: “A gente andava por isso aqui tudo né? Desbravando, comendo coquinho que tinha pelos  terreno baldi o. Com a dificuldade na época de se alimentar, juntava vários  coquinho  e misturava a farinha. E a pesca vinha do mar. Pescava com o meu pai também na lagoa, desde que eu era criança, meu pai sempre foi pescador”. E foi ao falar do pai que ele se emocionou a primeira vez, com menos de 10 minutos de conversa, expondo pra mim um lado frágil de um homem que muitas vezes tenta parecer forte: “Fui um cara duro a vida toda e agora eu tô vendo que não me levou nada. Eu acho que eu posso ter perdido várias oportunidades na vida por ter sido um cara muito duro, comigo mesmo, com a minha família. Mas meu pai era assim. Eu não tenho que ser igual ao meu pai, porque a vida fez ele assim”, chorou discretamente ao lembrar.<br>Paulo chegou a tentar assumir o legado do pai na pesca, mas acabou abandonando porque, segundo suas palavras, “essa lagoa está completamente só esgoto”. Hoje, devido a essa condição, ele buscou outras formas de conseguir dinheiro, todas de alguma forma associadas ao local em que nasceu e que lhe ensinou boa parte do que sabe. “Eu conserto prancha e trabalho do surfe (dando aulas)”. E complementa a renda com um barco que tem na praia, onde oferece passeios turísticos, mostra os pontos, pesca e leva gente para pescar.<br>Foi também almejando uma vida melhor que foi para os Estados Unidos, onde morou de 2000 a 2006. Lá ele assume ter feito um pouco de tudo, como por exemplo lavar carros, v alet parking  e  delivery ,  “Eu só não roubava, só não fazia nada errado”, e comenta o motivo da sua volta para o Brasil: “Deu saudade de Piratininga… A verdade  é essa”, contou.</p>
+                    
+                    ${createPhotoPlaceholder("Paulo com suas pranchas")}
+
+                    <p>Seu amor por Piratininga já foi refletido de diversas formas durante seus 52 anos de vida. Hoje, o homem, com manchas de sol na pele, fruto de uma vida vivida sob muito sol e mar, relembra já ter feito de tudo para defender sua terra, até mesmo práticas criminosas: “A gente pegava quem tava fazendo besteira, dava uma surra e mandava embora. Vai bagunçar aqui não! Antigamente a gente saía por aí com um grupo de amigos pegando pichador. Pintava a cara, fazia ele engolir o bico do jet. Olha só, eu estou nessa já faz um tempo, nesse amor pelo lugar, nesse amor por aquilo que eu faço. Porra, eu já salvei baleia, cara….” e não é à toa a frase ‘defensor da natureza’ é a que ele que escolheu para bio do no seu  Instagram . Além do papel questionável de justiceiro que já assumiu no local, Paulo coleciona uma série de histórias como ativista da natureza, essas não somente em Piratininga. Em 2013, quando causou rebuliço ao atravessar a Baía de Guanabara vestindo terno pela primeira vez e acabou parando a barca Rio-Niterói em protesto contra a poluição do local para as Olimpíadas.</p>
+                    <p>“Porra, aí deu uma merda, né cara”.<br>“Mas aí teve algum processo?”<br>“Quase fui preso”.<br>“Sério? E se arrepende?”<br>“Não. Foi uma parada que eu fiz e não adiantou de nada”.</p>
+                    <p>Ou quando posou em protesto em frente ao MAC (Museu de Arte Contemporânea), atrás de uma montanha de lixo, e teve sua foto indevidamente usada por um velejador de Búzios, Ricardo Vinícius, que publicou a imagem assumindo ser o homem que, na verdade, era Paulo. A foto viralizou, e foi assim que o homem simples de Piratininga, que nem chegou a concluir os estudos na escola, ganhou espaço em veículos mundiais como The New York Times e Le Monde, mesmo sendo tratado como outra pessoa. Nessa ocasião, ele acabou recebendo uma indenização de R$ 6 mil do portal UOL, mas falou com um tom de desprezo, como se o dinheiro tivesse sido pouco.</p>
+                    <p>Para os três filhos, cada um de uma mãe diferente, ele deseja que sejam reconhecidos em Piratininga pelo mesmo cuidado com a natureza que ele carrega: “Minha filha cata lixo no mar”, contou a voz orgulhosa e brilho nos olhos.<br>E como alguém que habita há anos em Piratininga, e mais do que só morar, explora cada pedaço desse lugar, ele assume ser, sem dúvidas, um conhecedor profundo do local. “Tem um museu aqui, cara, que é o Museu de Piratininga, da Pesca. Ninguém sabe nada lá. Aí o visitante vai para lá e conversa comigo, vou e dou aula”.</p>
+                    <h3>O surfe e a onda</h3>
+                    <p>“Eu só falo no surfe, minha vida é surfe.” Para Paulo, o surfe e a prancha são mais do que formas de trabalho. Mas, infelizmente, em Piratininga as condições do mar não são tão favoráveis para ele desbravar sua paixão. Sem muitas oportunidades de sair de lá mais novo, não conseguiu se profissionalizar como atleta, e hoje o mar com onda insuficiente e o desejo de oferecer mais chances para os filhos que surfam são os únicos motivos que o fazem se enxergar morando em outro lugar: “Vou para um lugar onde eu vou estar pelo surf, mas a gente de repente eu não poderia estar sentado aqui agora onde a gente está conversando, de boa.  É, o que falta aqui para mim é ter onda, cara. Amo esse lugar, aqui tem tudo. Eu viveria daqui. Tenho amigos aqui, como eu não tenho em nenhum outro lugar do mundo”.</p>
+                    
+                    ${createPhotoPlaceholder("Paulo no mar ou ensinando crianças")}
+
+                    <p>Hoje em dia, sua filha mais nova, Lays, de 8 anos, segue com maestria o caminho que o pai sonha. Com muito orgulho, ele contou que a criança já coleciona diversos troféus e já conseguiu patrocínio para surfar. Foi falando dela que ele chorou a segunda vez comigo, por volta dos 20 minutos da conversa: “Porra, ela tem uma consciência, cara, que você não faz ideia, cara, das coisas, de doação. Ela fala ‘Papai, a gente ganhou uma prancha nova, vamos doar essa outra?’”, falou o pai orgulhoso.</p>
+                    <p>Como diz o ditado popular “a fruta não cai longe do  pé”, e a  consciência de Lays veio do seu pai, que enxerga o esporte como um forte instrumento de transformação social. Atualmente, Paulo ajuda várias crianças carentes da região ensinando a surfar. “Hoje tenho um carrinho, graças a Deus, para ir para vários lugares pra onde eu levo várias crianças que eu ajudo, também de graça. Porque aqui não tem onda, então eu levo para fora. Levo para Búzios, levo para Itamambuca. Eu que cubro os gastos. Ninguém me ajuda com nada”. Ele aproveita a oportunidade para passar seus conhecimentos de vida, como coisas simples, por exemplo, ensinar a não jogar lixo pela janela do carro, e incentivar os estudos dessas crianças. “Eu vou ensinando as coisas, inclusive inglês. Dou aulas para ele de inglês, cara. Dentro do carro, vou ensinando uma coisa ou outra. Tá mal na escola? Então não vem surfar”.</p>
+                    <p>Com as diversas histórias que me relatou, percebi que Paulo é do tipo que não poupa esforços para fazer aquilo que acredita e salvar qualquer pessoa ou animal que precisa de ajuda. E, claro, que o surfe está presente nisso. “A gente (surfistas) já salvou muito mais gente se afogando do que os próprios bombeiros. Sabe? Surfista sempre teve um papel muito importante nessa área. A gente é muito respeitado por isso.”<br>Mas, como na vida, nem sempre as coisas acontecem como o esperado. O homem que já presenciou diversos salvamentos também vivenciou a morte de um aluno após um acidente no mar, um trauma que o acompanha até hoje. “Ele veio para a aula virado, chegou às 7 horas da manhã e foi tomar cerveja na praia. Naquele momento, não deveria ter deixado ele entrar, mas não me toquei, pensei: ‘pô, o cara é maior de idade, ele sabe o que faz da vida dele’. Ficou quase tetraplégico, ficou 40 dias internado e morreu. Quando eu vi que ele tava nessa situação, corri para cima dele, mas a maré carregou ele para longe. Outras pessoas chegaram nele antes de mim. A polícia me procurou, tive que dar depoimento, né? Porque houve uma morte”, contou, com um ar mais triste na voz, ao contrário do homem que me sempre pareceu animado e orgulhoso ao contar as histórias do surfe.<br>Vivendo boa parte da sua vida no mar, é lá que deseja continuar até depois de morrer, ao contar que deseja ter suas cinzas jogadas na Praia de Piratininga: “Eu posso estar morando lá no Rio, eu posso estar no Estados Unidos, eu vou mandar minha minhas  cinza , minha areia para ser jogada aqui. [...] Se não for caro, eu prefiro ser cremado, que faça uma fogueira aí mesmo. Ah, pode ser, juntar todas as minhas pranchas, né? Prancha   é bem inflamável. Quem sabe. E me põe lá no meio”, brincou o homem que faz do mar a sua vida e, um dia, deseja fazer nele sua despedida.</p>
+                `
+            },
+            'ricardo': {
+                title: "Ricardo da Costa Fonseca",
+                name: "Ricardo Fonseca",
+                subtitle: "1965 - 2021",
+                image: "https://images.unsplash.com/photo-1534234828563-025cda287a98?auto=format&fit=crop&q=80&w=1600",
+                snippet: "Era dia 22 de setembro de 1965, na Rua dos Corais lote e quadra 39, quando nasceu Ricardo da Costa Fonseca.",
+                content: `
+                    <p>Era dia 22 de setembro de 1965, na Rua dos Corais lote e quadra 39, quando nasceu Ricardo da Costa Fonseca. Todas as pessoas com quem  conversei, não se lembram do clima desse dia, nem mesmo o Google soube responder. Se fosse para deduzir, eu chutaria um dia de sol bem bonito, justamente por ser o dia que marca o início da primavera. Coincidência ou não, Ricardo era como um sol típico da estação que marca seu nascimento: iluminava e trazia acalento para todos ao seu redor, e disso posso falar com propriedade.</p>
+                    <p>Ricardo tinha cabelos brancos, olhos azuis e as marcas da idade já apareciam em sua pele. Ele foi o sexto filho de Magda Maria da Costa e Rubens da Fonseca e eu sempre cresci ouvindo sobre meu pai ter sido o mais levado e agitado entre os diversos filhos do casal. Rodeado de histórias, era impossível conhecer Ricardo e não conhecer Piratininga.  Por isso, quando penso nele, imediatamente sou levada a diversas paisagens da região que embalaram os seus 55 anos de vida.<br>Diferente de todos os perfis escritos para esse projeto, o do meu pai não vai ter falas diretas e atuais dele. Isso porque, no dia 14 de junho de 2021, ele partiu, sendo mais uma vítima da Pandemia do Covid-19. Mas sua relação com Piratininga sempre foi tão forte, que foi em um hospital próximo a lagoa que ele deu seu último suspiro de vida, finalizando lá um ciclo de muita luta, amor, alegria e sonhos.<br>Porque, se tem algo que meu pai foi, sem dúvidas, foi feliz. E, por causa dessa alegria, é que eu sigo aqui tentando sonhar. Esse trabalho é parte de um sonho que ele construiu lá trás quando, junto da minha mãe, sempre deixou muito claro pra mim e pro meu irmão o verdadeiro valor de um diploma universitário, e nunca poupou esforços para que isso acontecesse. Está acontecendo!<br>Com a ausência de recursos e brinquedos, ele sempre lembrava que sua infância humilde foi aproveitando o que Piratininga tinha para oferecer de graça: catar frutas, mergulhos no mar e na lagoa e muitas brincadeiras ao ar livre no local calmo e tranquilo. Com criação simples e com poucos cuidados,  meu pai começou andar apenas com 2 anos, mas frequentador assíduo da Lagoa, com essa mesma idade ele quase morreu afogado. “Fiquei roxo”, contava ele. E esse não foi o único dos afogamentos acontecidos durante os anos em que se aventurou em Piratininga. Mas a prática o fez aprender a nadar como ninguém. Lembro de estar na areia acompanhando suas braçadas na praia de Piratininga.  Certa vez, ele entrou nesse mesmo mar para salvar uma jovem enquanto não chegava o socorrista, revelando seu lado bondoso. “Tava chegando na areia e não soltava ela”, conta minha mãe, rindo e com ciúmes.<br>Seu pai, Rubens, era pedreiro e construiu quase todas as casas no Tibau, local em Piratininga, na época. Durante um período, Ricardo o ajudava na equipe. Ele sempre contava que seu pai, bruto, o chamava de burro, e ele não gostava muito de trabalhar com ele, mas foi graças a esse período que obteve conhecimentos e construiu nossa casa. Essa casa fica localizada em São Gonçalo. Este ano, faz dez anos que não moramos mais lá, ,mas a casa grande, de 3 quartos, um enorme quintal e terraço, sem dúvidas é a representação perfeita do homem que sempre lutou muito para oferecer o melhor do conforto à sua família.<br>Quando ele tinha  por volta  de  12 anos, teve que se mudar para Arsenal, São Gonçalo. Meu avô comprou uma casa lá, acredito que por ser maior e mais barata, e toda família se viu tendo que abandonar Piratininga. Mas Ricardo nunca se deu por satisfeito com essa condição. Se não houvesse um impedimento,  todos os seus finais de semana eram lá e, mesmo anos depois, já estabelecido em SG com a família que criou, sempre fazia questão de mencionar que seu sonho era voltar a viver  lá. E foi na tentativa de minimamente viver esse sonho que passamos lá tantos fins de semana, feriados,  carnavais e viradas do ano. Para escrever este perfil, mergulhei na caixa enorme de fotos antigas e reveladas que tenho em casa. A quantidade  de fotos revela um hábito antigo que não temos mais hoje em dia, que é ir para o bairro. Em quase todas as fotos da minha infância, Piratininga estava no plano de fundo.</p>
+                    
+                    ${createPhotoPlaceholder("Ricardo e a família na praia")}
+
+                    <p>Apesar de ter ido para São Gonçalo e lá ter conhecido a minha mãe, foi em uma pedra na praia Piratininga que aconteceu o pedido de casamento, pouco tempo depois de começarem a namorar. O casamento ocorreu em 5 de maio de 1990. Três anos depois, em 93, nasceu Caio. O filho mais velho do casal, que herdou o sorriso solto do meu pai, e era sua companhia para acordar aos domingos e assistir Fórmula 1  –  esporte que ele mais gostava. Era o som das corridas na televisão que me acordava todos os domingos.<br>Por falar em domingos, esse dia da semana até hoje é um dos mais difíceis, quando mais sinto sua ausência. Após as corridas, ele adorava colocar uma música e ir para a cozinha. Aos domingos, o almoço era com ele e quase sempre com receitas de frutos do mar. Fazer esses pratos foi um costume que herdou da época em que morava em Piratininga. Graças aos pescados da região, sempre foi um costume muito forte comer frutos do mar; não à toa, é meu cardápio favorito até hoje, mas nenhum se iguala ao dele. Com muito amor, ele cozinhava e a gente se reunia em volta da mesa. A tradição era tão forte que, mesmo depois de Caio ir morar sozinho, aos domingos ele retornava para almoçar com a gente. Meu pai não era um homem de falar muitas palavras de amor, mas sempre fazia questão de demonstrar seu sentimento por nós com gestos e ações, e cozinhar era um deles.<br>Lembro muito bem da época da escola: meu pai me acordava todo dia de manhã, já com a toalha na mão. Quando eu saía do banho, meu café já estava pronto e minhas frutas, cortadas. No caminho, íamos conversando, e na hora de ir embora ele me buscava novamente, sempre com carro cheio dando carona para meus amigos, que o adoravam. Ele levava eu, meu irmão e minha mãe para qualquer lugar e a qualquer hora. Seu maior objetivo era dar conforto para sua família, e isso posso afirmar que ele conseguiu. Até em momentos de dificuldades financeiras, ele nunca deixou isso chegar até mim.</p>
+                    <p>Em 2017, a gente se mudou para Itaipu, também na Região Oceânica de Niterói. Ainda não era Piratininga, mas era perto. Nos fins  de semana, quase todos os finais de tarde eram lá. Com o tempo, essa prática se estendeu também para os dias da semana.  Na pandemia, essa prática se tornou ainda mais comum. Quase todo dia era dia de Piratininga.  Sempre dentro do carro. Fico feliz de saber que ele pode conviver mais com o lugar que amava e me arrependo pelas vezes em que reclamava, querendo voltar para casa ou quando falava que não queria morar lá.  Hoje, faria tudo para passar um pouco mais de tempo com ele nesse lugar que aprendi a amar.</p>
+                    <p>Além disso, toda vez que íamos a Piratininga, eu reclamava porque ele sempre queria ir no Tibau e olhar a casa em que nasceu, casa essa também construída por meu avô. A primeira vez que Bernardo, meu namorado, foi lá em casa conhecer meus pais, ele também teve que ir conhecer a casa da Rua dos Corais que mapeou a infância do meu pai, como uma espécie de ritual para entrar na família.</p>
+                    <p>Dedicado à família, ele perdeu o pai cedo e, por ironia do destino, sempre brincava, com certo medo: “Será que vou morrer cedo igual ao meu pai?”. Rubens morreu aos 60 anos. Meu pai, aos 55.<br>Teimoso, ele logo quis retornar ao trabalho durante a pandemia.  Na época, era coordenador de uma equipe de representantes comerciais aqui no Rio. Ele não gostava de ficar parado, muito menos quieto em casa. Lembro das voltas que ele ficava dando no condomínio nesse período. Além disso, também estava preocupado com dinheiro, e procurava sempre formas de aumentar a renda, já que só ele trabalhava em casa. Além da ocupação principal, buscava produtos para assumir a representação comercial e, às vezes, voltava ao ofício de corretor imobiliário, que ele já havia exercido.  Ele não era homem de se acomodar, durante quase toda minha infância, ele trabalhou na Coca-Cola e lá conseguiu ir subindo de cargos. Depois disso, não me recordo de ter tido outros empregos tão duradouros.<br>E foi assim, retornando ao trabalho, que ele contraiu essa doença. Lá em casa, eu e minha mãe tínhamos todo o cuidado do mundo, mas ele era mais relapso. Lembro das brigas para ele usar a máscara de forma correta ou higienizar tudo ao chegar em casa. Por volta de um mês antes de ele pegar Covid, um dos seus melhores amigos morreu, e mesmo assim ele não levava a doença tão a sério. Lembro de uma fala minha que me corroeu de culpa por muito tempo: estávamos no carro, bem na saída do condomínio, e falei: “Você só vai levar a sério depois que alguém aqui de casa morrer (de Covid)”. Logo depois, ele acabou contraindo.<br>Era uma segunda-feira, 24 de maio de 2021. As coisas estavam começando a se normalizar  e encontrei meu namorado para ir ao cinema. As sessões do shopping Itaipu Multicenter ficavam tão vazias, que assistir filmes ali se tornou nosso único passeio na época. Após o filme, como de costume, meu pai foi me buscar, o que não sabíamos é que seria a última vez fazendo algo tão habitual para nós.</p>
+                    <p>Entrei no carro e ele pediu para a gente parar na farmácia  –  em Piratininga. Ele queria comprar vitamina C, pois já estava sentindo o corpo ruim. Dias depois, ele fez o teste. O resultado saiu em um sábado. Meu pai já estava isolado, dormindo no quarto ao lado do meu, que estava vazio depois que Caio saiu de casa. Fui fazer xixi pela  manhã e ele anunciou para mim num tom de voz mais alto e preocupado “Clara, estou com covid”.  Dias depois, ele precisou ser internado e, no dia em que veio a notícia da intubação, meu mundo desmoronou de vez.<br>Ele estava sem plano de saúde, justamente por causa do valor, mas mesmo assim continuava pagando o meu e o da minha mãe. Ele sempre abdicou das coisas dele para fazer por nós. Por conta disso, foi para um hospital público, Mário Monteiro, em Piratininga, e depois acabou sendo transferido para o hospital de campanha que havia em Niterói, também na região. A última vez que o vi foi nesse dia 3 de junho de 2021, entrando na ambulância e indo para o segundo hospital.<br>Dia 14 de junho de 2021. Seria meu primeiro dia de aula da faculdade de Jornalismo. O celular do meu irmão tocou bem cedo e ali já entendi o que estava acontecendo: meu pai tinha morrido. O médico disse pro meu irmão que ele lutou muito para viver.</p>
+                    <p>Também no dia 14, eu soube que antes de ser entubado, muito preocupado com a  família, meu pai deixou uma carta para meu irmão. Mesmo com toda dificuldade de respirar e com as limitações que a doença tinha causado, ele teve forças para escrever e pedir que ele cuidasse da gente e deixar instruções  sobre dinheiro e pagamentos que deveria receber. Seu último ato consciente em vida foi fazer aquilo que ele sempre fez por nós: demonstrar cuidado e preocupação. Assim, nove dias após a escrita da carta, ele se foi. Encerrou  seu ciclo de vida perto da lagoa que norteou seu nascimento. Ricardo morreu no lugar que mais amava.</p>
+                `
+            }
+        };
+
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Populate Grid
+        const grid = document.getElementById('profiles-grid');
+        
+        Object.keys(profilesData).forEach(key => {
+            if(key === 'ricardo') return; // Skip Ricardo as he has a special card
+
+            const profile = profilesData[key];
+            const card = document.createElement('div');
+            card.className = 'group bg-white rounded-sm shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 fade-in cursor-pointer border border-gray-100';
+            card.onclick = () => openProfile(key);
+            
+            // Only show subtitle if it exists (not empty)
+            const subtitleHtml = profile.subtitle ? `<p class="text-gray-500 text-sm italic mb-4">${profile.subtitle}</p>` : '';
+            
+            card.innerHTML = `
+                <div class="h-64 overflow-hidden relative">
+                    <div class="absolute inset-0 bg-ocean/10 group-hover:bg-transparent transition-colors z-10"></div>
+                    <img src="${profile.image}" alt="${profile.name}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                </div>
+                <div class="p-8">
+                    <span class="text-xs font-bold text-ocean tracking-widest uppercase mb-3 block">Perfil</span>
+                    <h3 class="font-display text-2xl text-deep font-bold mb-2 group-hover:text-ocean transition-colors">${profile.name}</h3>
+                    <p class="font-sans text-base text-gray-500 italic mb-4 leading-relaxed">${profile.title}</p>
+                    ${subtitleHtml}
+                    <p class="text-gray-600 leading-relaxed line-clamp-3 text-sm border-t border-gray-100 pt-4 mt-4">${profile.snippet}</p>
+                    <div class="mt-6 flex items-center text-deep font-bold text-xs uppercase tracking-widest group-hover:translate-x-2 transition-transform">
+                        Ler História <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+                    </div>
+                </div>
+            `;
+            grid.appendChild(card);
+            lucide.createIcons();
+        });
+
+        // Reading Mode Logic
+        function openProfile(key) {
+            const data = profilesData[key];
+            const modal = document.getElementById('reading-view');
+            
+            document.getElementById('article-image').src = data.image;
+            document.getElementById('article-title').innerText = data.title; // Using Title as main Headline
+            document.getElementById('article-subtitle').innerText = data.name; // Using Name as subtitle
+            document.getElementById('article-body').innerHTML = data.content;
+            
+            modal.classList.remove('hidden');
+            // Small delay to allow display:block to apply before transform
+            setTimeout(() => {
+                modal.classList.remove('translate-y-full');
+            }, 10);
+            
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeProfile() {
+            const modal = document.getElementById('reading-view');
+            modal.classList.add('translate-y-full');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 500);
+            document.body.style.overflow = 'auto';
+        }
+
+        // Navigation Logic
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            const offset = 80;
+            const bodyRect = document.body.getBoundingClientRect().top;
+            const elementRect = el.getBoundingClientRect().top;
+            const elementPosition = elementRect - bodyRect;
+            const offsetPosition = elementPosition - offset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+            
+            // Close mobile menu if open
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+
+        function goHome() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Scroll Animation Observer
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+
+        // Scroll Progress Bar
+        const readingView = document.getElementById('reading-view');
+        readingView.addEventListener('scroll', () => {
+            const winScroll = readingView.scrollTop;
+            const height = readingView.scrollHeight - readingView.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("scroll-progress").style.width = scrolled + "%";
+        });
+
+        // Navbar Transition on Scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-lg');
+            } else {
+                nav.classList.remove('shadow-lg');
+            }
+        });
+
+    </script>
+</body>
 </html>
