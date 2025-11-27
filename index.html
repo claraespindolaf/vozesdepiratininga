@@ -55,7 +55,7 @@
 
         .hero-pattern {
             background-color: #0f4c75;
-            /* Alterado para usar a imagem local capa-site.jpg */
+            /* Alterado para capa.jpg conforme solicitado */
             background-image: url("./img/capa.jpg");
             background-size: cover;
             background-position: center;
@@ -156,23 +156,24 @@
         <!-- Apresentação Section -->
         <section id="apresentacao" class="py-24 bg-white">
             <div class="max-w-4xl mx-auto px-6 md:px-12">
-                <!-- Layout simplificado para texto corrido (sem colunas) -->
                 <div class="fade-in">
                     <span class="text-ocean font-bold tracking-widest uppercase text-xs mb-3 block">Apresentação</span>
-                    <h2 class="font-display text-4xl text-deep font-bold mb-6 leading-tight">O Projeto</h2>
+                    <h2 class="font-display text-4xl text-deep font-bold mb-8 leading-tight">O Projeto</h2>
                     
-                    <p class="text-gray-600 leading-relaxed text-base mb-4 text-justify">
-                        Todas as pessoas são atravessadas por histórias, sejam elas boas ou ruins, e são essas histórias que guiam o meu projeto. Esse site tem como foco apresentar meu Trabalho de Conclusão de Curso. Vozes de Piratininga: Perfis de Gente Comum e Apaixonada é um produto jornalístico digital que reúne sete textos do gênero perfil, de moradores apaixonados por Piratininga, sendo um deles do meu pai, que faleceu no meu primeiro dia de aula na Faculdade de Jornalismo.
-                    </p>
-                    <p class="text-gray-600 leading-relaxed text-base mb-4 text-justify">
-                        Piratininga é um bairro localizado na Região Oceânica de Niterói, Rio de Janeiro. A escolha dessa região para delimitar este trabalho surgiu a partir de um questionamento existente desde que comecei a pensar no meu TCC: como homenagear meu pai, a partir da relação afetiva dele com Piratininga? Meu pai nasceu, cresceu e morreu neste bairro. E, a partir desse querer,  surgiu uma ideia ainda melhor e mais abrangente para honrar não somente a memória dele ele, mas também a de Piratininga: reunir outras pessoas que, assim como ele, são apaixonadas por esse lugar, e dar a esse pessoal uma visibilidade que, muitas vezes, não está presente  no jornalismo factual atual.
-                    </p>
-                    <p class="text-gray-600 leading-relaxed text-base mb-4 text-justify">
-                        Ao reunir essas pessoas de uma região delimitada e trazer relatos pessoais, criados a base de observação e de uma escuta cuidadosa e atenta, esse projeto se torna um grande instrumento para, através do jornalismo, fortalecer a construção de uma memória local para esse grupo de pessoas de Piratininga.
-                    </p>
-                    <p class="text-gray-600 leading-relaxed text-base text-justify">
-                        Para além do caráter jornalístico e social, esse projeto também traz uma importante contribuição afetiva para mim, uma vez que resgata a memória do meu pai e aprofunda o meu vínculo/relação com o local que ele mais amava.
-                    </p>
+                    <div class="prose prose-lg text-gray-600 text-justify max-w-none">
+                        <p class="mb-6 leading-relaxed">
+                            Todas as pessoas são atravessadas por histórias, sejam elas boas ou ruins, e são essas histórias que guiam o meu projeto. Esse site tem como foco apresentar meu Trabalho de Conclusão de Curso. Vozes de Piratininga: Perfis de Gente Comum e Apaixonada é um produto jornalístico digital que reúne sete textos do gênero perfil, de moradores apaixonados por Piratininga, sendo um deles do meu pai, que faleceu no meu primeiro dia de aula na Faculdade de Jornalismo.
+                        </p>
+                        <p class="mb-6 leading-relaxed">
+                            Piratininga é um bairro localizado na Região Oceânica de Niterói, Rio de Janeiro. A escolha dessa região para delimitar este trabalho surgiu a partir de um questionamento existente desde que comecei a pensar no meu TCC: como homenagear meu pai, a partir da relação afetiva dele com Piratininga? Meu pai nasceu, cresceu e morreu neste bairro. E, a partir desse querer,  surgiu uma ideia ainda melhor e mais abrangente para honrar não somente a memória dele ele, mas também a de Piratininga: reunir outras pessoas que, assim como ele, são apaixonadas por esse lugar, e dar a esse pessoal uma visibilidade que, muitas vezes, não está presente  no jornalismo factual atual.
+                        </p>
+                        <p class="mb-6 leading-relaxed">
+                            Ao reunir essas pessoas de uma região delimitada e trazer relatos pessoais, criados a base de observação e de uma escuta cuidadosa e atenta, esse projeto se torna um grande instrumento para, através do jornalismo, fortalecer a construção de uma memória local para esse grupo de pessoas de Piratininga.
+                        </p>
+                        <p class="leading-relaxed">
+                            Para além do caráter jornalístico e social, esse projeto também traz uma importante contribuição afetiva para mim, uma vez que resgata a memória do meu pai e aprofunda o meu vínculo/relação com o local que ele mais amava.
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -194,20 +195,24 @@
                     <!-- Cards will be injected by JS -->
                 </div>
                 
-                <!-- Ricardo's Special Card -->
+                <!-- Ricardo's Special Card (Revised Layout) -->
                 <div class="mt-12 fade-in">
-                    <div onclick="openProfile('ricardo')" class="cursor-pointer group relative h-96 rounded-sm overflow-hidden shadow-xl">
-                        <!-- FOTO: capa-ricardo.jpg -->
-                        <!-- Adicionado 'object-top' para evitar cortar a cabeça na foto -->
-                        <img src="./img/capa-ricardo.jpg" onerror="this.src='https://images.unsplash.com/photo-1534234828563-025cda287a98?auto=format&fit=crop&q=80&w=1600'" alt="Homenagem Ricardo" class="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105 filter grayscale">
-                        <div class="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-colors"></div>
-                        <div class="absolute bottom-0 left-0 p-8 md:p-12 w-full">
-                            <span class="inline-block px-3 py-1 mb-4 text-xs font-bold tracking-wider text-deep uppercase bg-white rounded-sm">In Memoriam</span>
-                            <h3 class="font-display text-3xl md:text-5xl text-white mb-2 font-bold">Ricardo da Costa Fonseca</h3>
-                            <p class="text-gray-300 text-lg font-light">1965 - 2021</p>
-                            <div class="mt-6 flex items-center text-white font-bold group-hover:translate-x-2 transition-all">
-                                <span class="uppercase tracking-widest text-sm mr-2">Ler Homenagem</span>
-                                <i data-lucide="arrow-right"></i>
+                    <div onclick="openProfile('ricardo')" class="cursor-pointer group bg-white rounded-sm overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100">
+                        <div class="flex flex-col md:flex-row h-auto md:h-[450px]">
+                            <!-- Foto Lateral (Esquerda) - Sem cortes no rosto -->
+                            <div class="w-full md:w-1/2 h-80 md:h-full relative overflow-hidden">
+                                <img src="./img/capa-ricardo.jpg" onerror="this.src='https://images.unsplash.com/photo-1534234828563-025cda287a98?auto=format&fit=crop&q=80&w=1600'" alt="Homenagem Ricardo" class="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105 filter grayscale">
+                                <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+                            </div>
+                            
+                            <!-- Conteúdo (Direita) -->
+                            <div class="w-full md:w-1/2 p-10 md:p-14 flex flex-col justify-center bg-white">
+                                <span class="inline-block self-start px-3 py-1 mb-6 text-xs font-bold tracking-wider text-white uppercase bg-deep rounded-sm">In Memoriam</span>
+                                <h3 class="font-display text-4xl md:text-5xl text-deep mb-4 font-bold leading-tight group-hover:text-ocean transition-colors">Ricardo da Costa Fonseca</h3>
+                                <p class="text-gray-400 text-xl font-light mb-8 border-l-4 border-ocean pl-4">1965 - 2021</p>
+                                <div class="mt-auto flex items-center text-ocean font-bold uppercase tracking-widest text-sm group-hover:translate-x-2 transition-transform">
+                                    Ler Homenagem <i data-lucide="arrow-right" class="ml-2"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -315,7 +320,7 @@
         const profilesData = {
             'ze': {
                 title: "O homem da cervejinha na varanda",
-                name: "José",
+                name: "José", // Alterado de Zé para José
                 subtitle: "",
                 image: "./img/capa-ze.jpg",
                 snippet: "“Quatro cervejas. Sozinho”. É assim que José Luiz da Costa, mais conhecido como Zé, descreve um dos seus melhores e mais comuns momentos de prazer da vida atual.",
@@ -384,6 +389,9 @@
                    <p>A primeira pergunta que fiz foi sobre sua relação com Piratininga e a resposta foi dita de forma bem direta e com muita convicção: “Amor. Muito amor! Amo esse lugar aqui”. Nascida e criada no Sul da Bahia, Maricelia Santos Barbosa conheceu o local que tanto ama aos 16 anos. No final de 1992. Tudo começou com uma viagem despretensiosa de Carnaval com os amigos da época que já moravam em Piratininga. Saíram da Bahia de carro em direção a Camboinhas, local vizinho a Piratininga. “Cheguei (no Rio) já recebi proposta de trabalho. Aí foi fluindo, eu fui ficando, me encantei, porque quando eu conheci o Rio em si eu não gostei, muito calor. Mas me encantei por Piratininga”.</p>
                    <p>Ao seu lado durante todo tempo, estava Val, uma amiga. E foi para ela que em vários momentos a mulher direcionou falas, criando um clima bem descontraído e dando a ela  liberdade para participar da conversa. “A primeira vez que eu vim aqui, nesse quiosque, eu virei e falei: ‘Esse que eu acho que um dia vai ser meu’. A minha irmã olhou para minha cara e riu”. Perguntei como ela conseguiu realizar esse sonho e a resposta veio através de uma história de anos atrás:</p>
                    <p>“Cara, trabalhando muito mesmo. Eu trabalhava em uma empresa, mas em um final de semana de sol não lembro o ano, acabou toda a água na praia. Nenhum quiosque, camelô ou barraqueiro tinha água. Os poucos que conseguiram estavam vendendo na época por cinco reais, um absurdo. Aí falei: ‘Caraca, a fonte é aqui'. Entrei de férias na empresa, fui no Largo da Batalha, comprei um isopor, uma caixa de cada coisa e uma churrasqueira. Fiz um monte de espetos de carne, comprei peixe, assei na brasa e minha barraca bombou. Mas eu só tinha um isopor e uma mesa emprestada. Aí fui indo, mas já corri muito de SEOP, fiscalização da prefeitura. Antigamente dava pra vender peixe frito na praia, mas quando a prefeitura vinha, a gente saía correndo com o isopor de bebida e tacho de óleo quente. Fui indo, juntando dinheiro, e foi assim que comecei”, contou.<br>Hoje em dia, Maricelia possui formação em Gastronomia e mora no Tibau, região localizada no canto direito da praia, próxima à lagoa. “Canto maravilhoso aqui de Piratininga, bairro fechado. Maravilhoso. Onde todo mundo conhece todo mundo”, definiu. “Muita gente fala: ‘Ah, eu odeio o Tibau, só tem gente fofoqueira, não sei o que’. Eu falei: ‘Gente, eu não faço nada ilícito, nada ilegal, nada’. Eu amo o Tibau. Toma conta da minha vida aqui? Que ótimo, porque eu mesma não tenho tempo para tomar conta. [...] A qualidade de vida é muito boa, muito boa, muito boa mesmo, as pessoas ainda se conhecem, se cumprimentam: bom dia, boa tarde. O dia que eu não abro o quiosque, as pessoas  me liga  para saber o que que houve.”<br>“Então, você acredita que ter vindo para Piratininga foi a melhor coisa que te aconteceu?”, perguntei.<br>“A melhor coisa da minha vida, uma das melhores, porque eu amo esse lugar!”, respondeu e em seguida comentou também que nunca sairia de Piratininga, nem para ir para a Bahia, onde até hoje tem uma casa.</p>
+                   
+                   ${createPhoto("maricelia-tibau.jpg", "Vista do Tibau ou arredores")}
+
                    <p>Mas a vida nem sempre foi tão simples assim para ela. Com família muito rígida, aos 14 anos saiu escondida para uma festa, querendo curtir um pouco. Mas a menina que esperava um castigo convencional, teve como punição aceitar um casamento forçado, “mesmo sem ter feito nada”. Com 15, se casou no dia 10 de outubro de 1977 e, menos de um ano depois, nasceu sua primeira filha. “ Eu era só uma menina, né? Ultrapassei um monte de etapa da minha vida ”, relembrou, como se estivesse desabafando em uma conversa entre amigos.</p>
                    <p>Criada pelos avós fazendeiros, são eles que Maricelia considera como pais. “A minha mãe (biológica) é como se fosse uma irmã. Eu não tenho como mãe. Meus pais já morreram para mim, na minha cabeça. Mas eu sempre tive contato com a minha mãe e com o meu pai. São meus genitores, mas afinidade mesmo…” Ela contou também que mesmo com a infância simples no interior, todos seus irmãos estão bem de vida. “Tem um que tem uma empresa de Construção Civil em São Paulo. Um outro é engenheiro, topógrafo [...] eu que puxei o bonde, tá? Depois que fui embora, todo mundo foi”. Apesar disso, relembrou comparações que teve que passar: “Minha mãe ficava jogando minha cara: ‘tua irmã tem dois diplomas, fez isso, fez não sei que lá, fez mestrado disso, mestrado daquilo.’ Eu ficava quieta, mas outro dia eu falei: ‘engraçado, outro dia ela me pediu 200 reais’. Essa comparação me motivou ainda mais a crescer”.</p>
                    <p>Durante o tempo em que estive no quiosque com ela, percebi que a todo momento Maricelia era solicitada, seja para cuidar de algum dos netos que estavam ao redor, brincando e aprontando, ou por alguma funcionária que vinha tirar dúvidas sobre o trabalho: “Onde tá aquela mulher ali sentada, ali, ó, que botou a mão na mesa agora?”, perguntou a jovem que trabalha no quiosque. O controle dos pedidos é feito em um caderno, tudo à mão e à caneta ainda. As crianças também já rabiscaram o caderno, ela me mostra: “Olha o que as crianças fizeram, rabiscaram tudo!”, além disso, toda hora passava alguém e a cumprimentava.<br>“ Você tem uma relação com os clientes, né?”, eu quis saber.<br>“Ah, a maioria, né? Vira amigo”, disse, orgulhosa.<br>Em certo momento, ela falou sobre legado e foi aí que aproveitei para perguntar qual ela desejaria deixar.  “O meu legado? Cara, o meu orgulho de mim mesmo, porque eu dei uma boa criação para meus filhos. Hoje todo mundo tá bem, graças a Deus. Todo mundo tem suas próprias vidas. Você não pode ter egoísmo. Eu poderia ter vivido mais, ter aproveitado muito mais a minha vida, ter viajado, feito várias coisas. Mas eu tinha a minha preferência, o meu foco estava nos meus filhos, numa coisa melhor para os meus filhos”.</p>
