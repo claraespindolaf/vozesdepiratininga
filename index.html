@@ -56,7 +56,7 @@
         .hero-pattern {
             background-color: #0f4c75;
             /* Alterado para usar a imagem local capa-site.jpg */
-            background-image: url("./img/capa.jpg");
+            background-image: url("./img/capa-site.jpg");
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -205,7 +205,8 @@
                 <div class="mt-12 fade-in">
                     <div onclick="openProfile('ricardo')" class="cursor-pointer group relative h-96 rounded-sm overflow-hidden shadow-xl">
                         <!-- FOTO: capa-ricardo.jpg -->
-                        <img src="./img/capa-ricardo.jpg" onerror="this.src='https://images.unsplash.com/photo-1534234828563-025cda287a98?auto=format&fit=crop&q=80&w=1600'" alt="Homenagem Ricardo" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter grayscale">
+                        <!-- Adicionado 'object-top' para evitar cortar a cabeça na foto -->
+                        <img src="./img/capa-ricardo.jpg" onerror="this.src='https://images.unsplash.com/photo-1534234828563-025cda287a98?auto=format&fit=crop&q=80&w=1600'" alt="Homenagem Ricardo" class="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105 filter grayscale">
                         <div class="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-colors"></div>
                         <div class="absolute bottom-0 left-0 p-8 md:p-12 w-full">
                             <span class="inline-block px-3 py-1 mb-4 text-xs font-bold tracking-wider text-deep uppercase bg-white rounded-sm">In Memoriam</span>
@@ -321,7 +322,7 @@
         const profilesData = {
             'ze': {
                 title: "O homem da cervejinha na varanda",
-                name: "José",
+                name: "Zé",
                 subtitle: "",
                 image: "./img/capa-ze.jpg",
                 snippet: "“Quatro cervejas. Sozinho”. É assim que José Luiz da Costa, mais conhecido como Zé, descreve um dos seus melhores e mais comuns momentos de prazer da vida atual.",
