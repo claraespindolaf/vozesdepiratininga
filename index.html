@@ -55,7 +55,6 @@
 
         .hero-pattern {
             background-color: #0f4c75;
-            /* Alterado para capa.jpg conforme solicitado */
             background-image: url("./img/capa.jpg");
             background-size: cover;
             background-position: center;
@@ -74,7 +73,7 @@
 
         /* Estilo para as Fotos no Texto */
         .article-figure {
-            margin: 2.5rem 0;
+            margin: 3rem 0; /* Mais espaço ao redor da foto */
             background-color: #f8fafc;
             border-radius: 0.5rem;
             overflow: hidden;
@@ -97,6 +96,11 @@
             font-style: italic;
             border-top: 1px solid #e2e8f0;
             background-color: #fff;
+        }
+
+        /* Espaçamento forçado entre parágrafos do artigo */
+        #article-body p {
+            margin-bottom: 2rem; /* Espaço generoso entre parágrafos */
         }
     </style>
 </head>
@@ -195,11 +199,11 @@
                     <!-- Cards will be injected by JS -->
                 </div>
                 
-                <!-- Ricardo's Special Card (Revised Layout) -->
+                <!-- Ricardo's Special Card -->
                 <div class="mt-12 fade-in">
                     <div onclick="openProfile('ricardo')" class="cursor-pointer group bg-white rounded-sm overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100">
                         <div class="flex flex-col md:flex-row h-auto md:h-[450px]">
-                            <!-- Foto Lateral (Esquerda) - Sem cortes no rosto -->
+                            <!-- Foto Lateral (Esquerda) -->
                             <div class="w-full md:w-1/2 h-80 md:h-full relative overflow-hidden">
                                 <img src="./img/capa-ricardo.jpg" onerror="this.src='https://images.unsplash.com/photo-1534234828563-025cda287a98?auto=format&fit=crop&q=80&w=1600'" alt="Homenagem Ricardo" class="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105 filter grayscale">
                                 <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
@@ -316,11 +320,11 @@
             `;
         }
 
-        // Dados dos Perfis com os caminhos exatos das imagens
+        // Dados dos Perfis
         const profilesData = {
             'ze': {
                 title: "O homem da cervejinha na varanda",
-                name: "José", // Alterado de Zé para José
+                name: "José",
                 subtitle: "",
                 image: "./img/capa-ze.jpg",
                 snippet: "“Quatro cervejas. Sozinho”. É assim que José Luiz da Costa, mais conhecido como Zé, descreve um dos seus melhores e mais comuns momentos de prazer da vida atual.",
@@ -332,14 +336,9 @@
                     <p>Passado o tempo de farra com os amigos na lagoa, aos 18 anos, se alistou e serviu no Exército por um ano e seis meses. Deixou bem claro que não gostava e não queria seguir a carreira: “Não (quis) Tanto que, pô,  para mim  sair daquela porcaria, foi mano… Os caras queriam que eu ficasse de qualquer maneira” e foi nesse momento que ele descobriu sua verdadeira vocação no ofício que segue até hoje, mesmo depois de ter se aposentado: eletricista. Apesar do curso eletrotécnico, foi na prática que ele realmente aperfeiçoou os conhecimentos na área “É, eu aprendi. Aprendi trabalhando”, e aprender sempre foi prazeroso. Não à toa, quando menino, Zé assumiu uma atividade que muitas crianças não conseguiriam entender: Ele estudava duas vezes em um mesmo dia.</p>
                     <p>“Eu estudava de dia e estudava à noite nessa época.”<br>“Ué, de manhã e à noite?”<br>“É. Estudava de manhã em Jurujuba e à noite trabalhava e estudava no Imbuí.”<br>“Por que dois colégios?”<br>“É porque acho que eu sei lá, fazia alguma coisa, eu gostava de estudar.”</p>
                     
-                    ${createPhoto("ze-trabalho.jpg", "Zé trabalhando ou foto antiga de Piratininga")}
-
                     <p>Palco de muitas aventuras e lembranças de sua vida, foi em Piratininga que conheceu as mães de seus dois filhos, Gustavo e Alexandre. Zé está até hoje com Silvina, mais conhecida pelo apelido de “Nega”  –  seu primeiro beijo e primeira namorada. Após um relacionamento de dois anos, eles se separaram.  Foi quando conheceu a mãe do seu primeiro filho, Xande, de 44 anos  –  uma Capixaba que foi parar em Piratinha após a morte do seu pai. Foi com o fim desse romance, que logo Nega retornou a sua vida, tiveram Gustavo e estão juntos até hoje. Posso afirmar que logo fica claro para todos que eles são o exemplo perfeito do ditado ‘os opostos se atraem’, já que o homem demonstra ser muito calmo e de pouco falar, enquanto a esposa é agitada e muito comunicativa.</p>
                     <p>Avô de uma menina de sete anos, ele contou que tem contato com a neta, mas não muito, já que ela mora em São Paulo. Ele afirmou não ser “coruja”, mas não elaborou muito, porque, nesse momento, nossa conversa foi interrompida por uma ligação: na varanda de sua casa, a todo momento seu celular tocava. Era uma moradora da praia de Piratininga que solicitava um de seus serviços elétricos emergenciais para o quadro de luz de sua casa, mas ele não queria ir. Recusou quase todas as ligações. Respondia no Whatsapp, mas mentia sobre o motivo de não poder ir. Ele apenas não queria ir. Aos 66 anos, ele pode se dar o luxo de escolher descansar um pouco mais. Apesar de aposentado, ainda trabalha dois dias na semana prestando serviços para complementar a renda familiar e lembrou dos tempos antigos. “Já trabalhei muito. Em 10 anos de Ampla (empresa), acho que nunca fiquei um feriado ou sábado em casa. E não tinha esse negócio não, de dizer que ‘ah, não dá para  mim vir  não’.”</p>
                     <p>Quando perguntei se já bebeu muito na vida, o homem tranquilo surpreendeu ao pôr mais ênfase na voz: “Puta que pariu. Nega ja passou muito sufoco comigo, porra…[...] Eu saía às cinco horas da manhã para trabalhar, só chegava às onze e meia da noite”. Engraçado que, minutos depois, sua esposa chega na conversa e, ao retornar o assunto, ela traz seu lado da história:  “Olha, Zé … ele saía cinco horas da manhã de casa, chegava duas horas da manhã em casa.” Uma diferença de duas horas e trinta minutos. Seja lá qual for o lado mais verdadeiro dessa conversa, o importante é que os dois concordaram que Zé parou com esse hábito após o nascimento de Gustavo, seu segundo filho.  “Tem  vez  que eu bebo só sábado. Quatro cervejas. Sozinho. Vamos dizer, eu compro quatro sábado. Às vezes eu bebo quatro, às vezes eu bebo três. Eu não bebo domingo”. E ai de quem oferecer algo que não seja sua tradicional cervejinha: “Não gosto de vinho. Só bebo cerveja. Eu nunca gostei de nada de mistura assim. Eu já bebi muita vodka”, revelou.</p>
-                    
-                    ${createPhoto("ze-esposa.jpg", "Zé e sua esposa ou um momento de lazer")}
-
                     <p>O filho de pescador que revelou não gostar de pescar, é um homem simples, de poucas palavras, mas feliz com convicção. Feliz com a vida que leva ao lado da sua esposa. Feliz com a calmaria que só a idade e a maturidade podem proporcionar. E agora, aos 66 anos, é feliz de poder passar o tempo no lugar que tanto ama. Seja bebendo sozinho em um sábado ou compartilhando um almoço farto como o casal gosta de fazer na varanda humilde e cheia de amor.</p>
                 `
             },
@@ -389,9 +388,6 @@
                    <p>A primeira pergunta que fiz foi sobre sua relação com Piratininga e a resposta foi dita de forma bem direta e com muita convicção: “Amor. Muito amor! Amo esse lugar aqui”. Nascida e criada no Sul da Bahia, Maricelia Santos Barbosa conheceu o local que tanto ama aos 16 anos. No final de 1992. Tudo começou com uma viagem despretensiosa de Carnaval com os amigos da época que já moravam em Piratininga. Saíram da Bahia de carro em direção a Camboinhas, local vizinho a Piratininga. “Cheguei (no Rio) já recebi proposta de trabalho. Aí foi fluindo, eu fui ficando, me encantei, porque quando eu conheci o Rio em si eu não gostei, muito calor. Mas me encantei por Piratininga”.</p>
                    <p>Ao seu lado durante todo tempo, estava Val, uma amiga. E foi para ela que em vários momentos a mulher direcionou falas, criando um clima bem descontraído e dando a ela  liberdade para participar da conversa. “A primeira vez que eu vim aqui, nesse quiosque, eu virei e falei: ‘Esse que eu acho que um dia vai ser meu’. A minha irmã olhou para minha cara e riu”. Perguntei como ela conseguiu realizar esse sonho e a resposta veio através de uma história de anos atrás:</p>
                    <p>“Cara, trabalhando muito mesmo. Eu trabalhava em uma empresa, mas em um final de semana de sol não lembro o ano, acabou toda a água na praia. Nenhum quiosque, camelô ou barraqueiro tinha água. Os poucos que conseguiram estavam vendendo na época por cinco reais, um absurdo. Aí falei: ‘Caraca, a fonte é aqui'. Entrei de férias na empresa, fui no Largo da Batalha, comprei um isopor, uma caixa de cada coisa e uma churrasqueira. Fiz um monte de espetos de carne, comprei peixe, assei na brasa e minha barraca bombou. Mas eu só tinha um isopor e uma mesa emprestada. Aí fui indo, mas já corri muito de SEOP, fiscalização da prefeitura. Antigamente dava pra vender peixe frito na praia, mas quando a prefeitura vinha, a gente saía correndo com o isopor de bebida e tacho de óleo quente. Fui indo, juntando dinheiro, e foi assim que comecei”, contou.<br>Hoje em dia, Maricelia possui formação em Gastronomia e mora no Tibau, região localizada no canto direito da praia, próxima à lagoa. “Canto maravilhoso aqui de Piratininga, bairro fechado. Maravilhoso. Onde todo mundo conhece todo mundo”, definiu. “Muita gente fala: ‘Ah, eu odeio o Tibau, só tem gente fofoqueira, não sei o que’. Eu falei: ‘Gente, eu não faço nada ilícito, nada ilegal, nada’. Eu amo o Tibau. Toma conta da minha vida aqui? Que ótimo, porque eu mesma não tenho tempo para tomar conta. [...] A qualidade de vida é muito boa, muito boa, muito boa mesmo, as pessoas ainda se conhecem, se cumprimentam: bom dia, boa tarde. O dia que eu não abro o quiosque, as pessoas  me liga  para saber o que que houve.”<br>“Então, você acredita que ter vindo para Piratininga foi a melhor coisa que te aconteceu?”, perguntei.<br>“A melhor coisa da minha vida, uma das melhores, porque eu amo esse lugar!”, respondeu e em seguida comentou também que nunca sairia de Piratininga, nem para ir para a Bahia, onde até hoje tem uma casa.</p>
-                   
-                   ${createPhoto("maricelia-tibau.jpg", "Vista do Tibau ou arredores")}
-
                    <p>Mas a vida nem sempre foi tão simples assim para ela. Com família muito rígida, aos 14 anos saiu escondida para uma festa, querendo curtir um pouco. Mas a menina que esperava um castigo convencional, teve como punição aceitar um casamento forçado, “mesmo sem ter feito nada”. Com 15, se casou no dia 10 de outubro de 1977 e, menos de um ano depois, nasceu sua primeira filha. “ Eu era só uma menina, né? Ultrapassei um monte de etapa da minha vida ”, relembrou, como se estivesse desabafando em uma conversa entre amigos.</p>
                    <p>Criada pelos avós fazendeiros, são eles que Maricelia considera como pais. “A minha mãe (biológica) é como se fosse uma irmã. Eu não tenho como mãe. Meus pais já morreram para mim, na minha cabeça. Mas eu sempre tive contato com a minha mãe e com o meu pai. São meus genitores, mas afinidade mesmo…” Ela contou também que mesmo com a infância simples no interior, todos seus irmãos estão bem de vida. “Tem um que tem uma empresa de Construção Civil em São Paulo. Um outro é engenheiro, topógrafo [...] eu que puxei o bonde, tá? Depois que fui embora, todo mundo foi”. Apesar disso, relembrou comparações que teve que passar: “Minha mãe ficava jogando minha cara: ‘tua irmã tem dois diplomas, fez isso, fez não sei que lá, fez mestrado disso, mestrado daquilo.’ Eu ficava quieta, mas outro dia eu falei: ‘engraçado, outro dia ela me pediu 200 reais’. Essa comparação me motivou ainda mais a crescer”.</p>
                    <p>Durante o tempo em que estive no quiosque com ela, percebi que a todo momento Maricelia era solicitada, seja para cuidar de algum dos netos que estavam ao redor, brincando e aprontando, ou por alguma funcionária que vinha tirar dúvidas sobre o trabalho: “Onde tá aquela mulher ali sentada, ali, ó, que botou a mão na mesa agora?”, perguntou a jovem que trabalha no quiosque. O controle dos pedidos é feito em um caderno, tudo à mão e à caneta ainda. As crianças também já rabiscaram o caderno, ela me mostra: “Olha o que as crianças fizeram, rabiscaram tudo!”, além disso, toda hora passava alguém e a cumprimentava.<br>“ Você tem uma relação com os clientes, né?”, eu quis saber.<br>“Ah, a maioria, né? Vira amigo”, disse, orgulhosa.<br>Em certo momento, ela falou sobre legado e foi aí que aproveitei para perguntar qual ela desejaria deixar.  “O meu legado? Cara, o meu orgulho de mim mesmo, porque eu dei uma boa criação para meus filhos. Hoje todo mundo tá bem, graças a Deus. Todo mundo tem suas próprias vidas. Você não pode ter egoísmo. Eu poderia ter vivido mais, ter aproveitado muito mais a minha vida, ter viajado, feito várias coisas. Mas eu tinha a minha preferência, o meu foco estava nos meus filhos, numa coisa melhor para os meus filhos”.</p>
@@ -409,10 +405,10 @@
                 snippet: "“Eu sou o único Selmo da região”. Essa foi uma das primeiras falas do homem para mim.",
                 content: `
                     <p>“Eu sou o único Selmo da região.” Essa foi uma das primeiras falas do homem para mim. Vestindo um casaco preto, boné tampando seus cabelos brancos quase inexistentes, apesar do seus mais de 60 anos, e calçando uma havaiana branca com meia cinza, vejo ele mexendo em um barco azul na beira da lagoa de Piratininga. Logo mais, eu descobriria que o barco denominado de “Salmos” foi construído por ele mesmo.</p>
-                    <p>Selmo José Nascimento, de 66 anos, é um exemplo de talento que vem de berço. Filho e neto de pescadores, o homem, que se denomina “Minhoca da Terra” de Piratininga, sempre morou e pescou na região, e tirou dessa prática o principal meio de sustento durante toda sua vida. Vida essa que coleciona memórias que me fazem acreditar ainda mais na veracidade da expressão “história de pescador”. Contador de histórias ora interessantes ora suspeitas o homem que gosta de falar encontrou, na nossa conversa, a oportunidade perfeita de ser ouvido.</p>
                     
                     ${createPhoto("capa-selmo.jpg", "Selmo e seu barco “Salmos”. Foto: Clara Fonseca")}
 
+                    <p>Selmo José Nascimento, de 66 anos, é um exemplo de talento que vem de berço. Filho e neto de pescadores, o homem, que se denomina “Minhoca da Terra” de Piratininga, sempre morou e pescou na região, e tirou dessa prática o principal meio de sustento durante toda sua vida. Vida essa que coleciona memórias que me fazem acreditar ainda mais na veracidade da expressão “história de pescador”. Contador de histórias ora interessantes ora suspeitas o homem que gosta de falar encontrou, na nossa conversa, a oportunidade perfeita de ser ouvido.</p>
                     <p>Criado na natureza da região, assume ter sido bem “largadinho” e fala com boa nostalgia dessa fase: corridas, bolas, brincadeiras na chuva e banhos na lagoa. Hoje, ele acha que as crianças são “Nutella”: “As crianças de hoje não  faz  mais isso”, e aproveita para me contar sobre um tombo de bicicleta em Piratininga que o fez desmaiar na infância.</p>
                     <p>Apesar dos 66 anos de muita história, o homem afirma que nasceu mesmo em 2016, quando se converteu à religião evangélica. Se revelando uma pessoa de muita fé, sem dúvidas, foi a religião o assunto mais presente em toda conversa. Sua conversão foi impulsionada por um momento muito difícil na sua família: a internação de um dos seus filhos em um manicômio, por esquizofrenia.</p>
                     <p>Logo de cara, ele fez questão de ressaltar várias vezes seu novo nascimento, e por isso, tudo que me contou depois, veio em forma de testemunho sobre o que Deus fez em sua vida e como ele foi transformado completamente. Muito desenrolado na conversa, usou um saco que estava a mesa na nossa frente para ilustrar e enfatizar melhor:</p>
