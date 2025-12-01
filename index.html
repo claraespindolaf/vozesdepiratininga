@@ -100,6 +100,7 @@
             margin-bottom: 2rem;
             line-height: 1.8;
             color: #374151; 
+            text-align: justify; /* Justificado como no DOCX */
         }
 
         /* Negrito dentro do artigo */
@@ -110,6 +111,14 @@
 
         #article-body em {
             font-style: italic;
+        }
+        
+        /* Ajuste para subtítulos em negrito que parecem parágrafos */
+        .subtitulo-texto {
+            font-weight: 700;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem !important;
+            display: block;
         }
     </style>
 </head>
@@ -312,7 +321,7 @@
             `;
         }
 
-        // Dados dos Perfis - textos fiéis ao DOCX
+        // Dados dos Perfis - textos fiéis ao DOCX e com parágrafos unificados conforme imagem
         const profilesData = {
             'elizangela': {
                 title: "Um tempero a mais na vida",
@@ -343,7 +352,7 @@ ${createPhoto("capa-elizangela.jpg", "Elizangela apoiada no balcão da lanchonet
 
 <p>A mãe, que várias vezes afirmou ter sido rígida na criação dos filhos, sente que deu o seu melhor, mas aproveitou para complementar: “Eu sempre fui uma mãezona chatona. Eu não criei meus filhos para eles serem meus amigos”, comentou revelando mais uma vez seu perfil durona.</p>
 
-<p><strong>Tempero a Mais: a lanchonete</strong></p>
+<p class="subtitulo-texto">Tempero a Mais: a lanchonete</p>
 
 <p>A lanchonete com paredes revestidas por um piso com cores amadeiradas e com tom amarelo predominando na decoração, que foi plano de fundo para toda nossa conversa, é uma parte importante da vida dela. Não por ser seu trabalho, mas por ser mais um símbolo de uma mulher determinada que conseguiu conquistar seu espaço e realizar sonhos com o seu trabalho. Na bio do <em>Instagram</em> do estabelecimento a frase “Transformando AMOR EM COMIDA” descreve perfeitamente o Tempero a Mais, projeto que surgiu como reflexo de uma vontade antiga de Elizangela.</p>
 
@@ -363,15 +372,11 @@ ${createPhoto("capa-elizangela.jpg", "Elizangela apoiada no balcão da lanchonet
 
 ${createPhoto("elizangela-fachada.jpg", "Fachada da lanchonete de Elizangela. <strong>Foto:</strong> Clara Fonseca")}
 
-<p><strong>“Eu sou feliz assim”</strong></p>
+<p class="subtitulo-texto">“Eu sou feliz assim”</p>
 
-<p>“Eu sou feliz assim!” Foi nesse momento que a entrevista se aproximou do fim. Ela é feliz e a felicidade basta para ela. Hoje, a mulher se revelou caseira e tem no seu lar tudo o que precisa para ser feliz.</p>
+<p>“Eu sou feliz assim!” Foi nesse momento que a entrevista se aproximou do fim. Ela é feliz e a felicidade basta para ela. Hoje, a mulher se revelou caseira e tem no seu lar tudo o que precisa para ser feliz. “Tem uma área gourmet, a vista para a lagoa, tem a televisão, tem a Netflix, eu quero mais o que? Eu estou feliz da minha vida.”</p>
 
-<p>“Tem uma área gourmet, a vista para a lagoa, tem a televisão, tem a Netflix, eu quero mais o que? Eu estou feliz da minha vida.”</p>
-
-<p>E essa felicidade é visível até sua forma de se vestir. Sempre arrumada, com brincos e cordões, a mulher que encontrei de salto plataforma na primeira vez que a vi, se define como vaidosa e declara a importância de se arrumar para trabalhar, mesmo o seu ambiente de trabalho sendo em uma extensão de sua casa.</p>
-
-<p>“Eu acho que se você não gostar de você, quem vai gostar? Não é porque eu abri a porta de casa, cheguei no meu trabalho, que eu tenho que estar de qualquer jeito. Eu tenho que estar arrumada. Eu me arrumo como se eu fosse sair todo dia para trabalhar. Certinho”.</p>
+<p>E essa felicidade é visível até sua forma de se vestir. Sempre arrumada, com brincos e cordões, a mulher que encontrei de salto plataforma na primeira vez que a vi, se define como vaidosa e declara a importância de se arrumar para trabalhar, mesmo o seu ambiente de trabalho sendo em uma extensão de sua casa. “Eu acho que se você não gostar de você, quem vai gostar? Não é porque eu abri a porta de casa, cheguei no meu trabalho, que eu tenho que estar de qualquer jeito. Eu tenho que estar arrumada. Eu me arrumo como se eu fosse sair todo dia para trabalhar. Certinho”.</p>
 
 <p>Cuidadosa consigo mesma, não abre mão de um hidratante antes de dormir e revela esse ser o segredo para pele perfeita que carrega aos 52 anos.</p>
                 `
@@ -444,7 +449,7 @@ ${createPhoto("capa-selmo.jpg", "Selmo e seu barco “Salmos”. <strong>Foto:</
 
 <p>Selmo que a vida toda acreditou ser bom em sobrevivência, agora não teme mais a morte. Afirmando que “o ser humano é o único ser que tem a vida eterna”, ele falou com toda convicção que, se morrer, vai para um lugar melhor do que está agora.</p>
 
-<p><strong>Pesca</strong></p>
+<p class="subtitulo-texto">Pesca</p>
 
 <p>“Não pesco para brincar, eu vou para ganhar um dinheiro.” A pesca é o que mais conecta Selmo com Piratininga, e essa relação começou cedo. Fruto de uma linhagem de pescadores, desde muito novo já foi introduzido nesse mundo: “Eu comecei a pescar com meu pai muito cedo, tinha uns seis, sete anos de idade e já saía de barco com ele, aí fui adquirindo a profissão, né? Não tem como fazer uma coisa várias vezes e não aprender. Isso ia ser muito orelhudo”, brincou e riu o homem que levava nossa conversa de forma leve e descontraída.</p>
 
@@ -548,7 +553,7 @@ ${createPhoto("jorge-familia.jpg", "Jorge com a neta na praia de Piratininga. <s
 
 <p>Ele contou que a trajetória da sua família se manteve ligada à igreja por longos anos: “A nossa vida toda foi dentro da igreja, né? Quando a gente casou, as crianças nasceram, foram batizadas lá, todo mundo fez Primeira Comunhão na mesma igreja”. Apesar do passado católico, hoje em dia ele frequenta um centro de umbanda, mas o processo de se descobrir em uma nova religião foi gradual. “Por algumas coisas da vida , a gente começou a ir no kardecismo. A gente conheceu um lugar aqui em Piratininga e passou a frequentar esse centro de umbanda, que é uma coisa bem legal também. Tem uns 10 anos que a gente tá nessa nessa religião, que é uma religião de caridade, de muita fraternidade. Mas, a gente de vez em quando vai na missa. Tem muito disso, desse sincretismo, né? Uma coisa que não te sufoca, né? Que prega que você tem que fazer caridade, que tem que ser uma pessoa boa. Que lá na frente, o universo vai te cobrar por aquilo que você faz e só você pode se ajudar”, refletiu.</p>
 
-<p><strong>Legalização dos quiosques</strong></p>
+<p class="subtitulo-texto">Legalização dos quiosques</p>
 
 <p>“Sou bem chatinho com essas coisas. Eu não suporto ver alguma coisa que esteja errada e que tenha injustiça.” Foi assim que Jorge se definiu quando perguntei o motivo de ele ter se tornado presidente da Associação dos Quiosqueiros de Niterói. Jorge, que durante 5 anos já ocupou o cargo de presidente da Associação de Moradores de Piratininga, hoje destina boa parte da sua luta à legalização dos quiosques de toda a cidade. A organização uniu todas as praias de Niterói para somar forças nesse objetivo tão importante. Segundo sua memória, atualmente são 86 membros da cidade inteira. “Essa é uma questão séria porque, por exemplo, você vai dormir, não sabe se quando você acordar no dia seguinte, vai ter alguém da prefeitura na porta querendo te tirar ou querendo derrubar seu quiosque, do jeito que já aconteceu em algumas outras praias da cidade. Desde 1998 eu tô nessa luta de legalização dos quiosques, né?”, contou Jorge.</p>
 
@@ -591,7 +596,7 @@ ${createPhoto("paulo-protesto.jpg", "Paulo no protesto que parou a barca Rio x N
 
 <p>Para os três filhos, cada um de uma mãe diferente, ele deseja que sejam reconhecidos em Piratininga pelo mesmo cuidado com a natureza que ele carrega: “Minha filha cata lixo no mar”, contou a voz orgulhosa e brilho nos olhos. E como alguém que mora em Piratininga, e mais do que só morar, explora cada pedaço desse lugar, ele assumiu ser, sem dúvidas, um conhecedor profundo do local. “Tem um museu aqui, cara, que é o Museu de Piratininga, da Pesca. Ninguém sabe nada lá. Aí o visitante vai para lá e conversa comigo, vou e dou aula.”</p>
 
-<p><strong>O surfe e a onda</strong></p>
+<p class="subtitulo-texto">O surfe e a onda</p>
 
 <p>“Eu só falo no surfe, minha vida é surfe.” Para Paulo, o surfe e a prancha são mais do que formas de trabalho. Mas, infelizmente, em Piratininga as condições do mar não são tão favoráveis para ele desbravar sua paixão. Sem muitas oportunidades de sair de lá mais novo, não conseguiu se profissionalizar como atleta, e hoje o mar com onda insuficiente e o desejo de oferecer mais chances para os filhos que surfam são os únicos motivos que o fazem se enxergar morando em outro lugar: “Vou para um lugar onde eu vou estar pelo surfe, mas a gente de repente eu não poderia estar sentado aqui agora onde a gente está conversando, de boa. É, o que falta aqui para mim é ter onda, cara. Amo esse lugar, aqui tem tudo. Eu viveria daqui. Tenho amigos aqui, como eu não tenho em nenhum outro lugar do mundo.”</p>
 
